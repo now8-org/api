@@ -1,0 +1,23 @@
+# --------- Pytest -------------
+
+[tool.pytest.ini_options]
+markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
+
+# --------- Commitizen -------------
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.0"
+tag_format = "$version"
+version_files = ["setup.py"]
+
+# --------- Black -------------
+
+[tool.black]
+line-length = 79
+target-version = ["py39"]
+
+# --------- mypy -------------
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]

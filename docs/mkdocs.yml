@@ -1,0 +1,56 @@
+site_name: ntap[i documentation
+site_url: https://m0wer.github.io/ntapi/
+repo_name: m0wer/ntapi
+repo_url: http://github.com/m0wer/ntapi/
+
+nav:
+  #  - Overview: index.md
+    #  - Tutorials:
+    #  - How-to Guides:
+    #  - Topic guides:
+    #  - Reference:
+
+plugins:
+  - search
+  - autolinks
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          selection:
+            filters:
+          rendering:
+            show_source: true
+      watch:
+        - ../dsapi
+  - git-revision-date-localized:
+      type: timeago
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.top
+  palette:
+    # Light mode
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: blue grey
+      accent: light blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+
+    # Dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: blue grey
+      accent: light blue
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
