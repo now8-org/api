@@ -2,4 +2,6 @@ fastapi
 gunicorn
 mypy
 pydantic
+pytest
+requests
 uvicorn
