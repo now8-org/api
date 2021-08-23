@@ -167,8 +167,8 @@ class City(BaseModel, ABC):
         transport_types: Supported transport types for the city.
     """
 
-    name: str
-    transport_types: List[TransportType]
+    name: str = ""
+    transport_types: List[TransportType] = []
 
     @abstractmethod
     def get_estimations(
@@ -179,6 +179,9 @@ class City(BaseModel, ABC):
 
         Arguments:
             stop: Stop to get the next vehicle arrival estimations for.
+
+        Returns:
+            ETA for the next vehicles to the stop.
 
         Raises:
             NotImplementedError: If the method is not implemented for
@@ -223,4 +226,17 @@ class StopIdError(ValueError):
             stop_id: Invalid stop identifier passed.
         """
         message = f"Invalid stop ID '{stop_id}'."
+        super().__init__(message)
+
+
+class CityNameError(ValueError):
+    """Invalid city name error."""
+
+    def __init__(self, city: str):
+        """Set the error message and raise the exception.
+
+        Arguments:
+            city: Invalid city name passed.
+        """
+        message = f"Invalid city name '{city}'."
         super().__init__(message)
