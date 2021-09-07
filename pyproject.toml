@@ -2,22 +2,31 @@
 
 [tool.pytest.ini_options]
 markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
+filterwarnings = "ignore::DeprecationWarning"
 
 # --------- Commitizen -------------
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.0.0"
+version = "2.0.0"
 tag_format = "$version"
-version_files = ["setup.py"]
+version_files = ["setup.py",]
 
 # --------- Black -------------
 
 [tool.black]
 line-length = 79
-target-version = ["py39"]
+target-version = ['py39']
+include = '\.pyi?$'
+
+# --------- pydocstyle -------------
+
+[tool.pydocstyle]
+convention = "google"
 
 # --------- mypy -------------
 
 [tool.mypy]
 plugins = ["pydantic.mypy"]
+ignore_missing_imports = true
+strict_optional = false

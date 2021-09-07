@@ -14,6 +14,8 @@ charset-normalizer==2.0.4
     # via requests
 click==8.0.1
     # via uvicorn
+coverage==5.5
+    # via -r requirements.in
 fastapi==0.68.0
     # via -r requirements.in
 gunicorn==20.1.0
@@ -28,6 +30,8 @@ mypy==0.910
     # via -r requirements.in
 mypy-extensions==0.4.3
     # via mypy
+orjson==3.6.3
+    # via -r requirements.in
 packaging==21.0
     # via pytest
 pluggy==0.13.1
@@ -41,6 +45,10 @@ pydantic==1.8.2
 pyparsing==2.4.7
     # via packaging
 pytest==6.2.4
+    # via
+    #   -r requirements.in
+    #   pytest-asyncio
+pytest-asyncio==0.15.1
     # via -r requirements.in
 requests==2.26.0
     # via -r requirements.in
@@ -48,8 +56,19 @@ starlette==0.14.2
     # via fastapi
 toml==0.10.2
     # via
+    #   -r requirements.in
     #   mypy
     #   pytest
+types-attrs==19.1.0
+    # via -r requirements.in
+types-orjson==3.6.0
+    # via -r requirements.in
+types-requests==2.25.6
+    # via -r requirements.in
+types-setuptools==57.0.2
+    # via -r requirements.in
+types-toml==0.1.5
+    # via -r requirements.in
 typing-extensions==3.10.0.0
     # via
     #   mypy

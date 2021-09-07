@@ -1,18 +1,32 @@
+"""Module to store the common objects for the logic layer."""
+
+from enum import Enum
 from typing import Dict, List, Optional, Tuple, Type
 
 from ntapi import City, CityNameError, Stop, VehicleEstimation
 from ntapi.data.cities.madrid import MadridCity, MadridStop
 from pydantic import validate_arguments
 
-CITIES_STOPS: Dict[str, Tuple[Type[City], Type[Stop]]] = {
-    "Madrid": (MadridCity, MadridStop)
-}
+
+class Cities(str, Enum):
+    """Enum with the available cities."""
+
+    MADRID = "madrid"
+
+
+# type aliases
+
+CitiesStops = Dict[Cities, Tuple[Type[City], Type[Stop]]]
+
+# default values
+
+CITIES_STOPS: CitiesStops = {Cities.MADRID: (MadridCity, MadridStop)}
 
 
 @validate_arguments
 def assign_city_stop(
     city: str,
-    cities_stops: Optional[Dict[str, Tuple[Type[City], Type[Stop]]]] = None,
+    cities_stops: Optional[CitiesStops] = None,
 ) -> Tuple[Type[City], Type[Stop]]:
     """Assign City and Stop objects corresponding to a city name.
 
@@ -29,12 +43,12 @@ def assign_city_stop(
         cities_stops = CITIES_STOPS
 
     try:
-        return cities_stops[city.title()]
-    except KeyError:
-        raise CityNameError(city)
+        return cities_stops[Cities(city.lower())]
+    except ValueError:
+        raise CityNameError(city) from ValueError
 
 
-def get_estimations(
+async def get_estimations(
     city_name: str, stop_dict: dict
 ) -> List[VehicleEstimation]:
     """Return ETA for the next vehicles to the stop.
@@ -50,18 +64,10 @@ def get_estimations(
 
     Returns:
         ETA for the next vehicles to the stop.
-
-    Raises:
-
     """
     city_class, stop_class = assign_city_stop(city_name)
 
     city = city_class()
     stop = stop_class(**stop_dict)
 
-    try:
-        return city.get_estimations(stop)
-    except NotImplementedError:
-        raise NotImplementedError(
-            "Can't get estimations for the given stop in the given city."
-        ) from NotImplementedError
+    return await city.get_estimations(stop)

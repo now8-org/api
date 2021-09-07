@@ -171,7 +171,7 @@ class City(BaseModel, ABC):
     transport_types: List[TransportType] = []
 
     @abstractmethod
-    def get_estimations(
+    async def get_estimations(
         self,
         stop: Stop,
     ) -> List[VehicleEstimation]:
@@ -189,9 +189,9 @@ class City(BaseModel, ABC):
         """
 
     @abstractmethod
-    def get_stops(
+    async def get_stops(
         self,
-        transport_types: Optional[List[TransportType]] = None,
+        transport_types: List[TransportType] = None,
     ) -> List[Stop]:
         """Return all the stops of the selected transport types."""
 

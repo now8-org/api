@@ -29,12 +29,13 @@ class MadridCity(City):
         TRANSPORT_TYPE_STOP_PREFIXES.keys()
     )
 
-    def get_estimations(
+    async def get_estimations(
         self,
         stop: Stop,
     ) -> List[VehicleEstimation]:
+        """Get estimations implementation for Madrid."""
         if stop.transport_type == TransportType.INTERCITY_BUS:
-            response = get_json(
+            response = await get_json(
                 f"https://www.crtm.es/"  # type: ignore
                 f"widgets/api/GetStopsTimes.php"
                 f"?codStop={stop.id_api}&type=1&orderBy=2&stopTimesByIti=3"
@@ -62,7 +63,11 @@ class MadridCity(City):
 
         return result
 
-    def get_stops(self):
+    async def get_stops(
+        self,
+        transport_types: List[TransportType] = None,
+    ) -> List[Stop]:
+        """Return all the stops of the selected transport types."""
         raise NotImplementedError
 
 

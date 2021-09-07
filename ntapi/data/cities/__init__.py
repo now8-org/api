@@ -4,7 +4,7 @@ import requests  # type: ignore
 from pydantic import HttpUrl
 
 
-def get_json(url: HttpUrl) -> dict:
+async def get_json(url: HttpUrl) -> dict:
     """Fetch the given URL and returns the result as a dictionary.
 
      Arguments:

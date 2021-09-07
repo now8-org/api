@@ -12,12 +12,13 @@ class TestMadridCity:
         def generate_id_user(cls, value, values):
             pass
 
-    def test_get_estimation_raises_not_implemented(self):
+    @pytest.mark.asyncio
+    async def test_get_estimation_raises_not_implemented(self):
         city = MadridCity()
         stop = self.StopInherit(id_api="test_stop")
 
         with pytest.raises(NotImplementedError):
-            city.get_estimations(stop)
+            await city.get_estimations(stop)
 
 
 class TestMadridStop:

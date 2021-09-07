@@ -17,8 +17,9 @@ class TestCities:
     ]
 
     @pytest.mark.slow
+    @pytest.mark.asyncio
     @pytest.mark.parametrize("city,stop", cities_transport_types)
-    def test_get_estimations(self, city, stop):
-        result = city.get_estimations(stop)
+    async def test_get_estimations(self, city, stop):
+        result = await city.get_estimations(stop)
 
         assert len(result) > 0

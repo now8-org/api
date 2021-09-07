@@ -1,7 +1,16 @@
+coverage
 fastapi
 gunicorn
 mypy
+orjson
 pydantic
 pytest
+pytest-asyncio
 requests
+toml
+types-attrs
+types-orjson
+types-requests
+types-setuptools
+types-toml
 uvicorn

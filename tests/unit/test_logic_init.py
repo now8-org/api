@@ -1,20 +1,21 @@
-from unittest.mock import Mock, patch
+from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from ntapi import City, CityNameError, Stop
-from ntapi.logic import assign_city_stop, get_estimations
+from ntapi.data.cities.madrid import MadridCity, MadridStop
+from ntapi.logic import Cities, CitiesStops, assign_city_stop, get_estimations
 
 
 class TestAssignCityStop:
     @patch.multiple(City, __abstractmethods__=set())
     @patch.multiple(Stop, __abstractmethods__=set())
     def test_assign_city_stop(self):
-        cities_stops = {"Test": (City, Stop)}
-        result = assign_city_stop("test", cities_stops)
+        cities_stops: CitiesStops = {Cities.MADRID: (MadridCity, MadridStop)}
+        result = assign_city_stop("Madrid", cities_stops)
 
         assert isinstance(result, tuple)
-        assert result[0] == City
-        assert result[1] == Stop
+        assert result[0] == MadridCity
+        assert result[1] == MadridStop
 
     def test_assign_city_stop_raises(self):
         with pytest.raises(CityNameError):
@@ -23,15 +24,18 @@ class TestAssignCityStop:
 
 class TestGetEstimations:
     @patch.multiple(
-        City, __abstractmethods__=set(), get_estimations=Mock(return_value=[])
+        City,
+        __abstractmethods__=set(),
+        get_estimations=AsyncMock(return_value=[]),
     )
     @patch.multiple(Stop, __abstractmethods__=set())
     @patch("ntapi.logic.assign_city_stop", return_value=(City, Stop))
-    def test_get_estimations(self, mock_assign_city_stop):
+    @pytest.mark.asyncio
+    async def test_get_estimations(self, mock_assign_city_stop):
         city_name = "test_city"
         id_user = "test_id"
 
-        result = get_estimations(city_name, {"id_user": id_user})
+        result = await get_estimations(city_name, {"id_user": id_user})
 
         mock_assign_city_stop.assert_called_once_with(city_name)
         assert result == []
@@ -43,11 +47,12 @@ class TestGetEstimations:
     )
     @patch.multiple(Stop, __abstractmethods__=set())
     @patch("ntapi.logic.assign_city_stop", return_value=(City, Stop))
-    def test_get_estimations_raises(self, mock_assign_city_stop):
+    @pytest.mark.asyncio
+    async def test_get_estimations_raises(self, mock_assign_city_stop):
         city_name = "test_city"
         id_user = "test_id"
 
         with pytest.raises(NotImplementedError):
-            get_estimations(city_name, {"id_user": id_user})
+            await get_estimations(city_name, {"id_user": id_user})
 
         mock_assign_city_stop.assert_called_once_with(city_name)
