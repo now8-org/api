@@ -3,6 +3,7 @@ fastapi
 gunicorn
 mypy
 orjson
+overrides
 pydantic
 pytest
 pytest-asyncio

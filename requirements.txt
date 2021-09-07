@@ -32,6 +32,8 @@ mypy-extensions==0.4.3
     # via mypy
 orjson==3.6.3
     # via -r requirements.in
+overrides==6.1.0
+    # via -r requirements.in
 packaging==21.0
     # via pytest
 pluggy==0.13.1
@@ -73,6 +75,8 @@ typing-extensions==3.10.0.0
     # via
     #   mypy
     #   pydantic
+typing-utils==0.1.0
+    # via overrides
 urllib3==1.26.6
     # via requests
 uvicorn==0.14.0

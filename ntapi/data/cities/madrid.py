@@ -13,6 +13,7 @@ from ntapi import (
     VehicleEstimation,
 )
 from ntapi.data.cities import get_json
+from overrides import overrides
 from pydantic import root_validator
 from pydantic.dataclasses import dataclass
 
@@ -29,11 +30,11 @@ class MadridCity(City):
         TRANSPORT_TYPE_STOP_PREFIXES.keys()
     )
 
+    @overrides
     async def get_estimations(
         self,
         stop: Stop,
     ) -> List[VehicleEstimation]:
-        """Get estimations implementation for Madrid."""
         if stop.transport_type == TransportType.INTERCITY_BUS:
             response = await get_json(
                 f"https://www.crtm.es/"  # type: ignore
