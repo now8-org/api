@@ -1,0 +1,34 @@
+---
+name: Generate docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Setup Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: pre-commit
+        uses: pre-commit/action@v2.0.3
+        with:
+          extra_args: --all-files
+      - name: Install package
+        run: pip install -e .
+      - name: Install docs dependencies
+        run: pip install -r requirements.txt
+        working-directory: docs
+      - run: git config user.name 'github-actions[bot]' && git config user.email 'github-actions[bot]@users.noreply.github.com'
+      - name: Publish docs
+        run: mkdocs gh-deploy
