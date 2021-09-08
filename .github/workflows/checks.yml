@@ -1,0 +1,48 @@
+---
+name: Code checks
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: 34 3 * * 1
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Setup Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: pre-commit
+        uses: pre-commit/action@v2.0.3
+        with:
+          extra_args: --all-files
+      - name: Run tests with pytest
+        run: pytest
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add requirements.txt
+          git diff-index --quiet HEAD \
+            || git commit -m "build: update python dependencies"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }})
