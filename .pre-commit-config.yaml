@@ -43,6 +43,8 @@ repos:
     rev: 6.1.1
     hooks:
     - id: pydocstyle
+      args:
+        - --ignore-decorators=overrides
       exclude: tests
 
   - repo: https://github.com/pre-commit/mirrors-mypy
