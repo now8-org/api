@@ -3,13 +3,6 @@ site_url: https://m0wer.github.io/ntapi/
 repo_name: m0wer/ntapi
 repo_url: http://github.com/m0wer/ntapi/
 
-nav:
-  #  - Overview: index.md
-    #  - Tutorials:
-    #  - How-to Guides:
-    #  - Topic guides:
-    #  - Reference:
-
 plugins:
   - search
   - autolinks

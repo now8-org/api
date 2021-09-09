@@ -15,6 +15,10 @@ setup(
     install_requires=[
         "fastapi",
         "gunicorn",
+        "orjson",
+        "overrides",
         "pydantic",
+        "requests",
+        "uvicorn",
     ],
 )
