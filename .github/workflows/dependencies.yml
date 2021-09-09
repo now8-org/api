@@ -1,9 +1,9 @@
 ---
-name: Code checks
+name: Update dependencies
 
 on:
-  push:
-  pull_request:
+  schedule:
+    - cron: 34 3 * * 1
 
 jobs:
   molecule:
@@ -19,10 +19,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-      - name: pre-commit
-        uses: pre-commit/action@v2.0.3
-        with:
-          extra_args: --all-files
       - name: Cache dependencies
         uses: actions/cache@v1
         with:
@@ -30,7 +26,21 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+      - name: Update dependencies
+        run: pip install pip-tools && pip-compile
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run tests with pytest
         run: python -m pytest
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add requirements.txt
+          git diff-index --quiet HEAD \
+            || git commit -m "build: update python dependencies"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }})
