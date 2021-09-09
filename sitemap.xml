@@ -2,52 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://m0wer.github.io/ntapi/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://m0wer.github.io/ntapi/howto/contributing/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://m0wer.github.io/ntapi/howto/testing/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://m0wer.github.io/ntapi/reference/__init__/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://m0wer.github.io/ntapi/reference/data/__init__/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://m0wer.github.io/ntapi/reference/data/cities/__init__/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://m0wer.github.io/ntapi/reference/data/cities/madrid/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://m0wer.github.io/ntapi/topics/code_structure/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://m0wer.github.io/ntapi/tutorials/docker/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://m0wer.github.io/ntapi/tutorials/getting_started/</loc>
-         <lastmod>2021-09-08</lastmod>
+         <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
