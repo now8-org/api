@@ -1,8 +1,8 @@
 from typing import List, Tuple
 
 import pytest
-from ntapi import City, Stop, TransportType
-from ntapi.data.cities.madrid import MadridCity, MadridStop
+from now8_api import City, Stop, TransportType
+from now8_api.data.cities.madrid import MadridCity, MadridStop
 
 
 class TestCities:

@@ -1,6 +1,6 @@
-# ntapi
+# now8-api
 
-*Normal Times API* provides estimated time of arrival for public transport
+*now8 (no wait) API* provides estimated time of arrival for public transport
 vehicles.
 
 For a step by step tutorial that covers the installation process and running

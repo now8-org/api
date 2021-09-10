@@ -1,9 +1,14 @@
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
-from ntapi import City, CityNameError, Stop
-from ntapi.data.cities.madrid import MadridCity, MadridStop
-from ntapi.logic import Cities, CitiesStops, assign_city_stop, get_estimations
+from now8_api import City, CityNameError, Stop
+from now8_api.data.cities.madrid import MadridCity, MadridStop
+from now8_api.logic import (
+    Cities,
+    CitiesStops,
+    assign_city_stop,
+    get_estimations,
+)
 
 
 class TestAssignCityStop:
@@ -29,7 +34,7 @@ class TestGetEstimations:
         get_estimations=AsyncMock(return_value=[]),
     )
     @patch.multiple(Stop, __abstractmethods__=set())
-    @patch("ntapi.logic.assign_city_stop", return_value=(City, Stop))
+    @patch("now8_api.logic.assign_city_stop", return_value=(City, Stop))
     @pytest.mark.asyncio
     async def test_get_estimations(self, mock_assign_city_stop):
         city_name = "test_city"
@@ -46,7 +51,7 @@ class TestGetEstimations:
         get_estimations=Mock(side_effect=NotImplementedError),
     )
     @patch.multiple(Stop, __abstractmethods__=set())
-    @patch("ntapi.logic.assign_city_stop", return_value=(City, Stop))
+    @patch("now8_api.logic.assign_city_stop", return_value=(City, Stop))
     @pytest.mark.asyncio
     async def test_get_estimations_raises(self, mock_assign_city_stop):
         city_name = "test_city"

@@ -1,10 +1,10 @@
 # Code structure
 
-The main module is contained in the `ntapi/` directory. The structure is as
+The main module is contained in the `now8_api/` directory. The structure is as
 follows:
 
 ```
-ntapi
+now8_api
 ├── data
 │   ├── __init__.py
 │   ├── cities
@@ -60,7 +60,7 @@ Each component should only connect with its contiguous ones. Each component
 contains a `__init__.py` file that stores the functions shared in the
 component, for example a `hello_world()` function shared among different
 entrypoints (API, CLI, …). Apart from this components, there is the
-`__init__.py` file of the `ntapi` module.
+`__init__.py` file of the `now8_api` module.
 
 ## Components
 
@@ -85,6 +85,6 @@ when called by the `entrypoints` component.
 
 ### Entrypoints
 
-This component provides access to the `ntapi` package functionality. The main
+This component provides access to the `now8_api` package functionality. The main
 entrypoint is a HTTP REST API but other entrypoints, such as CLIs, should be
 placed here.

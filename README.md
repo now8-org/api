@@ -1,4 +1,4 @@
-# ntapi
+# now8-api
 
 *Normal Times API* provides estimated time of arrival for public transport
 vehicles.

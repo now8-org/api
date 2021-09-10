@@ -36,7 +36,7 @@ You can define them in several ways:
 For development, you can run the project with:
 
 ```bash
-uvicorn ntapi.entrypoints.api:api --reload
+uvicorn now8_api.entrypoints.api:api --reload
 ```
 
 You can then access the API at <http://localhost:8000> and the [Swagger UI](https://swagger.io/tools/swagger-ui/) (interactive API documentation) at <http://localhost:8000/docs>.
@@ -49,7 +49,7 @@ workers, such as `gunicorn`.
 For example:
 
 ```bash
-gunicorn -b 0.0.0.0:8000 -w 4 -k uvicorn.workers.UvicornWorker ntapi.entrypoints.api:api
+gunicorn -b 0.0.0.0:8000 -w 4 -k uvicorn.workers.UvicornWorker now8_api.entrypoints.api:api
 ```
 
 Options:

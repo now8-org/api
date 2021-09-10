@@ -1,6 +1,6 @@
 import pytest
-from ntapi import Stop, TransportType
-from ntapi.data.cities.madrid import MadridCity, MadridStop
+from now8_api import Stop, TransportType
+from now8_api.data.cities.madrid import MadridCity, MadridStop
 from pydantic import ValidationError
 
 

@@ -1,1 +1,1 @@
-::: ntapi.data.cities
+::: now8_api.data.cities

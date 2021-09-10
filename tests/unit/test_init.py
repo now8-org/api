@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List, Optional
 
 import pytest
-from ntapi import (
+from now8_api import (
     City,
     Estimation,
     Line,

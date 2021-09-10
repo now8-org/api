@@ -3,7 +3,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="ntapi",
+    name="now8_api",
     version="0.0.0",
     description="Estimated time of arrival for public transport vehicles.",
     author="m0wer",

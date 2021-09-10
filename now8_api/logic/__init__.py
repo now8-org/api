@@ -3,8 +3,8 @@
 from enum import Enum
 from typing import Dict, List, Optional, Tuple, Type
 
-from ntapi import City, CityNameError, Stop, VehicleEstimation
-from ntapi.data.cities.madrid import MadridCity, MadridStop
+from now8_api import City, CityNameError, Stop, VehicleEstimation
+from now8_api.data.cities.madrid import MadridCity, MadridStop
 from pydantic import validate_arguments
 
 

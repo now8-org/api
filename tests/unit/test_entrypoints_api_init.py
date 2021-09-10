@@ -1,4 +1,4 @@
-from ntapi.entrypoints.api import _return_msg
+from now8_api.entrypoints.api import _return_msg
 
 
 class TestReturnMsg:

@@ -2,7 +2,7 @@
 
 from typing import Dict, List
 
-from ntapi import (
+from now8_api import (
     City,
     Estimation,
     Line,
@@ -12,7 +12,7 @@ from ntapi import (
     Vehicle,
     VehicleEstimation,
 )
-from ntapi.data.cities import get_json
+from now8_api.data.cities import get_json
 from overrides import overrides
 from pydantic import root_validator
 from pydantic.dataclasses import dataclass

@@ -1,7 +1,7 @@
-site_name: ntapi documentation
-site_url: https://m0wer.github.io/ntapi/
-repo_name: m0wer/ntapi
-repo_url: http://github.com/m0wer/ntapi/
+site_name: now8-api documentation
+site_url: https://m0wer.github.io/now8-api/
+repo_name: m0wer/now8-api
+repo_url: http://github.com/m0wer/now8-api/
 
 plugins:
   - search
@@ -15,7 +15,7 @@ plugins:
           rendering:
             show_source: true
       watch:
-        - ../ntapi
+        - ../now8_api
   - git-revision-date-localized:
       type: timeago
 

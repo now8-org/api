@@ -1,1 +1,1 @@
-::: ntapi.data.cities.madrid
+::: now8_api.data.cities.madrid

@@ -6,8 +6,8 @@ from typing import Dict
 from fastapi import Depends, FastAPI
 from fastapi.exceptions import HTTPException
 from fastapi.responses import ORJSONResponse
-from ntapi import Stop
-from ntapi.logic import get_estimations
+from now8_api import Stop
+from now8_api.logic import get_estimations
 
 api = FastAPI(default_response_class=ORJSONResponse)
 
