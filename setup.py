@@ -13,12 +13,14 @@ setup(
     packages=find_packages(exclude=("tests",)),
     entry_points={"console_scripts": []},
     install_requires=[
+        "aiohttp",
         "fastapi",
         "gunicorn",
         "orjson",
         "overrides",
         "pydantic",
         "requests",
+        "tenacity",
         "uvicorn",
     ],
 )

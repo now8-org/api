@@ -1,3 +1,4 @@
+aiohttp
 coverage
 fastapi
 gunicorn
@@ -7,7 +8,7 @@ overrides
 pydantic
 pytest
 pytest-asyncio
-requests
+tenacity
 toml
 types-attrs
 types-orjson

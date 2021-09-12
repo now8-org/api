@@ -1,13 +1,11 @@
 """Module to store the HTTP REST API."""
 
-from dataclasses import asdict
 from typing import Dict
 
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 from fastapi.exceptions import HTTPException
 from fastapi.responses import ORJSONResponse
-from now8_api import Stop
-from now8_api.logic import get_estimations
+from now8_api.service.service import get_estimations
 
 api = FastAPI(default_response_class=ORJSONResponse)
 
@@ -33,17 +31,15 @@ def _return_msg(msg: str, key: str = "msg") -> Dict[str, str]:
 
 
 @api.get("/{city_name}/get_estimations")
-async def get_estimations_api(city_name: str, stop_dict: Stop = Depends(Stop)):
+async def get_estimations_api(city_name: str, stop_id: str):
     """Return ETA for the next vehicles to the stop.
 
     Arguments:
         city_name: City name.
-        stop_dict: Stop information.
+        stop_id: Stop identifier.
     """
     try:
-        result = await get_estimations(
-            city_name=city_name, stop_dict=asdict(stop_dict)
-        )
+        result = await get_estimations(city_name=city_name, stop_id=stop_id)
     except NotImplementedError:
         raise HTTPException(
             404, "Can't get estimations for the given stop in the given city."

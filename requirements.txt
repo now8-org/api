@@ -4,14 +4,18 @@
 #
 #    pip-compile
 #
+aiohttp==3.7.4.post0
+    # via -r requirements.in
 asgiref==3.4.1
     # via uvicorn
+async-timeout==3.0.1
+    # via aiohttp
 attrs==21.2.0
-    # via pytest
-certifi==2021.5.30
-    # via requests
-charset-normalizer==2.0.4
-    # via requests
+    # via
+    #   aiohttp
+    #   pytest
+chardet==4.0.0
+    # via aiohttp
 click==8.0.1
     # via uvicorn
 coverage==5.5
@@ -23,9 +27,13 @@ gunicorn==20.1.0
 h11==0.12.0
     # via uvicorn
 idna==3.2
-    # via requests
+    # via yarl
 iniconfig==1.1.1
     # via pytest
+multidict==5.1.0
+    # via
+    #   aiohttp
+    #   yarl
 mypy==0.910
     # via -r requirements.in
 mypy-extensions==0.4.3
@@ -52,10 +60,10 @@ pytest==6.2.4
     #   pytest-asyncio
 pytest-asyncio==0.15.1
     # via -r requirements.in
-requests==2.26.0
-    # via -r requirements.in
 starlette==0.14.2
     # via fastapi
+tenacity==8.0.1
+    # via -r requirements.in
 toml==0.10.2
     # via
     #   -r requirements.in
@@ -73,14 +81,15 @@ types-toml==0.1.5
     # via -r requirements.in
 typing-extensions==3.10.0.0
     # via
+    #   aiohttp
     #   mypy
     #   pydantic
 typing-utils==0.1.0
     # via overrides
-urllib3==1.26.6
-    # via requests
 uvicorn==0.14.0
     # via -r requirements.in
+yarl==1.6.3
+    # via aiohttp
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
