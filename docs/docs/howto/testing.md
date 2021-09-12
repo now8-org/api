@@ -11,14 +11,18 @@ python -m pytest
 
 ## Testing scopes
 
-There are two main testing scopes: unit testing and integration testing.
+We use three testing scopes: unit, integration and
+end-to-end (e2e).
 
 Unit testing is a testing method by which individual units of source
 code are tested to determine if they are ready to use,
-whereas integration testing checks integration between software modules.
+whereas integration testing checks integration between software modules
+at the boundaries. Lastly, e2e tetsing checks the system as a whole
+assessing that the functionality expected by the user works as expected
+and that there are no system errors.
 
-Unit tests should be fast and not relay on other pieces of code or
-external dependencies such as databases. Mock them if necessary.
+Unit tests should be fast and not relay on unnecessary pieces of code or
+external dependencies such as databases.
 
 ## Test-driven development
 
@@ -34,3 +38,9 @@ is as follows:
 1. Check that all (old and new) tests pass.
 1. Improve the implementation incrementally checking that all tests still
   pass.
+
+One of this cycles might have subcycles. For example, if you want to
+add a new high level function for which you write an end-to-end (E2E)
+test, start writing a test for that function and use small cycles of
+TDD for the helper functions or dependencies in lower level layers that
+the new function requires.

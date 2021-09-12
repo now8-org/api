@@ -1,54 +1,28 @@
 # Code structure
 
-The main module is contained in the `now8_api/` directory. The structure is as
+The main package is contained in the `now8_api/` directory. The structure is as
 follows:
 
 ```
-now8_api
-├── data
-│   ├── __init__.py
-│   ├── cities
-│   │   ├── __init__.py
-│   │   └── ...
-│   ├── database
-│   │   ├── __init__.py
-│   │   └── ...
-│   └── ...
-├── entrypoints
-│   ├── __init__.py
-│   ├── api
-│   │   ├── __init__.py
-│   │   └── ...
-│   └── ...
-├── logic
-│   ├── __init__.py
-│   └── ...
-└── __init__.py
-```
-
-As you can see, there are three main directories: `data`, `entrypoints` and
-`logic`. They are connected between them as follows:
-
-```
- +---------------+
- | external deps |
- +---------------+
-        |
-+-------|---------+
-|       |         |
-|  +----------+   |
-|  |   data   |   |
-|  +----------+   |
-|       |         |
-| +------------+  |
-| |   logic    |  |
-| +------------+  |
-|       |         |
-| +-------------+ |
-| | entrypoints | |
-| +-------------+ |
-|       |         |
-+-------|---------+
+  +------------+  +-----------+
+  | db backend |  | City APIs |
+  +------------+  +-----------+
+        |                |
++-------|----------------|---+
+|       |                |   |
+|  +------+  +--------+  |   |
+|  | data |  | domain |  |   |
+|  +------+  +--------+  |   |
+|   |   |        |       |   |
+|   |  +-------------------+ |
+|   |  |     service       | |
+|   |  +-------------------+ |
+|   |        |               |
+| +-------------+            |
+| | entrypoints |            |
+| +-------------+            |
+|       |                    |
++-------|--------------------+
         |
    +----------+
    | frontend |
@@ -56,32 +30,42 @@ As you can see, there are three main directories: `data`, `entrypoints` and
 
 ```
 
-Each component should only connect with its contiguous ones. Each component
+Each component should only connect with its connected ones. Each component
 contains a `__init__.py` file that stores the functions shared in the
 component, for example a `hello_world()` function shared among different
 entrypoints (API, CLI, …). Apart from this components, there is the
-`__init__.py` file of the `now8_api` module.
+`__init__.py` file of the `now8_api` package.
 
 ## Components
 
 ### Data
 
-This component is responsible for accessing the external dependencies
-providing methods for the logic component that abstract the queries to
-the database, external APIs and other data sources.
-
-#### Cities
-
-Abstraction of city transport APIs and other city data sources.
+This component is responsible for abstracting the data persistence.
 
 #### Database
 
 Abstraction of the local database.
 
-### Logic
+### Domain
 
-This component obtains data from the `data` component and process them
+`domain` contains the business actors and logic. It has no dependencies,
+so that it can be tested alone and the code is as simple and clear as
+possible.
+
+### Service
+
+This component obtains data from the `data` or from the City APIs
+and interacts
+with `doamin` to validate it and process it
 when called by the `entrypoints` component.
+
+Having this layer decouples the `domain` from the `data` and the
+`entrypoints`, which facilitates testing and implementing new functionality.
+
+#### City Data
+
+Abstraction of city transport APIs and other city data sources.
+
 
 ### Entrypoints
 
