@@ -5,7 +5,7 @@ from typing import Dict
 from fastapi import FastAPI
 from fastapi.exceptions import HTTPException
 from fastapi.responses import ORJSONResponse
-from now8_api.service.service import get_estimations
+from now8_api.service.service import Cities, get_estimations
 
 api = FastAPI(default_response_class=ORJSONResponse)
 
@@ -31,18 +31,19 @@ def _return_msg(msg: str, key: str = "msg") -> Dict[str, str]:
 
 
 @api.get("/{city_name}/get_estimations")
-async def get_estimations_api(city_name: str, stop_id: str):
+async def get_estimations_api(
+    city_name: Cities = Cities.MADRID, stop_id: str = "17491"
+):
     """Return ETA for the next vehicles to the stop.
 
-    Arguments:
-        city_name: City name.
-        stop_id: Stop identifier.
+    - **city_name**: City name.
+    - **stop_id**: Stop identifier.
     """
     try:
         result = await get_estimations(city_name=city_name, stop_id=stop_id)
-    except NotImplementedError:
+    except NotImplementedError as error:
         raise HTTPException(
             404, "Can't get estimations for the given stop in the given city."
-        ) from NotImplementedError
+        ) from error
 
     return result
