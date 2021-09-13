@@ -90,7 +90,7 @@ class CityData(ABC):
         """
 
 
-@retry(stop=stop_after_attempt(2))
+@retry(stop=stop_after_attempt(3))
 @validate_arguments
 async def get_json(url: HttpUrl) -> dict:
     """Fetch the given URL and returns the result as a dictionary.
@@ -102,5 +102,5 @@ async def get_json(url: HttpUrl) -> dict:
         List of dictionaries with the parsed answer.
     """
     async with aiohttp.ClientSession() as session:
-        async with session.get(url, raise_for_status=True, timeout=60) as resp:
+        async with session.get(url, raise_for_status=True, timeout=10) as resp:
             return await resp.json(content_type=None)
