@@ -14,8 +14,12 @@ attrs==21.2.0
     # via
     #   aiohttp
     #   pytest
+certifi==2021.5.30
+    # via requests
 chardet==4.0.0
     # via aiohttp
+charset-normalizer==2.0.4
+    # via requests
 click==8.0.1
     # via uvicorn
 coverage==5.5
@@ -27,7 +31,9 @@ gunicorn==20.1.0
 h11==0.12.0
     # via uvicorn
 idna==3.2
-    # via yarl
+    # via
+    #   requests
+    #   yarl
 iniconfig==1.1.1
     # via pytest
 multidict==5.1.0
@@ -60,6 +66,8 @@ pytest==6.2.4
     #   pytest-asyncio
 pytest-asyncio==0.15.1
     # via -r requirements.in
+requests==2.26.0
+    # via -r requirements.in
 starlette==0.14.2
     # via fastapi
 tenacity==8.0.1
@@ -73,8 +81,6 @@ types-attrs==19.1.0
     # via -r requirements.in
 types-orjson==3.6.0
     # via -r requirements.in
-types-requests==2.25.6
-    # via -r requirements.in
 types-setuptools==57.0.2
     # via -r requirements.in
 types-toml==0.1.5
@@ -86,6 +92,8 @@ typing-extensions==3.10.0.0
     #   pydantic
 typing-utils==0.1.0
     # via overrides
+urllib3==1.26.6
+    # via requests
 uvicorn==0.14.0
     # via -r requirements.in
 yarl==1.6.3

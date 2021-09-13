@@ -8,11 +8,11 @@ overrides
 pydantic
 pytest
 pytest-asyncio
+requests
 tenacity
 toml
 types-attrs
 types-orjson
-types-requests
 types-setuptools
 types-toml
 uvicorn

@@ -19,7 +19,6 @@ setup(
         "orjson",
         "overrides",
         "pydantic",
-        "requests",
         "tenacity",
         "uvicorn",
     ],
