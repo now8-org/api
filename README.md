@@ -9,7 +9,10 @@ Run `pip install .`.
 
 ## Documentation
 
-Once installed, to render the documentation, run (from the `docs/` directory):
+You can access the online version at <https://m0wer.github.io/now8-api/>.
+
+Alternatively, once installed, to render the documentation
+run (from the `docs/` directory):
 
 ```bash
 pip install -r requirements.txt
