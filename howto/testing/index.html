@@ -412,6 +412,12 @@
   
 
           
+        </ul>
+      </nav>
+    </li>
+  
+
+          
             
   
   
@@ -420,16 +426,16 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_2" type="checkbox" id="__nav_3_2_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
       
-      <label class="md-nav__link" for="__nav_3_2_2">
-        Cities
+      <label class="md-nav__link" for="__nav_3_3">
+        Entrypoints
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Cities" data-md-level="3">
-        <label class="md-nav__title" for="__nav_3_2_2">
+      <nav class="md-nav" aria-label="Entrypoints" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
           <span class="md-nav__icon md-icon"></span>
-          Cities
+          Entrypoints
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -438,7 +444,85 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/data/cities/__init__/" class="md-nav__link">
+      <a href="../../reference/entrypoints/__init__/" class="md-nav__link">
+          init  
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" >
+      
+      <label class="md-nav__link" for="__nav_3_3_2">
+        Api
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Api" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Api
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/entrypoints/api/__init__/" class="md-nav__link">
+          init  
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      <label class="md-nav__link" for="__nav_3_4">
+        Service
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Service" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Service
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service/__init__/" class="md-nav__link">
           init  
       </a>
     </li>
@@ -450,7 +534,52 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/data/cities/madrid/" class="md-nav__link">
+      <a href="../../reference/service/service/" class="md-nav__link">
+        Service
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4_3" type="checkbox" id="__nav_3_4_3" >
+      
+      <label class="md-nav__link" for="__nav_3_4_3">
+        City data
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="City data" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          City data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service/city_data/__init__/" class="md-nav__link">
+          init  
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service/city_data/madrid/" class="md-nav__link">
         Madrid
       </a>
     </li>
@@ -634,12 +763,16 @@ by executing:</p>
 <div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytest</span>
 </code></pre></div>
 <h2 id="testing-scopes">Testing scopes</h2>
-<p>There are two main testing scopes: unit testing and integration testing.</p>
+<p>We use three testing scopes: unit, integration and
+end-to-end (e2e).</p>
 <p>Unit testing is a testing method by which individual units of source
 code are tested to determine if they are ready to use,
-whereas integration testing checks integration between software modules.</p>
-<p>Unit tests should be fast and not relay on other pieces of code or
-external dependencies such as databases. Mock them if necessary.</p>
+whereas integration testing checks integration between software modules
+at the boundaries. Lastly, e2e tetsing checks the system as a whole
+assessing that the functionality expected by the user works as expected
+and that there are no system errors.</p>
+<p>Unit tests should be fast and not relay on unnecessary pieces of code or
+external dependencies such as databases.</p>
 <h2 id="test-driven-development">Test-driven development</h2>
 <p>We <em>try</em> to follow test-driven development (TDD) principles. The methodology
 is as follows:</p>
@@ -654,6 +787,11 @@ is as follows:</p>
 <li>Improve the implementation incrementally checking that all tests still
   pass.</li>
 </ol>
+<p>One of this cycles might have subcycles. For example, if you want to
+add a new high level function for which you write an end-to-end (E2E)
+test, start writing a test for that function and use small cycles of
+TDD for the helper functions or dependencies in lower level layers that
+the new function requires.</p>
                 
                   
                     
@@ -662,7 +800,7 @@ is as follows:</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-08-22T08:08:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-08-22</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-09-12T19:03:42+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-09-12</span>
       
     
   </small>

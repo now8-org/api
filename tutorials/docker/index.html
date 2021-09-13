@@ -363,6 +363,12 @@
   
 
           
+        </ul>
+      </nav>
+    </li>
+  
+
+          
             
   
   
@@ -371,16 +377,16 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_2" type="checkbox" id="__nav_3_2_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
       
-      <label class="md-nav__link" for="__nav_3_2_2">
-        Cities
+      <label class="md-nav__link" for="__nav_3_3">
+        Entrypoints
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Cities" data-md-level="3">
-        <label class="md-nav__title" for="__nav_3_2_2">
+      <nav class="md-nav" aria-label="Entrypoints" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
           <span class="md-nav__icon md-icon"></span>
-          Cities
+          Entrypoints
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -389,7 +395,85 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/data/cities/__init__/" class="md-nav__link">
+      <a href="../../reference/entrypoints/__init__/" class="md-nav__link">
+          init  
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" >
+      
+      <label class="md-nav__link" for="__nav_3_3_2">
+        Api
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Api" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Api
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/entrypoints/api/__init__/" class="md-nav__link">
+          init  
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      <label class="md-nav__link" for="__nav_3_4">
+        Service
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Service" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Service
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service/__init__/" class="md-nav__link">
           init  
       </a>
     </li>
@@ -401,7 +485,52 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/data/cities/madrid/" class="md-nav__link">
+      <a href="../../reference/service/service/" class="md-nav__link">
+        Service
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4_3" type="checkbox" id="__nav_3_4_3" >
+      
+      <label class="md-nav__link" for="__nav_3_4_3">
+        City data
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="City data" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          City data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service/city_data/__init__/" class="md-nav__link">
+          init  
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service/city_data/madrid/" class="md-nav__link">
         Madrid
       </a>
     </li>
@@ -636,7 +765,7 @@
 </code></pre></div>
 <h2 id="running">Running</h2>
 <p>Then, to run the server execute (filling the variable values):</p>
-<div class="highlight"><pre><span></span><code>docker run --rm --name now8-api -p <span class="m">8000</span>:8000 -it -e <span class="nv">DB_NAME</span><span class="o">=</span><span class="s1">&#39;&#39;</span> -e <span class="nv">DB_HOST</span><span class="o">=</span><span class="s1">&#39;&#39;</span> -e <span class="nv">DB_USER</span><span class="o">=</span><span class="s1">&#39;&#39;</span> -e <span class="nv">DB_PASS</span><span class="o">=</span><span class="s1">&#39;&#39;</span> -e <span class="nv">DB_PORT</span><span class="o">=</span><span class="s1">&#39;5432&#39;</span> local/now8-api
+<div class="highlight"><pre><span></span><code>docker run -d --name now8-api -p <span class="m">8000</span>:8000 -e <span class="nv">N_WORKERS</span><span class="o">=</span><span class="m">4</span> local/now8-api
 </code></pre></div>
 <p>You can then access the HTTP API at <a href="http://localhost:8000">http://localhost:8000</a>.</p>
                 
@@ -647,7 +776,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-09-10T05:52:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-09-10</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-09-13T06:43:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-09-13</span>
       
     
   </small>
