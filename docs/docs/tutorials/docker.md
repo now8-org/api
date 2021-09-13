@@ -16,7 +16,7 @@ docker build -t local/now8-api .
 Then, to run the server execute (filling the variable values):
 
 ```bash
-docker run --rm --name now8-api -p 8000:8000 -it -e DB_NAME='' -e DB_HOST='' -e DB_USER='' -e DB_PASS='' -e DB_PORT='5432' local/now8-api
+docker run -d --name now8-api -p 8000:8000 -e N_WORKERS=4 local/now8-api
 ```
 
 You can then access the HTTP API at <http://localhost:8000>.
