@@ -3,7 +3,7 @@
 from enum import Enum
 from typing import Dict, List
 
-from now8_api.domain import Stop, VehicleEstimation
+from now8_api.domain import Stop, TransportType, VehicleEstimation
 from now8_api.service import CityNameError
 from now8_api.service.city_data import CityData
 from now8_api.service.city_data.madrid import MadridCityData
@@ -57,6 +57,6 @@ async def get_estimations(
     """
     city_data = assign_city_data(city_name)
 
-    stop = Stop(id=stop_id)
+    stop = Stop(id=stop_id, transport_type=TransportType.INTERCITY_BUS)
 
     return await city_data.get_estimations(stop)
