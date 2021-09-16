@@ -1,7 +1,8 @@
+---
 site_name: now8-api documentation
-site_url: https://m0wer.github.io/now8-api/
-repo_name: m0wer/now8-api
-repo_url: http://github.com/m0wer/now8-api/
+site_url: https://now8-org.github.io/now8-api/
+repo_name: now8-org/now8-api
+repo_url: http://github.com/now8-org/now8-api/
 
 plugins:
   - search

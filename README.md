@@ -9,7 +9,7 @@ Run `pip install .`.
 
 ## Documentation
 
-You can access the online version at <https://m0wer.github.io/now8-api/>.
+You can access the online version at <https://now8-org.github.io/now8-api/>.
 
 Alternatively, once installed, to render the documentation
 run (from the `docs/` directory):
