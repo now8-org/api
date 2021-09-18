@@ -28,9 +28,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
       - name: Update dependencies
-        run: pip install pip-tools && pip-compile
+        run: pip install pip-tools && pip-compile requirements-dev.in
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.in
       - name: Run tests with pytest
         run: python -m pytest
       - name: Commit files
