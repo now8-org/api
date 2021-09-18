@@ -765,9 +765,14 @@
 </code></pre></div>
 <h2 id="running">Running</h2>
 <p>Then, to run the server execute (filling the variable values):</p>
-<div class="highlight"><pre><span></span><code>docker run -d --name now8-api -p <span class="m">8000</span>:8000 -e <span class="nv">N_WORKERS</span><span class="o">=</span><span class="m">4</span> local/now8-api
+<div class="highlight"><pre><span></span><code>docker run -d --name now8-api -p <span class="m">80</span>:80 -e <span class="nv">WEB_CONCURRENCY</span><span class="o">=</span><span class="m">4</span> local/now8-api
 </code></pre></div>
-<p>You can then access the HTTP API at <a href="http://localhost:8000">http://localhost:8000</a>.</p>
+<p>You can then access the HTTP API at <a href="http://localhost:80">http://localhost:80</a>.</p>
+<p>If <code>WEB_CONCURRENCY</code> is not set, the number of workers will be two times
+the number of CPU cores/threads.</p>
+<p>The environment variables from
+<a href="https://hub.docker.com/r/tiangolo/uvicorn-gunicorn-fastapi">tiangolo/uvicorn-gunicorn-fastapi</a>
+are supported.</p>
                 
                   
                     
@@ -776,7 +781,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-09-13T06:43:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-09-13</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-09-18T18:45:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-09-18</span>
       
     
   </small>
