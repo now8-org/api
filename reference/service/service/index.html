@@ -532,8 +532,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#now8_api.service.service.assign_city_data" class="md-nav__link">
-    assign_city_data()
+  <a href="#now8_api.service.service._assign_city_data" class="md-nav__link">
+    _assign_city_data()
   </a>
   
 </li>
@@ -750,8 +750,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#now8_api.service.service.assign_city_data" class="md-nav__link">
-    assign_city_data()
+  <a href="#now8_api.service.service._assign_city_data" class="md-nav__link">
+    _assign_city_data()
   </a>
   
 </li>
@@ -844,9 +844,12 @@
 
 
 
-<h2 id="now8_api.service.service.assign_city_data" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">assign_city_data</span><span class="p">(</span><span class="n">city_name</span><span class="p">)</span></code>
+<h2 id="now8_api.service.service._assign_city_data" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">_assign_city_data</span><span class="p">(</span><span class="n">city_name</span><span class="p">)</span></code>
 
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-private"><code>private</code></small>
+  </span>
 
 </h2>
 
@@ -905,7 +908,7 @@
 </table>
         <details class="quote">
           <summary>Source code in <code>now8_api/service/service.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">assign_city_data</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_assign_city_data</span><span class="p">(</span>
     <span class="n">city_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CityData</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Assign CityData instance corresponding to a city name.</span>
@@ -987,7 +990,7 @@ city.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>List[now8_api.domain.VehicleEstimation]</code></td>
+      <td><code>List[Dict[str, dict]]</code></td>
       <td><p>ETA for the next vehicles to the stop.</p></td>
     </tr>
   </tbody>
@@ -996,7 +999,7 @@ city.</p>
           <summary>Source code in <code>now8_api/service/service.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">get_estimations</span><span class="p">(</span>
     <span class="n">city_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">stop_id</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">VehicleEstimation</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Return ETA for the next vehicles to the stop.</span>
 
 <span class="sd">    `stop` will be used to instantiate a Stop subclass of the given</span>
@@ -1009,11 +1012,32 @@ city.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        ETA for the next vehicles to the stop.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">city_data</span> <span class="o">=</span> <span class="n">assign_city_data</span><span class="p">(</span><span class="n">city_name</span><span class="p">)</span>
+    <span class="n">city_data</span> <span class="o">=</span> <span class="n">_assign_city_data</span><span class="p">(</span><span class="n">city_name</span><span class="p">)</span>
 
     <span class="n">stop</span> <span class="o">=</span> <span class="n">Stop</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">stop_id</span><span class="p">,</span> <span class="n">transport_type</span><span class="o">=</span><span class="n">TransportType</span><span class="o">.</span><span class="n">INTERCITY_BUS</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="k">await</span> <span class="n">city_data</span><span class="o">.</span><span class="n">get_estimations</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span>
+    <span class="n">estimations</span> <span class="o">=</span> <span class="k">await</span> <span class="n">city_data</span><span class="o">.</span><span class="n">get_estimations</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span>
+
+    <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;vehicle&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                    <span class="s2">&quot;transport_type&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">transport_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;estimation&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;estimation&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">estimation</span><span class="o">.</span><span class="n">estimation</span><span class="p">,</span>
+                <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">estimation</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">v_e</span> <span class="ow">in</span> <span class="n">estimations</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
         </details>
     </div>
