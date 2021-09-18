@@ -38,8 +38,6 @@ multidict==5.1.0
     # via
     #   aiohttp
     #   yarl
-orjson==3.6.3
-    # via -r requirements.in
 overrides==6.1.0
     # via -r requirements.in
 packaging==21.0

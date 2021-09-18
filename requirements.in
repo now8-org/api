@@ -1,7 +1,6 @@
 aiohttp
 fastapi
 gunicorn
-orjson
 overrides
 tenacity
 uvicorn

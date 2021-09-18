@@ -16,7 +16,6 @@ setup(
         "aiohttp",
         "fastapi",
         "gunicorn",
-        "orjson",
         "overrides",
         "pydantic",
         "tenacity",

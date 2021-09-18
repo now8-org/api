@@ -5,7 +5,6 @@ from typing import Dict
 
 from fastapi import FastAPI
 from fastapi.exceptions import HTTPException
-from fastapi.responses import ORJSONResponse
 from now8_api.service.service import Cities, get_estimations
 
 description = "Estimated time of arrival for public transport vehicles."
@@ -13,7 +12,6 @@ description = "Estimated time of arrival for public transport vehicles."
 api = FastAPI(
     name="now8 API",
     description=description,
-    default_response_class=ORJSONResponse,
     root_path=environ.get("ROOT_PATH", ""),
 )
 

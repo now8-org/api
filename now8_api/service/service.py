@@ -3,7 +3,7 @@
 from enum import Enum
 from typing import Dict, List
 
-from now8_api.domain import Stop, TransportType, VehicleEstimation
+from now8_api.domain import Stop, TransportType
 from now8_api.service import CityNameError
 from now8_api.service.city_data import CityData
 from now8_api.service.city_data.madrid import MadridCityData
@@ -18,7 +18,7 @@ class Cities(str, Enum):
 CITIES_CITY_DATA: Dict[Cities, CityData] = {Cities.MADRID: MadridCityData()}
 
 
-def assign_city_data(
+def _assign_city_data(
     city_name: str,
 ) -> CityData:
     """Assign CityData instance corresponding to a city name.
@@ -42,7 +42,7 @@ def assign_city_data(
 
 async def get_estimations(
     city_name: str, stop_id: str
-) -> List[VehicleEstimation]:
+) -> List[Dict[str, dict]]:
     """Return ETA for the next vehicles to the stop.
 
     `stop` will be used to instantiate a Stop subclass of the given
@@ -55,8 +55,29 @@ async def get_estimations(
     Returns:
         ETA for the next vehicles to the stop.
     """
-    city_data = assign_city_data(city_name)
+    city_data = _assign_city_data(city_name)
 
     stop = Stop(id=stop_id, transport_type=TransportType.INTERCITY_BUS)
 
-    return await city_data.get_estimations(stop)
+    estimations = await city_data.get_estimations(stop)
+
+    result: List[Dict[str, dict]] = [
+        {
+            "vehicle": {
+                "id": v_e.vehicle.id,
+                "line": {
+                    "id": v_e.vehicle.line.id,
+                    "transport_type": v_e.vehicle.line.transport_type.value,
+                    "name": v_e.vehicle.line.name,
+                },
+                "name": v_e.vehicle.name,
+            },
+            "estimation": {
+                "estimation": v_e.estimation.estimation,
+                "time": v_e.estimation.time,
+            },
+        }
+        for v_e in estimations
+    ]
+
+    return result
