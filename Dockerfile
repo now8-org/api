@@ -1,11 +1,11 @@
-FROM python:3.9 as builder
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim
 
-COPY . /app
+COPY ./requirements.txt /tmp
+RUN pip install -r /tmp/requirements.txt
 
-WORKDIR /app
+COPY ./now8_api/ /app/now8_api
 
-RUN pip install .
 
-EXPOSE 8000
-
-CMD ["sh", "-c", "gunicorn -b 0.0.0.0:8000 -w ${N_WORKERS:-4} -k uvicorn.workers.UvicornWorker now8_api.entrypoints.api:api"]
+ENV MODULE_NAME="now8_api.entrypoints.api"
+ENV VARIABLE_NAME="api"
+ENV WORKERS_PER_CORE=2

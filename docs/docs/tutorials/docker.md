@@ -16,7 +16,14 @@ docker build -t local/now8-api .
 Then, to run the server execute (filling the variable values):
 
 ```bash
-docker run -d --name now8-api -p 8000:8000 -e N_WORKERS=4 local/now8-api
+docker run -d --name now8-api -p 80:80 -e WEB_CONCURRENCY=4 local/now8-api
 ```
 
-You can then access the HTTP API at <http://localhost:8000>.
+You can then access the HTTP API at <http://localhost:80>.
+
+If `WEB_CONCURRENCY` is not set, the number of workers will be two times
+the number of CPU cores/threads.
+
+The environment variables from
+[tiangolo/uvicorn-gunicorn-fastapi](https://hub.docker.com/r/tiangolo/uvicorn-gunicorn-fastapi)
+are supported.
