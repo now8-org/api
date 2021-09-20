@@ -1,3 +1,9 @@
+## 2.2.1 (2021-09-20)
+
+### Perf
+
+- **service**: manually convert dataclasses to dict
+
 ## 2.2.0 (2021-09-16)
 
 ### Feat
