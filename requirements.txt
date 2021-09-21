@@ -10,6 +10,8 @@ asgiref==3.4.1
     # via uvicorn
 async-timeout==3.0.1
     # via aiohttp
+asyncpg==0.24.0
+    # via -r requirements.in
 attrs==21.2.0
     # via aiohttp
 chardet==4.0.0
@@ -31,7 +33,9 @@ multidict==5.1.0
 overrides==6.1.0
     # via -r requirements.in
 pydantic==1.8.2
-    # via fastapi
+    # via
+    #   -r requirements.in
+    #   fastapi
 starlette==0.14.2
     # via fastapi
 tenacity==8.0.1
