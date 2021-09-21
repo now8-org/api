@@ -10,6 +10,8 @@ asgiref==3.4.1
     # via uvicorn
 async-timeout==3.0.1
     # via aiohttp
+asyncpg==0.24.0
+    # via -r requirements.in
 attrs==21.2.0
     # via
     #   aiohttp
@@ -47,7 +49,9 @@ pluggy==1.0.0
 py==1.10.0
     # via pytest
 pydantic==1.8.2
-    # via fastapi
+    # via
+    #   -r requirements.in
+    #   fastapi
 pyparsing==2.4.7
     # via packaging
 pytest==6.2.5

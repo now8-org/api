@@ -1,6 +1,8 @@
 aiohttp
+asyncpg
 fastapi
 gunicorn
 overrides
+pydantic
 tenacity
 uvicorn

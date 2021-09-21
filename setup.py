@@ -14,6 +14,7 @@ setup(
     entry_points={"console_scripts": []},
     install_requires=[
         "aiohttp",
+        "asyncpg",
         "fastapi",
         "gunicorn",
         "overrides",
