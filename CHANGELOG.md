@@ -1,3 +1,9 @@
+## 2.3.0 (2021-09-21)
+
+### Feat
+
+- **data**: database module with postgres implementation
+
 ## 2.2.1 (2021-09-20)
 
 ### Perf
