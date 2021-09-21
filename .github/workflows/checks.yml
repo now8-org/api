@@ -15,6 +15,9 @@ jobs:
         image: postgres:alpine
         env:
           POSTGRES_PASSWORD: postgres
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -47,7 +50,7 @@ jobs:
         run: python -m pytest
         env:
           DB_NAME: postgres
-          DB_HOST: postgres
+          DB_HOST: localhost
           DB_USER: postgres
           DB_PASS: postgres
           DB_PORT: 5432
