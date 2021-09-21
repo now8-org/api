@@ -841,15 +841,15 @@
 <p>Run <code>pip install .</code>.</p>
 <h3 id="development">Development</h3>
 <p>To install also the development dependencies, run
-<code>pip install -r requirements.txt</code></p>
+<code>pip install -r requirements-dev.txt</code></p>
 <h2 id="configuration">Configuration</h2>
 <p>The following environment variables must be defined with the database
-connection settings:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">DB_NAME</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-<span class="nv">DB_HOST</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-<span class="nv">DB_USER</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-<span class="nv">DB_PASS</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-<span class="nv">DB_PORT</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+(PostgreSQL) connection settings:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">DB_NAME</span><span class="o">=</span>
+<span class="nv">DB_HOST</span><span class="o">=</span>
+<span class="nv">DB_USER</span><span class="o">=</span>
+<span class="nv">DB_PASS</span><span class="o">=</span>
+<span class="nv">DB_PORT</span><span class="o">=</span>
 </code></pre></div>
 <p>You can define them in several ways:</p>
 <ul>
@@ -859,6 +859,24 @@ connection settings:</p>
 <li>...</li>
 </ul>
 <h2 id="running">Running</h2>
+<p>Before running <code>now8_api</code>, start a PostgreSQL database. This can be done
+with:</p>
+<div class="highlight"><pre><span></span><code>docker run -d --name postgres -e <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>postgres -p <span class="m">5432</span>:5432 postgres:alpine
+</code></pre></div>
+<p>You don't need to bind the host port if both <code>now8_api</code> and the database
+are running in Docker in the same network. Nevertheless, it might be
+useful to bind the host port if using the database for development
+so that you can run the code and tests directly from the sources.</p>
+<p>In this case, the database configuration environment variables for
+<code>now8_api</code> should be:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">DB_NAME</span><span class="o">=</span>postgres
+<span class="nv">DB_HOST</span><span class="o">=</span>postgres
+<span class="nv">DB_USER</span><span class="o">=</span>postgres
+<span class="nv">DB_PASS</span><span class="o">=</span>postgres
+<span class="nv">DB_PORT</span><span class="o">=</span><span class="m">5432</span>
+</code></pre></div>
+<p>If you are using a Python virtual environment, you can add them to
+<code>$VIRTUAL_ENV/bin/postactivate</code> adding <code>export</code> before each one of them.</p>
 <h3 id="development_1">Development</h3>
 <p>For development, you can run the project with:</p>
 <div class="highlight"><pre><span></span><code>uvicorn now8_api.entrypoints.api:api --reload
@@ -884,7 +902,7 @@ workers, such as <code>gunicorn</code>.</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-09-10T05:52:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-09-10</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-09-21T04:26:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-09-21</span>
       
     
   </small>
