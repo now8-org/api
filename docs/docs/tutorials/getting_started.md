@@ -7,19 +7,19 @@ Run `pip install .`.
 ### Development
 
 To install also the development dependencies, run
-`pip install -r requirements.txt`
+`pip install -r requirements-dev.txt`
 
 ## Configuration
 
 The following environment variables must be defined with the database
-connection settings:
+(PostgreSQL) connection settings:
 
 ```bash
-DB_NAME=''
-DB_HOST=''
-DB_USER=''
-DB_PASS=''
-DB_PORT=''
+DB_NAME=
+DB_HOST=
+DB_USER=
+DB_PASS=
+DB_PORT=
 ```
 
 You can define them in several ways:
@@ -30,6 +30,32 @@ You can define them in several ways:
   * ...
 
 ## Running
+
+Before running `now8_api`, start a PostgreSQL database. This can be done
+with:
+
+```bash
+docker run -d --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:alpine
+```
+
+You don't need to bind the host port if both `now8_api` and the database
+are running in Docker in the same network. Nevertheless, it might be
+useful to bind the host port if using the database for development
+so that you can run the code and tests directly from the sources.
+
+In this case, the database configuration environment variables for
+`now8_api` should be:
+
+```bash
+DB_NAME=postgres
+DB_HOST=postgres
+DB_USER=postgres
+DB_PASS=postgres
+DB_PORT=5432
+```
+
+If you are using a Python virtual environment, you can add them to
+`$VIRTUAL_ENV/bin/postactivate` adding `export ` before each one of them.
 
 ### Development
 
