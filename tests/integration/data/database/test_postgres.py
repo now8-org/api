@@ -1,10 +1,10 @@
 import pytest
-from now8_api.data.database.popstgres import PostgresqlSqlEngine
+from now8_api.data.database.postgres import PostgresqlSqlEngine
 
 
 @pytest.mark.slow
 class TestPostgres:
-    postgresql_sql_engine = PostgresqlSqlEngine()
+    postgresql_sql_engine = PostgresqlSqlEngine(env_prefix="TEST_DB_")
 
     @pytest.mark.asyncio
     async def test_execute_query(self):

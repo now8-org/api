@@ -1,17 +1,29 @@
 import pytest
-from now8_api.service import CityNameError
-from now8_api.service.city_data import CityData
-from now8_api.service.city_data.madrid import MadridCityData
-from now8_api.service.service import _assign_city_data
+from now8_api.service.service import Service
+from tests.conftest import FakeCityData, FakeSqlEngine
 
 
-class TestAssignCityStop:
-    def test_assign_city_data(self):
-        result = _assign_city_data(city_name="Madrid")
+class TestService:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.service = Service(
+            city_data=FakeCityData(),
+            sql_engine=FakeSqlEngine(),
+        )
 
-        assert isinstance(result, CityData)
-        assert isinstance(result, MadridCityData)
+    @pytest.mark.asyncio
+    async def test_stop_info(self):
+        result = await self.service.stop_info(stop_id="42")
 
-    def test_assign_city_stop_raises(self):
-        with pytest.raises(CityNameError):
-            _assign_city_data(city_name="fake_city")
+        assert isinstance(result, dict)
+        assert all(isinstance(key, str) for key in result.keys())
+        assert all(
+            isinstance(value, (str, float)) for value in result.values()
+        )
+        assert result == {
+            "id": "42",
+            "name": "Stop 42",
+            "longitude": 0.0,
+            "latitude": 0.0,
+            "zone": "A",
+        }

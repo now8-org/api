@@ -54,6 +54,8 @@ pydantic==1.8.2
     #   fastapi
 pyparsing==2.4.7
     # via packaging
+pypika==0.48.8
+    # via -r requirements.in
 pytest==6.2.5
     # via
     #   -r requirements-dev.in
@@ -68,6 +70,8 @@ tenacity==8.0.1
     # via -r requirements.in
 toml==0.10.2
     # via pytest
+types-orjson==3.6.1
+    # via -r requirements-dev.in
 typing-extensions==3.10.0.2
     # via
     #   aiohttp

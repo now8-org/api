@@ -5,7 +5,7 @@ from typing import Dict
 
 from fastapi import FastAPI
 from fastapi.exceptions import HTTPException
-from now8_api.service.service import Cities, get_estimations
+from now8_api.entrypoints.common import CITY_SERVICES, Cities
 
 description = "Estimated time of arrival for public transport vehicles."
 
@@ -46,7 +46,9 @@ async def get_estimations_api(
     - **stop_id**: Stop identifier.
     """
     try:
-        result = await get_estimations(city_name=city_name, stop_id=stop_id)
+        result = await CITY_SERVICES.get(
+            Cities(city_name.lower())
+        ).get_estimations(stop_id=stop_id)
     except NotImplementedError as error:
         raise HTTPException(
             404, "Can't get estimations for the given stop in the given city."

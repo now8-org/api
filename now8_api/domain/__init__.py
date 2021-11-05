@@ -2,9 +2,9 @@
 
 from datetime import datetime
 from enum import Enum
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
-from pydantic import validator
+from pydantic import Field, validator
 from pydantic.dataclasses import dataclass
 
 
@@ -107,6 +107,19 @@ class VehicleEstimation:
 
 
 @dataclass
+class Coordinates:
+    """Coordinates (in degrees).
+
+    Attributes:
+        longitude: Longitude.
+        latitude: Latitude.
+    """
+
+    longitude: float = Field(..., ge=-180, le=180)
+    latitude: float = Field(..., ge=-90, le=90)
+
+
+@dataclass
 class Stop:
     """Transportation stop.
 
@@ -116,13 +129,15 @@ class Stop:
         way: Way of the stop.
         name: Name of the stop.
         coordinates: Coordinates where the stop is located at.
+        zone: Zone where the stop is located at.
     """
 
     id: str
     transport_type: Optional[TransportType] = None
     way: Optional[Way] = None
     name: Optional[str] = None
-    coordinates: Optional[Tuple[float, float]] = None
+    coordinates: Optional[Coordinates] = None
+    zone: Optional[str] = None
 
 
 @dataclass
