@@ -11,15 +11,16 @@ To install also the development dependencies, run
 
 ## Configuration
 
-The following environment variables must be defined with the database
-(PostgreSQL) connection settings:
+The following environment variables must be defined for each city
+(e.g., `MADRID_DB_NAME`) with the database (PostgreSQL) connection
+settings:
 
 ```bash
-DB_NAME=
-DB_HOST=
-DB_USER=
-DB_PASS=
-DB_PORT=
+CITY_DB_NAME=
+CITY_DB_HOST=
+CITY_DB_USER=
+CITY_DB_PASS=
+CITY_DB_PORT=
 ```
 
 You can define them in several ways:
@@ -47,11 +48,11 @@ In this case, the database configuration environment variables for
 `now8_api` should be:
 
 ```bash
-DB_NAME=postgres
-DB_HOST=postgres
-DB_USER=postgres
-DB_PASS=postgres
-DB_PORT=5432
+CITY_DB_NAME=postgres
+CITY_DB_HOST=postgres
+CITY_DB_USER=postgres
+CITY_DB_PASS=postgres
+CITY_DB_PORT=5432
 ```
 
 If you are using a Python virtual environment, you can add them to
@@ -62,7 +63,7 @@ If you are using a Python virtual environment, you can add them to
 For development, you can run the project with:
 
 ```bash
-uvicorn now8_api.entrypoints.api:api --reload
+uvicorn now8_api.entrypoints.api.main:api --reload
 ```
 
 You can then access the API at <http://localhost:8000> and the [Swagger UI](https://swagger.io/tools/swagger-ui/) (interactive API documentation) at <http://localhost:8000/docs>.
@@ -75,7 +76,7 @@ workers, such as `gunicorn`.
 For example:
 
 ```bash
-gunicorn -b 0.0.0.0:8000 -w 4 -k uvicorn.workers.UvicornWorker now8_api.entrypoints.api:api
+gunicorn -b 0.0.0.0:8000 -w 4 -k uvicorn.workers.UvicornWorker now8_api.entrypoints.api.main:api
 ```
 
 Options:
