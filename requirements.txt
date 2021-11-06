@@ -36,6 +36,8 @@ pydantic==1.8.2
     # via
     #   -r requirements.in
     #   fastapi
+pypika==0.48.8
+    # via -r requirements.in
 starlette==0.14.2
     # via fastapi
 tenacity==8.0.1

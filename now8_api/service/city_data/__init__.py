@@ -5,11 +5,11 @@ from typing import List, Tuple
 
 import aiohttp
 from now8_api.domain import Line, Stop, TransportType, VehicleEstimation
-from pydantic import HttpUrl, validate_arguments
+from pydantic import BaseModel, HttpUrl, validate_arguments
 from tenacity import retry, stop_after_attempt
 
 
-class CityData(ABC):
+class CityData(BaseModel, ABC):
     """City data abstract class.
 
     Abstracts the city data retrieval.

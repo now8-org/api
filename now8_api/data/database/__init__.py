@@ -84,7 +84,7 @@ class SqlEngine(ABC):
         }
 
     @abstractmethod
-    async def execute_query(self, query: str, *args) -> List:
+    async def execute_query(self, query: str, *args) -> List[tuple]:
         """Return the result of executing the passed query.
 
         Arguments:
