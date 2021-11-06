@@ -20,6 +20,47 @@ class Service(BaseModel):
     city_data: CityData
     sql_engine: SqlEngine
 
+    async def all_stops(self) -> List[Dict[str, Union[str, float]]]:
+        """Return all the stops of the city.
+
+        Returns:
+            List of dictionaries with the stop ID, transport type, way,
+            name, coordinates and zone of each stop.
+        """
+        table_stops: Table = Table("stops")
+        query: Query = Query.from_(table_stops).select(
+            table_stops.stop_code,
+            table_stops.stop_name,
+            table_stops.stop_lat,
+            table_stops.stop_lon,
+            table_stops.zone_id,
+        )
+        query_result: List[tuple] = await self.sql_engine.execute_query(
+            str(query)
+        )
+
+        result: List[Dict[str, Union[str, float]]] = []
+
+        for row in query_result:
+            stop = Stop(
+                id=row[0],
+                name=row[1],
+                coordinates=Coordinates(latitude=row[2], longitude=row[3]),
+                zone=row[4],
+            )
+
+            result.append(
+                {
+                    "id": stop.id,
+                    "name": stop.name,
+                    "longitude": stop.coordinates.longitude,
+                    "latitude": stop.coordinates.latitude,
+                    "zone": stop.zone,
+                }
+            )
+
+        return result
+
     async def stop_info(self, stop_id: str) -> Dict[str, Union[str, float]]:
         """Return the stop information.
 

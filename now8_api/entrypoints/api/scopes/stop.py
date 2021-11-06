@@ -12,14 +12,20 @@ router = APIRouter(
 
 
 @router.get(
-    "/{city_name}/{stop_id}",
+    "/{city_name}",
     summary="Get all stops in a city.",
 )
 async def stop_api(
     city_name: str = CityName,
-    stop_id: str = StopId,
-) -> List[Dict[str, str]]:
-    return []
+) -> List[Dict[str, Union[str, float]]]:
+    try:
+        city_service: Service = CITY_SERVICES.get(Cities(city_name.lower()))
+    except KeyError as error:
+        raise HTTPException(400, f'Invalid city name "{city_name}"') from error
+
+    result = await city_service.all_stops()
+
+    return result
 
 
 @router.get(
