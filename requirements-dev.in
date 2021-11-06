@@ -1,5 +1,6 @@
 -r requirements.in
 pytest
 pytest-asyncio
+pytest-env
 types-orjson
 requests

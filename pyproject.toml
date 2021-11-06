@@ -3,6 +3,13 @@
 [tool.pytest.ini_options]
 markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
 filterwarnings = "ignore::DeprecationWarning"
+env = [
+    "MADRID_DB_NAME={TEST_DB_NAME}",
+    "MADRID_DB_USER={TEST_DB_USER}",
+    "MADRID_DB_PASS={TEST_DB_PASS}",
+    "MADRID_DB_HOST={TEST_DB_HOST}",
+    "MADRID_DB_PORT={TEST_DB_PORT}",
+]
 
 # --------- Commitizen -------------
 

@@ -1,9 +1,10 @@
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 from now8_api.data.database import SqlEngine
 from now8_api.domain import Line, Stop, TransportType, VehicleEstimation
 from now8_api.service.city_data import CityData
 from overrides import overrides
+from pydantic.dataclasses import dataclass
 
 
 class FakeCityData(CityData):
@@ -36,7 +37,15 @@ class FakeCityData(CityData):
         return []
 
 
+@dataclass
 class FakeSqlEngine(SqlEngine):
+    env_prefix: str = "FAKE_DB_"
+    name: Optional[str] = "fake_name"
+    user: Optional[str] = "fake_user"
+    password: Optional[str] = "fake_password"
+    host: Optional[str] = "fake_host"
+    port: Optional[str] = "fake_port"
+
     @overrides
     async def execute_query(self, query: str, *_) -> List[tuple]:
         if query.startswith("SELECT"):
