@@ -1,3 +1,9 @@
+## 3.1.0 (2021-11-06)
+
+### Feat
+
+- all city stops endpoint
+
 ## 3.0.0 (2021-11-06)
 
 ### Feat
