@@ -29,7 +29,8 @@ include = '\.pyi?$'
 
 [tool.pydocstyle]
 convention = "google"
-ignore_decorators = "overrides"
+match = "^(now8_api)"
+ignore_decorators = "^(overrides|api.get|router.get)"
 
 # --------- mypy -------------
 

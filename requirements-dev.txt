@@ -72,7 +72,9 @@ starlette==0.14.2
 tenacity==8.0.1
     # via -r requirements.in
 toml==0.10.2
-    # via pytest
+    # via
+    #   -r requirements-dev.in
+    #   pytest
 types-orjson==3.6.1
     # via -r requirements-dev.in
 typing-extensions==3.10.0.2
