@@ -6,6 +6,6 @@ RUN pip install -r /tmp/requirements.txt
 COPY ./now8_api/ /app/now8_api
 
 
-ENV MODULE_NAME="now8_api.entrypoints.api"
+ENV MODULE_NAME="now8_api.entrypoints.api.main"
 ENV VARIABLE_NAME="api"
 ENV WORKERS_PER_CORE=2
