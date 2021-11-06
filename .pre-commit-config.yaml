@@ -9,18 +9,6 @@ repos:
       - id: check-merge-conflict
       - id: end-of-file-fixer
 
-  - repo: https://github.com/jazzband/pip-tools
-    rev: 6.4.0
-    hooks:
-      - name: Build requirements.txt
-        id: pip-compile
-      - name: Build requirements-dev.txt
-        id: pip-compile
-        args: [requirements-dev.in]
-      - name: Build mkdocs requirements.txt
-        id: pip-compile
-        args: [docs/requirements.txt]
-
   - repo: https://github.com/ambv/black
     rev: 21.10b0
     hooks:

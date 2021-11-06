@@ -1,9 +1,0 @@
-aiohttp
-asyncpg
-fastapi
-gunicorn
-overrides
-pydantic
-pypika
-tenacity
-uvicorn

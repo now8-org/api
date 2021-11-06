@@ -5,13 +5,13 @@
 #    pip-compile
 #
 aiohttp==3.7.4.post0
-    # via -r requirements.in
+    # via now8-api (setup.py)
 asgiref==3.4.1
     # via uvicorn
 async-timeout==3.0.1
     # via aiohttp
 asyncpg==0.24.0
-    # via -r requirements.in
+    # via now8-api (setup.py)
 attrs==21.2.0
     # via aiohttp
 chardet==4.0.0
@@ -19,9 +19,9 @@ chardet==4.0.0
 click==8.0.1
     # via uvicorn
 fastapi==0.68.0
-    # via -r requirements.in
+    # via now8-api (setup.py)
 gunicorn==20.1.0
-    # via -r requirements.in
+    # via now8-api (setup.py)
 h11==0.12.0
     # via uvicorn
 idna==3.2
@@ -31,17 +31,17 @@ multidict==5.1.0
     #   aiohttp
     #   yarl
 overrides==6.1.0
-    # via -r requirements.in
+    # via now8-api (setup.py)
 pydantic==1.8.2
     # via
-    #   -r requirements.in
     #   fastapi
+    #   now8-api (setup.py)
 pypika==0.48.8
-    # via -r requirements.in
+    # via now8-api (setup.py)
 starlette==0.14.2
     # via fastapi
 tenacity==8.0.1
-    # via -r requirements.in
+    # via now8-api (setup.py)
 typing-extensions==3.10.0.0
     # via
     #   aiohttp
@@ -49,7 +49,7 @@ typing-extensions==3.10.0.0
 typing-utils==0.1.0
     # via overrides
 uvicorn==0.14.0
-    # via -r requirements.in
+    # via now8-api (setup.py)
 yarl==1.6.3
     # via aiohttp
 

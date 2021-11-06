@@ -19,6 +19,7 @@ setup(
         "gunicorn",
         "overrides",
         "pydantic",
+        "pypika",
         "tenacity",
         "uvicorn",
     ],
