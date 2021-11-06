@@ -20,40 +20,6 @@ class Service(BaseModel):
     city_data: CityData
     sql_engine: SqlEngine
 
-    async def get_estimations(self, stop_id: str) -> List[Dict[str, dict]]:
-        """Return ETA for the next vehicles to the stop.
-
-        Arguments:
-            stop_id: Stop identifier.
-
-        Returns:
-            ETA for the next vehicles to the stop.
-        """
-        stop = Stop(id=stop_id, transport_type=TransportType.INTERCITY_BUS)
-
-        estimations = await self.city_data.get_estimations(stop)
-
-        result: List[Dict[str, dict]] = [
-            {
-                "vehicle": {
-                    "id": v_e.vehicle.id,
-                    "line": {
-                        "id": v_e.vehicle.line.id,
-                        "transport_type": v_e.vehicle.line.transport_type.value,  # noqa: E501
-                        "name": v_e.vehicle.line.name,
-                    },
-                    "name": v_e.vehicle.name,
-                },
-                "estimation": {
-                    "estimation": v_e.estimation.estimation,
-                    "time": v_e.estimation.time,
-                },
-            }
-            for v_e in estimations
-        ]
-
-        return result
-
     async def stop_info(self, stop_id: str) -> Dict[str, Union[str, float]]:
         """Return the stop information.
 
@@ -99,3 +65,37 @@ class Service(BaseModel):
             "latitude": stop.coordinates.latitude,
             "zone": stop.zone,
         }
+
+    async def stop_estimation(self, stop_id: str) -> List[Dict[str, dict]]:
+        """Return ETA for the next vehicles to the stop.
+
+        Arguments:
+            stop_id: Stop identifier.
+
+        Returns:
+            ETA for the next vehicles to the stop.
+        """
+        stop = Stop(id=stop_id, transport_type=TransportType.INTERCITY_BUS)
+
+        estimations = await self.city_data.get_estimations(stop)
+
+        result: List[Dict[str, dict]] = [
+            {
+                "vehicle": {
+                    "id": v_e.vehicle.id,
+                    "line": {
+                        "id": v_e.vehicle.line.id,
+                        "transport_type": v_e.vehicle.line.transport_type.value,  # noqa: E501
+                        "name": v_e.vehicle.line.name,
+                    },
+                    "name": v_e.vehicle.name,
+                },
+                "estimation": {
+                    "estimation": v_e.estimation.estimation,
+                    "time": v_e.estimation.time,
+                },
+            }
+            for v_e in estimations
+        ]
+
+        return result

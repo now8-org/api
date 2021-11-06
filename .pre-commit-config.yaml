@@ -36,7 +36,7 @@ repos:
     rev: v1.2.2
     hooks:
       - id: python-safety-dependencies-check
-        files: requirements
+        files: (requirements.*\.txt)$
 
   - repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
     rev: v1.0.5
