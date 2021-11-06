@@ -4,26 +4,75 @@
 #
 #    pip-compile requirements-dev.in
 #
+-e file:.
+    # via -r requirements-dev.in
+aiohttp==3.7.4.post0
+    # via
+    #   -c requirements.txt
+    #   now8-api
+asgiref==3.4.1
+    # via
+    #   -c requirements.txt
+    #   uvicorn
+async-timeout==3.0.1
+    # via
+    #   -c requirements.txt
+    #   aiohttp
+asyncpg==0.24.0
+    # via
+    #   -c requirements.txt
+    #   now8-api
 attrs==21.2.0
     # via
     #   -c requirements.txt
+    #   aiohttp
     #   pytest
 certifi==2021.5.30
     # via requests
+chardet==4.0.0
+    # via
+    #   -c requirements.txt
+    #   aiohttp
 charset-normalizer==2.0.6
     # via requests
 click==8.0.1
     # via
+    #   -c docs/requirements.txt
     #   -c requirements.txt
     #   pip-tools
+    #   uvicorn
+fastapi==0.68.0
+    # via
+    #   -c requirements.txt
+    #   now8-api
+gunicorn==20.1.0
+    # via
+    #   -c requirements.txt
+    #   now8-api
+h11==0.12.0
+    # via
+    #   -c requirements.txt
+    #   uvicorn
 idna==3.2
     # via
     #   -c requirements.txt
     #   requests
+    #   yarl
 iniconfig==1.1.1
     # via pytest
+multidict==5.1.0
+    # via
+    #   -c requirements.txt
+    #   aiohttp
+    #   yarl
+overrides==6.1.0
+    # via
+    #   -c requirements.txt
+    #   now8-api
 packaging==21.0
-    # via pytest
+    # via
+    #   -c docs/requirements.txt
+    #   pytest
 pep517==0.12.0
     # via pip-tools
 pip-tools==6.4.0
@@ -32,8 +81,19 @@ pluggy==1.0.0
     # via pytest
 py==1.10.0
     # via pytest
+pydantic==1.8.2
+    # via
+    #   -c requirements.txt
+    #   fastapi
+    #   now8-api
 pyparsing==2.4.7
-    # via packaging
+    # via
+    #   -c docs/requirements.txt
+    #   packaging
+pypika==0.48.8
+    # via
+    #   -c requirements.txt
+    #   now8-api
 pytest==6.2.5
     # via
     #   -r requirements-dev.in
@@ -45,6 +105,14 @@ pytest-env==0.6.2
     # via -r requirements-dev.in
 requests==2.26.0
     # via -r requirements-dev.in
+starlette==0.14.2
+    # via
+    #   -c requirements.txt
+    #   fastapi
+tenacity==8.0.1
+    # via
+    #   -c requirements.txt
+    #   now8-api
 toml==0.10.2
     # via
     #   -r requirements-dev.in
@@ -53,10 +121,27 @@ tomli==1.2.2
     # via pep517
 types-orjson==3.6.1
     # via -r requirements-dev.in
+typing-extensions==3.10.0.0
+    # via
+    #   -c requirements.txt
+    #   aiohttp
+    #   pydantic
+typing-utils==0.1.0
+    # via
+    #   -c requirements.txt
+    #   overrides
 urllib3==1.26.6
     # via requests
+uvicorn==0.14.0
+    # via
+    #   -c requirements.txt
+    #   now8-api
 wheel==0.37.0
     # via pip-tools
+yarl==1.6.3
+    # via
+    #   -c requirements.txt
+    #   aiohttp
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
