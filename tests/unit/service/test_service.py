@@ -12,6 +12,25 @@ class TestService:
         )
 
     @pytest.mark.asyncio
+    async def test_all_stops(self):
+        result = await self.service.all_stops()
+
+        assert isinstance(result, list)
+        assert all(isinstance(item, dict) for item in result)
+        assert all(
+            isinstance(value, (str, float))
+            for item in result
+            for value in item.values()
+        )
+        assert list(result[0].keys()) == [
+            "id",
+            "name",
+            "longitude",
+            "latitude",
+            "zone",
+        ]
+
+    @pytest.mark.asyncio
     async def test_stop_info(self):
         result = await self.service.stop_info(stop_id="42")
 

@@ -1,4 +1,7 @@
 -c requirements.txt
+-c docs/requirements.txt
+
+-e file:.
 
 pip-tools
 pytest
