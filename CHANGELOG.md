@@ -1,3 +1,14 @@
+## 3.0.0 (2021-11-06)
+
+### Feat
+
+- **api**: add stop info entrypoint
+- **service**: get stop info
+
+### Refactor
+
+- **api**: refactor endpoints
+
 ## 2.3.0 (2021-09-21)
 
 ### Feat
