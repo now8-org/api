@@ -521,15 +521,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.data.database.popstgres" class="md-nav__link">
-    popstgres
+  <a href="#now8_api.data.database.postgres" class="md-nav__link">
+    postgres
   </a>
   
-    <nav class="md-nav" aria-label="popstgres">
+    <nav class="md-nav" aria-label="postgres">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#now8_api.data.database.popstgres.PostgresqlSqlEngine" class="md-nav__link">
+  <a href="#now8_api.data.database.postgres.PostgresqlSqlEngine" class="md-nav__link">
     PostgresqlSqlEngine
   </a>
   
@@ -537,7 +537,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#now8_api.data.database.popstgres.PostgresqlSqlEngine.execute_query" class="md-nav__link">
+  <a href="#now8_api.data.database.postgres.PostgresqlSqlEngine.execute_query" class="md-nav__link">
     execute_query()
   </a>
   
@@ -1010,15 +1010,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.data.database.popstgres" class="md-nav__link">
-    popstgres
+  <a href="#now8_api.data.database.postgres" class="md-nav__link">
+    postgres
   </a>
   
-    <nav class="md-nav" aria-label="popstgres">
+    <nav class="md-nav" aria-label="postgres">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#now8_api.data.database.popstgres.PostgresqlSqlEngine" class="md-nav__link">
+  <a href="#now8_api.data.database.postgres.PostgresqlSqlEngine" class="md-nav__link">
     PostgresqlSqlEngine
   </a>
   
@@ -1026,7 +1026,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#now8_api.data.database.popstgres.PostgresqlSqlEngine.execute_query" class="md-nav__link">
+  <a href="#now8_api.data.database.postgres.PostgresqlSqlEngine.execute_query" class="md-nav__link">
     execute_query()
   </a>
   
@@ -1279,7 +1279,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_host</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get host from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;HOST&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;HOST&quot;</span><span class="p">,</span> <span class="s2">&quot;postgres&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1313,7 +1315,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get name from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;NAME&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;postgres&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1347,7 +1351,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_password</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get password from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;PASS&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;PASS&quot;</span><span class="p">,</span> <span class="s2">&quot;postgres&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1381,7 +1387,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_port</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get port from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;PORT&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;PORT&quot;</span><span class="p">,</span> <span class="s2">&quot;5432&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1415,7 +1423,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_user</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get user from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;USER&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;USER&quot;</span><span class="p">,</span> <span class="s2">&quot;postgres&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1494,7 +1504,7 @@ connection parameters.</p></td>
   </thead>
   <tbody>
     <tr>
-      <td><code>List</code></td>
+      <td><code>List[tuple]</code></td>
       <td><p>The result of executing the passed query.</p></td>
     </tr>
   </tbody>
@@ -1502,7 +1512,7 @@ connection parameters.</p></td>
         <details class="quote">
           <summary>Source code in <code>now8_api/data/database/__init__.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="nd">@abstractmethod</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">execute_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">execute_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Return the result of executing the passed query.</span>
 
 <span class="sd">    Arguments:</span>
@@ -1596,7 +1606,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_host</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get host from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;HOST&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;HOST&quot;</span><span class="p">,</span> <span class="s2">&quot;postgres&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1630,7 +1642,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get name from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;NAME&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;postgres&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1664,7 +1678,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_password</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get password from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;PASS&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;PASS&quot;</span><span class="p">,</span> <span class="s2">&quot;postgres&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1698,7 +1714,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_port</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get port from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;PORT&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;PORT&quot;</span><span class="p">,</span> <span class="s2">&quot;5432&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1732,7 +1750,9 @@ connection parameters.</p></td>
 <span class="k">def</span> <span class="nf">validate_user</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get user from environment variable if undefined.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">environ</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;USER&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;env_prefix&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;USER&quot;</span><span class="p">,</span> <span class="s2">&quot;postgres&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">value</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1759,8 +1779,8 @@ connection parameters.</p></td>
 
 
 
-<h3 id="now8_api.data.database.popstgres" class="doc doc-heading">
-        <code>popstgres</code>
+<h3 id="now8_api.data.database.postgres" class="doc doc-heading">
+        <code>postgres</code>
 
 
 
@@ -1784,7 +1804,7 @@ connection parameters.</p></td>
 
 
 
-<h4 id="now8_api.data.database.popstgres.PostgresqlSqlEngine" class="doc doc-heading">
+<h4 id="now8_api.data.database.postgres.PostgresqlSqlEngine" class="doc doc-heading">
         <code>PostgresqlSqlEngine</code>
 
 
@@ -1812,7 +1832,7 @@ connection parameters.</p></td>
 
 
 
-<h5 id="now8_api.data.database.popstgres.PostgresqlSqlEngine.execute_query" class="doc doc-heading">
+<h5 id="now8_api.data.database.postgres.PostgresqlSqlEngine.execute_query" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">execute_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
@@ -1860,8 +1880,9 @@ connection parameters.</p></td>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>now8_api/data/database/popstgres.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">execute_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+          <summary>Source code in <code>now8_api/data/database/postgres.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@retry</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="n">stop_after_attempt</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">execute_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Return the result of executing the passed query.</span>
 
 <span class="sd">    Arguments:</span>
@@ -1872,7 +1893,13 @@ connection parameters.</p></td>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">db_conf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_db_conf</span><span class="p">()</span>
     <span class="n">db_conf</span><span class="p">[</span><span class="s2">&quot;database&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">db_conf</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;dbname&quot;</span><span class="p">)</span>
-    <span class="n">conn</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">**</span><span class="n">db_conf</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">**</span><span class="n">db_conf</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">gaierror</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Can&#39;t connect to database: </span><span class="si">{</span><span class="n">db_conf</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span>
 
     <span class="n">query_result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
 

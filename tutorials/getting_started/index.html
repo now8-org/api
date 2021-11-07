@@ -726,6 +726,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#populating-the-database" class="md-nav__link">
+    Populating the database
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -819,6 +826,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#populating-the-database" class="md-nav__link">
+    Populating the database
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -843,7 +857,10 @@
 <p>To install also the development dependencies, run
 <code>pip install -r requirements-dev.txt</code></p>
 <h2 id="configuration">Configuration</h2>
-<p>The following environment variables must be defined with the database
+<p>Choose the city to serve for with the following environment variable:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CITY</span><span class="o">=</span>madrid
+</code></pre></div>
+<p>Then, also define the following environment variables with the database
 (PostgreSQL) connection settings:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">DB_NAME</span><span class="o">=</span>
 <span class="nv">DB_HOST</span><span class="o">=</span>
@@ -851,7 +868,7 @@
 <span class="nv">DB_PASS</span><span class="o">=</span>
 <span class="nv">DB_PORT</span><span class="o">=</span>
 </code></pre></div>
-<p>You can define them in several ways:</p>
+<p>Ways of defining them:</p>
 <ul>
 <li>manually using <code>export</code></li>
 <li>sourcing a script with the <code>export</code> commands</li>
@@ -859,12 +876,18 @@
 <li>...</li>
 </ul>
 <h2 id="running">Running</h2>
-<p>Before running <code>now8_api</code>, start a PostgreSQL database. This can be done
-with:</p>
-<div class="highlight"><pre><span></span><code>docker run -d --name postgres -e <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>postgres -p <span class="m">5432</span>:5432 postgres:alpine
+<p>Before running <code>now8_api</code>, start a PostgreSQL database with the PostGIS
+extension installed. You can run:</p>
+<div class="highlight"><pre><span></span><code>docker run -d --name postgres <span class="se">\</span>
+  -e <span class="nv">POSTGRES_USER</span><span class="o">=</span>postgres <span class="se">\</span>
+  -e <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>postgres <span class="se">\</span>
+  -e <span class="nv">POSTGRES_DB</span><span class="o">=</span>postgres <span class="se">\</span>
+  -p <span class="m">5432</span>:5432 <span class="se">\</span>
+  postgis/postgis
 </code></pre></div>
 <p>You don't need to bind the host port if both <code>now8_api</code> and the database
-are running in Docker in the same network. Nevertheless, it might be
+are running in Docker in the same network
+(add <code>--network now8</code> to both). Nevertheless, it might be
 useful to bind the host port if using the database for development
 so that you can run the code and tests directly from the sources.</p>
 <p>In this case, the database configuration environment variables for
@@ -875,18 +898,19 @@ so that you can run the code and tests directly from the sources.</p>
 <span class="nv">DB_PASS</span><span class="o">=</span>postgres
 <span class="nv">DB_PORT</span><span class="o">=</span><span class="m">5432</span>
 </code></pre></div>
+<p>Which are the default values.</p>
 <p>If you are using a Python virtual environment, you can add them to
 <code>$VIRTUAL_ENV/bin/postactivate</code> adding <code>export</code> before each one of them.</p>
 <h3 id="development_1">Development</h3>
 <p>For development, you can run the project with:</p>
-<div class="highlight"><pre><span></span><code>uvicorn now8_api.entrypoints.api:api --reload
+<div class="highlight"><pre><span></span><code>uvicorn now8_api.entrypoints.api.main:api --reload
 </code></pre></div>
 <p>You can then access the API at <a href="http://localhost:8000">http://localhost:8000</a> and the <a href="https://swagger.io/tools/swagger-ui/">Swagger UI</a> (interactive API documentation) at <a href="http://localhost:8000/docs">http://localhost:8000/docs</a>.</p>
 <h3 id="production">Production</h3>
 <p>For production, a process manager is recommended to handle multiple
 workers, such as <code>gunicorn</code>.</p>
 <p>For example:</p>
-<div class="highlight"><pre><span></span><code>gunicorn -b <span class="m">0</span>.0.0.0:8000 -w <span class="m">4</span> -k uvicorn.workers.UvicornWorker now8_api.entrypoints.api:api
+<div class="highlight"><pre><span></span><code>gunicorn -b <span class="m">0</span>.0.0.0:8000 -w <span class="m">4</span> -k uvicorn.workers.UvicornWorker now8_api.entrypoints.api.main:api
 </code></pre></div>
 <p>Options:</p>
 <ul>
@@ -894,6 +918,20 @@ workers, such as <code>gunicorn</code>.</p>
 <li><code>-w</code> option specifies the number of workers.</li>
 <li><code>-k</code> option specifies the type of workers, that need to be <code>uvicorn.workers.UvicornWorker</code> as specified at the <a href="https://www.uvicorn.org/deployment/">Uvicorn Documentation</a>.</li>
 </ul>
+<h2 id="populating-the-database">Populating the database</h2>
+<p>The database should contain the GTFS information for the city, it can be
+populated using
+<a href="https://github.com/OpenTransitTools/gtfsdb">OpenTransitTools/gtfsdb</a>.</p>
+<p>For example, for adding the intercity buses information for Madrid, run:</p>
+<div class="highlight"><pre><span></span><code>docker run <span class="se">\</span>
+    --network now8 <span class="se">\</span>
+    local/gtfsdb <span class="se">\</span>
+        --database_url postgresql://postgres:postgres@postgres:5432/postgres <span class="se">\</span>
+        --is_geospatial <span class="se">\</span>
+        https://www.arcgis.com/sharing/rest/content/items/885399f83408473c8d815e40c5e702b7/data
+</code></pre></div>
+<p>Don't forget to run the PostgreSQL (with the PostGIS extension) Docker
+in the same network (i.e., <code>now8</code>).</p>
                 
                   
                     
@@ -902,7 +940,7 @@ workers, such as <code>gunicorn</code>.</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-09-21T04:26:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-09-21</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-11-07T10:41:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-11-07</span>
       
     
   </small>

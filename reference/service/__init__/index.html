@@ -717,16 +717,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.service._assign_city_data" class="md-nav__link">
-    _assign_city_data()
+  <a href="#now8_api.service.service.Service" class="md-nav__link">
+    Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#now8_api.service.service.Service.all_stops" class="md-nav__link">
+    all_stops()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.service.get_estimations" class="md-nav__link">
-    get_estimations()
+  <a href="#now8_api.service.service.Service.stop_estimation" class="md-nav__link">
+    stop_estimation()
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#now8_api.service.service.Service.stop_info" class="md-nav__link">
+    stop_info()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1149,16 +1169,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.service._assign_city_data" class="md-nav__link">
-    _assign_city_data()
+  <a href="#now8_api.service.service.Service" class="md-nav__link">
+    Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#now8_api.service.service.Service.all_stops" class="md-nav__link">
+    all_stops()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.service.get_estimations" class="md-nav__link">
-    get_estimations()
+  <a href="#now8_api.service.service.Service.stop_estimation" class="md-nav__link">
+    stop_estimation()
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#now8_api.service.service.Service.stop_info" class="md-nav__link">
+    stop_info()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1518,6 +1558,9 @@
         <code>CityData</code>
 
 
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
+  </span>
 
 </h3>
 
@@ -1530,6 +1573,9 @@
 
 
   <div class="doc doc-children">
+
+
+
 
 
 
@@ -2025,6 +2071,9 @@ the line transport type in this city.</p></td>
         <code>MadridCityData</code>
 
 
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
+  </span>
 
 </h4>
 
@@ -2036,6 +2085,9 @@ the line transport type in this city.</p></td>
 
 
   <div class="doc doc-children">
+
+
+
 
 
 
@@ -2670,6 +2722,7 @@ supported.</p></td>
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
@@ -2709,43 +2762,80 @@ supported.</p></td>
 
 
 
-
-  <div class="doc doc-object doc-function">
-
+  <div class="doc doc-object doc-class">
 
 
-<h3 id="now8_api.service.service._assign_city_data" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">_assign_city_data</span><span class="p">(</span><span class="n">city_name</span><span class="p">)</span></code>
+
+<h3 id="now8_api.service.service.Service" class="doc doc-heading">
+        <code>Service</code>
+
 
   <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-private"><code>private</code></small>
+      <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
 </h3>
 
     <div class="doc doc-contents ">
 
-      <p>Assign CityData instance corresponding to a city name.</p>
+      <p>Service base class.</p>
 
-<p><strong>Parameters:</strong></p>
+<p><strong>Attributes:</strong></p>
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
       <tr>
-        <td><code>city_name</code></td>
-        <td><code>str</code></td>
-        <td><p>Name of the city. Casing is not relevant.</p></td>
-        <td><em>required</em></td>
+        <td><code>city_data</code></td>
+        <td><code>CityData</code></td>
+        <td><p>CityData instance for the city.</p></td>
+      </tr>
+      <tr>
+        <td><code>sql_engine</code></td>
+        <td><code>SqlEngine</code></td>
+        <td><p>SqlEngine instance for the city.</p></td>
       </tr>
   </tbody>
 </table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="now8_api.service.service.Service.all_stops" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">all_stops</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return all the stops of the city.</p>
+
 <p><strong>Returns:</strong></p>
 <table>
   <thead>
@@ -2756,48 +2846,54 @@ supported.</p></td>
   </thead>
   <tbody>
     <tr>
-      <td><code>CityData</code></td>
-      <td><p>Corresponding CityData instance.</p></td>
+      <td><code>List[Dict[str, Union[str, float]]]</code></td>
+      <td><p>List of dictionaries with the stop ID, transport type, way,
+name, coordinates and zone of each stop.</p></td>
     </tr>
-  </tbody>
-</table>
-<p><strong>Exceptions:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>CityNameError</code></td>
-        <td><p>If an invalid city name is passed.</p></td>
-      </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>now8_api/service/service.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_assign_city_data</span><span class="p">(</span>
-    <span class="n">city_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CityData</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Assign CityData instance corresponding to a city name.</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">        city_name: Name of the city. Casing is not relevant.</span>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">all_stops</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]:</span>
+    <span class="sd">&quot;&quot;&quot;Return all the stops of the city.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Corresponding CityData instance.</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        CityNameError: If an invalid city name is passed.</span>
+<span class="sd">        List of dictionaries with the stop ID, transport type, way,</span>
+<span class="sd">        name, coordinates and zone of each stop.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">city</span> <span class="o">=</span> <span class="n">Cities</span><span class="p">(</span><span class="n">city_name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">CityNameError</span><span class="p">(</span><span class="n">city_name</span><span class="o">=</span><span class="n">city_name</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span>
+    <span class="n">table_stops</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;stops&quot;</span><span class="p">)</span>
+    <span class="n">query</span><span class="p">:</span> <span class="n">Query</span> <span class="o">=</span> <span class="n">Query</span><span class="o">.</span><span class="n">from_</span><span class="p">(</span><span class="n">table_stops</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_code</span><span class="p">,</span>
+        <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_name</span><span class="p">,</span>
+        <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_lat</span><span class="p">,</span>
+        <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_lon</span><span class="p">,</span>
+        <span class="n">table_stops</span><span class="o">.</span><span class="n">zone_id</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">query_result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">CITIES_CITY_DATA</span><span class="p">[</span><span class="n">city</span><span class="p">]</span>
+    <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">query_result</span><span class="p">:</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">Stop</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">coordinates</span><span class="o">=</span><span class="n">Coordinates</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">longitude</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+            <span class="n">zone</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+                <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+                <span class="s2">&quot;zone&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">zone</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
         </details>
     </div>
@@ -2806,24 +2902,22 @@ supported.</p></td>
 
 
 
-  <div class="doc doc-object doc-function">
+  <div class="doc doc-object doc-method">
 
 
 
-<h3 id="now8_api.service.service.get_estimations" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_estimations</span><span class="p">(</span><span class="n">city_name</span><span class="p">,</span> <span class="n">stop_id</span><span class="p">)</span></code>
+<h4 id="now8_api.service.service.Service.stop_estimation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">stop_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_id</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-async"><code>async</code></small>
   </span>
 
-</h3>
+</h4>
 
     <div class="doc doc-contents ">
 
       <p>Return ETA for the next vehicles to the stop.</p>
-<p><code>stop</code> will be used to instantiate a Stop subclass of the given
-city.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -2836,12 +2930,6 @@ city.</p>
     </tr>
   </thead>
   <tbody>
-      <tr>
-        <td><code>city_name</code></td>
-        <td><code>str</code></td>
-        <td><p>City name.</p></td>
-        <td><em>required</em></td>
-      </tr>
       <tr>
         <td><code>stop_id</code></td>
         <td><code>str</code></td>
@@ -2867,26 +2955,18 @@ city.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>now8_api/service/service.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">get_estimations</span><span class="p">(</span>
-    <span class="n">city_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">stop_id</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">stop_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Return ETA for the next vehicles to the stop.</span>
 
-<span class="sd">    `stop` will be used to instantiate a Stop subclass of the given</span>
-<span class="sd">    city.</span>
-
 <span class="sd">    Arguments:</span>
-<span class="sd">        city_name: City name.</span>
 <span class="sd">        stop_id: Stop identifier.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        ETA for the next vehicles to the stop.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">city_data</span> <span class="o">=</span> <span class="n">_assign_city_data</span><span class="p">(</span><span class="n">city_name</span><span class="p">)</span>
-
     <span class="n">stop</span> <span class="o">=</span> <span class="n">Stop</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">stop_id</span><span class="p">,</span> <span class="n">transport_type</span><span class="o">=</span><span class="n">TransportType</span><span class="o">.</span><span class="n">INTERCITY_BUS</span><span class="p">)</span>
 
-    <span class="n">estimations</span> <span class="o">=</span> <span class="k">await</span> <span class="n">city_data</span><span class="o">.</span><span class="n">get_estimations</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span>
+    <span class="n">estimations</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">city_data</span><span class="o">.</span><span class="n">get_estimations</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span>
 
     <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>
@@ -2894,7 +2974,7 @@ city.</p>
                 <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
                 <span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-                    <span class="s2">&quot;transport_type&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">transport_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                    <span class="s2">&quot;transport_type&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">transport_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>  <span class="c1"># noqa: E501</span>
                     <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                 <span class="p">},</span>
                 <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">v_e</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -2913,6 +2993,139 @@ city.</p>
     </div>
 
   </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="now8_api.service.service.Service.stop_info" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">stop_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_id</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return the stop information.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>stop_id</code></td>
+        <td><code>str</code></td>
+        <td><p>Stop identifier.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Dict[str, Union[str, float]]</code></td>
+      <td><p>Dictionary with the stop ID, transport type, way, name,
+    coordinates and zone.</p></td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>If the <code>stop_id</code> does not match any stop.</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>now8_api/service/service.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">stop_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Return the stop information.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        stop_id: Stop identifier.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary with the stop ID, transport type, way, name,</span>
+<span class="sd">            coordinates and zone.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the `stop_id` does not match any stop.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">table_stops</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;stops&quot;</span><span class="p">)</span>
+    <span class="n">query</span><span class="p">:</span> <span class="n">Query</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">Query</span><span class="o">.</span><span class="n">from_</span><span class="p">(</span><span class="n">table_stops</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">select</span><span class="p">(</span>
+            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_code</span><span class="p">,</span>
+            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_name</span><span class="p">,</span>
+            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_lat</span><span class="p">,</span>
+            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_lon</span><span class="p">,</span>
+            <span class="n">table_stops</span><span class="o">.</span><span class="n">zone_id</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">table_stops</span><span class="o">.</span><span class="n">stop_code</span> <span class="o">==</span> <span class="n">stop_id</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">query_result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">stop</span> <span class="o">=</span> <span class="n">Stop</span><span class="p">(</span>
+        <span class="nb">id</span><span class="o">=</span><span class="n">stop_id</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">query_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">coordinates</span><span class="o">=</span><span class="n">Coordinates</span><span class="p">(</span>
+            <span class="n">latitude</span><span class="o">=</span><span class="n">query_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">longitude</span><span class="o">=</span><span class="n">query_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+        <span class="p">),</span>
+        <span class="n">zone</span><span class="o">=</span><span class="n">query_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+        <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+        <span class="s2">&quot;zone&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="o">.</span><span class="n">zone</span><span class="p">,</span>
+    <span class="p">}</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
 
 
 

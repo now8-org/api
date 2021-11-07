@@ -443,15 +443,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#now8_api.entrypoints.api._return_msg" class="md-nav__link">
-    _return_msg()
+  <a href="#now8_api.entrypoints.api.dependencies" class="md-nav__link">
+    dependencies
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.entrypoints.api.get_estimations_api" class="md-nav__link">
-    get_estimations_api()
+  <a href="#now8_api.entrypoints.api.main" class="md-nav__link">
+    main
   </a>
   
 </li>
@@ -757,15 +757,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#now8_api.entrypoints.api._return_msg" class="md-nav__link">
-    _return_msg()
+  <a href="#now8_api.entrypoints.api.dependencies" class="md-nav__link">
+    dependencies
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.entrypoints.api.get_estimations_api" class="md-nav__link">
-    get_estimations_api()
+  <a href="#now8_api.entrypoints.api.main" class="md-nav__link">
+    main
   </a>
   
 </li>
@@ -799,7 +799,7 @@
 <a id="now8_api.entrypoints"></a>
     <div class="doc doc-contents first">
 
-      <p>Module to store the common objects for the entrypoints.</p>
+      <p>Module to store the entrypoints.</p>
 
 
 
@@ -845,134 +845,81 @@
 
 
 
-  <div class="doc doc-object doc-function">
+  <div class="doc doc-object doc-module">
 
 
 
-<h3 id="now8_api.entrypoints.api._return_msg" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">_return_msg</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;msg&#39;</span><span class="p">)</span></code>
+<h3 id="now8_api.entrypoints.api.dependencies" class="doc doc-heading">
+        <code>dependencies</code>
 
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-private"><code>private</code></small>
-  </span>
+
 
 </h3>
 
     <div class="doc doc-contents ">
 
-      <p>Return a dictionary with the provided string.</p>
-<p>As the value of the provided key.</p>
+      <p>Module to store the endpoint parameter dependencies.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>msg</code></td>
-        <td><code>str</code></td>
-        <td><p>Message to wrap with the dictionary.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>key</code></td>
-        <td><code>str</code></td>
-        <td><p>Dictionary key to store the <code>msg</code> at.</p></td>
-        <td><code>&#39;msg&#39;</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Dict[str, str]</code></td>
-      <td><p>Resulting dictionary: <code>{key: msg}</code>.</p></td>
-    </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>now8_api/entrypoints/api/__init__.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_return_msg</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;msg&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Return a dictionary with the provided string.</span>
 
-<span class="sd">    As the value of the provided key.</span>
 
-<span class="sd">    Arguments:</span>
-<span class="sd">        msg: Message to wrap with the dictionary.</span>
-<span class="sd">        key: Dictionary key to store the `msg` at.</span>
+  <div class="doc doc-children">
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Resulting dictionary: `{key: msg}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">msg</span><span class="p">}</span>
-</code></pre></div>
-        </details>
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
     </div>
 
   </div>
 
 
 
-  <div class="doc doc-object doc-function">
+  <div class="doc doc-object doc-module">
 
 
 
-<h3 id="now8_api.entrypoints.api.get_estimations_api" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_estimations_api</span><span class="p">(</span><span class="n">city_name</span><span class="o">=&lt;</span><span class="n">Cities</span><span class="o">.</span><span class="n">MADRID</span><span class="p">:</span> <span class="s1">&#39;madrid&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stop_id</span><span class="o">=</span><span class="s1">&#39;17491&#39;</span><span class="p">)</span></code>
+<h3 id="now8_api.entrypoints.api.main" class="doc doc-heading">
+        <code>main</code>
 
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-async"><code>async</code></small>
-  </span>
+
 
 </h3>
 
     <div class="doc doc-contents ">
 
-      <p>Return ETA for the next vehicles to the stop.</p>
-<ul>
-<li><strong>city_name</strong>: City name.</li>
-<li><strong>stop_id</strong>: Stop identifier.</li>
-</ul>
+      <p>Main API.</p>
 
-        <details class="quote">
-          <summary>Source code in <code>now8_api/entrypoints/api/__init__.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="nd">@api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{city_name}</span><span class="s2">/get_estimations&quot;</span><span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_estimations_api</span><span class="p">(</span>
-    <span class="n">city_name</span><span class="p">:</span> <span class="n">Cities</span> <span class="o">=</span> <span class="n">Cities</span><span class="o">.</span><span class="n">MADRID</span><span class="p">,</span> <span class="n">stop_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;17491&quot;</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return ETA for the next vehicles to the stop.</span>
 
-<span class="sd">    - **city_name**: City name.</span>
-<span class="sd">    - **stop_id**: Stop identifier.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_estimations</span><span class="p">(</span><span class="n">city_name</span><span class="o">=</span><span class="n">city_name</span><span class="p">,</span> <span class="n">stop_id</span><span class="o">=</span><span class="n">stop_id</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">NotImplementedError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
-            <span class="mi">404</span><span class="p">,</span> <span class="s2">&quot;Can&#39;t get estimations for the given stop in the given city.&quot;</span>
-        <span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span>
 
-    <span class="k">return</span> <span class="n">result</span>
-</code></pre></div>
-        </details>
-    </div>
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
 
   </div>
 
+    </div>
 
+  </div>
 
 
 
