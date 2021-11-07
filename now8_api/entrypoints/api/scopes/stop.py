@@ -1,8 +1,7 @@
 from typing import Dict, List, Union
 
 from fastapi import APIRouter, HTTPException
-from now8_api.entrypoints.api.dependencies import CityName, StopId
-from now8_api.entrypoints.common import CITY_SERVICES, Cities
+from now8_api.entrypoints.api.dependencies import StopId
 from now8_api.service.service import Service
 
 router = APIRouter(
@@ -10,39 +9,29 @@ router = APIRouter(
     tags=["stop"],
 )
 
+service: Service = Service()
+
 
 @router.get(
-    "/{city_name}",
-    summary="Get all stops in a city.",
+    "",
+    summary="Get all stops in the city.",
 )
-async def stop_api(
-    city_name: str = CityName,
-) -> List[Dict[str, Union[str, float]]]:
-    try:
-        city_service: Service = CITY_SERVICES.get(Cities(city_name.lower()))
-    except KeyError as error:
-        raise HTTPException(400, f'Invalid city name "{city_name}"') from error
+async def stop_api() -> List[Dict[str, Union[str, float]]]:
 
-    result = await city_service.all_stops()
+    result = await service.all_stops()
 
     return result
 
 
 @router.get(
-    "/{city_name}/{stop_id}/info",
+    "/{stop_id}/info",
     summary="Get stop information.",
 )
 async def stop_info_api(
-    city_name: str = CityName,
     stop_id: str = StopId,
 ) -> Dict[str, Union[str, float]]:
     try:
-        city_service: Service = CITY_SERVICES.get(Cities(city_name.lower()))
-    except KeyError as error:
-        raise HTTPException(400, f'Invalid city name "{city_name}"') from error
-
-    try:
-        result = await city_service.stop_info(stop_id=stop_id)
+        result = await service.stop_info(stop_id=stop_id)
     except NotImplementedError as error:
         raise HTTPException(
             404, "Can't get estimations for the given stop in the given city."
@@ -52,20 +41,14 @@ async def stop_info_api(
 
 
 @router.get(
-    "/{city_name}/{stop_id}/estimation",
+    "/{stop_id}/estimation",
     summary="ETA for the next vehicles to the stop.",
 )
 async def stop_estimation_api(
-    city_name: str = CityName,
     stop_id: str = StopId,
 ) -> List[Dict[str, dict]]:
     try:
-        city_service: Service = CITY_SERVICES.get(Cities(city_name.lower()))
-    except KeyError as error:
-        raise HTTPException(400, f'Invalid city name "{city_name}"') from error
-
-    try:
-        result = await city_service.stop_estimation(stop_id=stop_id)
+        result = await service.stop_estimation(stop_id=stop_id)
     except NotImplementedError as error:
         raise HTTPException(
             404, "Can't get estimations for the given stop in the given city."

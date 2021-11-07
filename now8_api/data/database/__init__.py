@@ -34,7 +34,9 @@ class SqlEngine(ABC):
     def validate_name(cls, value, values):
         """Get name from environment variable if undefined."""
         return (
-            environ[values["env_prefix"] + "NAME"] if value is None else value
+            environ.get(values["env_prefix"] + "NAME", "postgres")
+            if value is None
+            else value
         )
 
     @validator("user", always=True)
@@ -42,7 +44,9 @@ class SqlEngine(ABC):
     def validate_user(cls, value, values):
         """Get user from environment variable if undefined."""
         return (
-            environ[values["env_prefix"] + "USER"] if value is None else value
+            environ.get(values["env_prefix"] + "USER", "postgres")
+            if value is None
+            else value
         )
 
     @validator("password", always=True)
@@ -50,7 +54,9 @@ class SqlEngine(ABC):
     def validate_password(cls, value, values):
         """Get password from environment variable if undefined."""
         return (
-            environ[values["env_prefix"] + "PASS"] if value is None else value
+            environ.get(values["env_prefix"] + "PASS", "postgres")
+            if value is None
+            else value
         )
 
     @validator("host", always=True)
@@ -58,7 +64,9 @@ class SqlEngine(ABC):
     def validate_host(cls, value, values):
         """Get host from environment variable if undefined."""
         return (
-            environ[values["env_prefix"] + "HOST"] if value is None else value
+            environ.get(values["env_prefix"] + "HOST", "postgres")
+            if value is None
+            else value
         )
 
     @validator("port", always=True)
@@ -66,7 +74,9 @@ class SqlEngine(ABC):
     def validate_port(cls, value, values):
         """Get port from environment variable if undefined."""
         return (
-            environ[values["env_prefix"] + "PORT"] if value is None else value
+            environ.get(values["env_prefix"] + "PORT", "5432")
+            if value is None
+            else value
         )
 
     def get_db_conf(self) -> Dict[str, str]:

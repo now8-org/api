@@ -16,7 +16,7 @@ env = [
 name = "cz_conventional_commits"
 version = "3.1.0"
 tag_format = "$version"
-version_files = ["setup.py",]
+version_files = ["setup.py", "now8_api/entrypoints/api/main.py"]
 
 # --------- Black -------------
 
