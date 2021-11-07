@@ -1,3 +1,9 @@
+## 3.2.0 (2021-11-07)
+
+### Feat
+
+- set env vars defaults and refactor
+
 ## 3.1.0 (2021-11-06)
 
 ### Feat

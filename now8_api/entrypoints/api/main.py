@@ -21,7 +21,7 @@ api = FastAPI(
         400: {"description": "Invalid value for parameter."},
         404: {"description": "No data available."},
     },
-    version="3.1.0",
+    version="3.2.0",
 )
 
 api.include_router(stop.router)
