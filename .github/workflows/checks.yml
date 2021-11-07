@@ -3,6 +3,8 @@ name: Code checks
 
 on:
   push:
+    branches:
+      - main
   pull_request:
 
 jobs:
@@ -10,20 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-    services:
-      postgres:
-        image: postgres:alpine
-        env:
-          POSTGRES_PASSWORD: postgres
-        ports:
-          # Maps tcp port 5432 on service container to the host
-          - 5432:5432
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    environment: test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -49,8 +38,8 @@ jobs:
       - name: Run tests with pytest
         run: python -m pytest
         env:
-          DB_NAME: postgres
-          DB_HOST: localhost
-          DB_USER: postgres
-          DB_PASS: postgres
-          DB_PORT: 5432
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+          DB_PORT: ${{ secrets.DB_PORT }}
