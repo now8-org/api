@@ -6,7 +6,6 @@
 pip-tools
 pytest
 pytest-asyncio
-pytest-env
 requests
 toml
 types-orjson
