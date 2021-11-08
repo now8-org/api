@@ -2,72 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://now8-org.github.io/now8-api/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/howto/contributing/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/howto/testing/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/reference/__init__/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/reference/data/__init__/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/reference/entrypoints/__init__/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/reference/entrypoints/api/__init__/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/reference/service/__init__/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/reference/service/service/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/reference/service/city_data/__init__/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/reference/service/city_data/madrid/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/topics/code_structure/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/tutorials/docker/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://now8-org.github.io/now8-api/tutorials/getting_started/</loc>
-         <lastmod>2021-11-07</lastmod>
+         <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
