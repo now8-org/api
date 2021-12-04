@@ -1,7 +1,7 @@
-# now8-api
+# now8 API
 
-*Normal Times API* provides estimated time of arrival for public transport
-vehicles.
+*now8 (no wait) API* provides improved public transport arrival time
+estimations using Machine Learning.
 
 ## Installation
 
