@@ -1,3 +1,5 @@
+from typing import List
+
 import pytest
 from now8_api.service.service import Service
 from tests.conftest import FakeCityData, FakeSqlEngine
@@ -11,38 +13,76 @@ class TestService:
             sql_engine=FakeSqlEngine(),
         )
 
+    stop_keys: List[str] = [
+        "code",
+        "name",
+        "longitude",
+        "latitude",
+        "zone",
+        "lines",
+    ]
+
     @pytest.mark.asyncio
-    async def test_all_stops(self):
+    async def test_all_stops_structure(self):
         result = await self.service.all_stops()
 
-        assert isinstance(result, list)
-        assert all(isinstance(item, dict) for item in result)
+        assert isinstance(result, dict)
+        assert all(isinstance(item, dict) for item in result.values())
         assert all(
-            isinstance(value, (str, float))
-            for item in result
-            for value in item.values()
+            isinstance(value, (str, float, dict))
+            for d in result.values()
+            for value in d.values()
         )
-        assert list(result[0].keys()) == [
-            "id",
-            "name",
-            "longitude",
-            "latitude",
-            "zone",
-        ]
+        assert all(list(d.keys()) == self.stop_keys for d in result.values())
+
+    @pytest.mark.asyncio
+    async def test_all_stops_lines(self):
+        result = await self.service.all_stops()
+
+        assert all(
+            list(d["lines"].keys())
+            == [
+                "line",
+                "transport_type",
+                "name",
+            ]
+            for d in result.values()
+        )
+
+    @pytest.mark.parametrize("exclude", stop_keys)
+    @pytest.mark.asyncio
+    async def test_all_stops_exclude(self, exclude):
+        result = await self.service.all_stops(exclude=[exclude])
+
+        assert all(
+            list(d.keys()) == [key for key in self.stop_keys if key != exclude]
+            for d in result.values()
+        )
+
+    @pytest.mark.asyncio
+    async def test_all_stops_exclude_multiple(self):
+        result = await self.service.all_stops(exclude=self.stop_keys[:2])
+
+        assert all(
+            list(d.keys())
+            == [key for key in self.stop_keys if key not in self.stop_keys[:2]]
+            for d in result.values()
+        )
 
     @pytest.mark.asyncio
     async def test_stop_info(self):
-        result = await self.service.stop_info(stop_id="42")
+        result = await self.service.stop_info(stop_id="1_42")
 
         assert isinstance(result, dict)
         assert all(isinstance(key, str) for key in result.keys())
         assert all(
-            isinstance(value, (str, float)) for value in result.values()
+            isinstance(value, (str, float, dict)) for value in result.values()
         )
         assert result == {
-            "id": "42",
+            "code": "42",
             "name": "Stop 42",
             "longitude": 0.0,
             "latitude": 0.0,
             "zone": "A",
+            "lines": {},
         }

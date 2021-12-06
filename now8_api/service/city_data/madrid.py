@@ -71,14 +71,11 @@ class MadridCityData(CityData):
         self,
         stop: Stop,
     ) -> List[VehicleEstimation]:
-        stop_id_api = _stop_id_api(
-            stop_id_user=stop.id, transport_type=TransportType.INTERCITY_BUS
-        )
         if stop.transport_type == TransportType.INTERCITY_BUS:
             response = await get_json(
                 f"https://www.crtm.es/"  # type: ignore
                 f"widgets/api/GetStopsTimes.php"
-                f"?codStop={stop_id_api}&"
+                f"?codStop={stop.id.removeprefix('par_')}&"
                 f"type=1&orderBy=2&stopTimesByIti=3"
             )
         else:

@@ -2,7 +2,7 @@
 
 from enum import Enum
 from os import environ
-from typing import Dict, List, Union
+from typing import Any, Dict, List, Union
 
 from now8_api.data.database import SqlEngine
 from now8_api.data.database.postgres import PostgresqlSqlEngine
@@ -38,20 +38,19 @@ class Service(BaseModel):
     Attributes:
         city_data: CityData instance for the city.
         sql_engine: SqlEngine instance for the city.
+        stops_cache: Object to store the stops info.
     """
 
     city_data: CityData = CITY_DATA_DICT[CITY]
     sql_engine: SqlEngine = PostgresqlSqlEngine()
 
-    async def all_stops(self) -> List[Dict[str, Union[str, float]]]:
-        """Return all the stops of the city.
+    stops_cache: Dict[str, Dict[str, Any]] = None
 
-        Returns:
-            List of dictionaries with the stop ID, transport type, way,
-            name, coordinates and zone of each stop.
-        """
+    async def initialize_stops_cache(self) -> None:
+        """Initialize `stops_cache` if undefined."""
         table_stops: Table = Table("stops")
         query: Query = Query.from_(table_stops).select(
+            table_stops.stop_id,
             table_stops.stop_code,
             table_stops.stop_name,
             table_stops.stop_lat,
@@ -62,27 +61,51 @@ class Service(BaseModel):
             str(query)
         )
 
-        result: List[Dict[str, Union[str, float]]] = []
-
+        result: Dict[str, Dict[str, Union[str, float, dict]]] = {}
         for row in query_result:
             stop = Stop(
                 id=row[0],
-                name=row[1],
-                coordinates=Coordinates(latitude=row[2], longitude=row[3]),
-                zone=row[4],
+                code=row[1],
+                name=row[2],
+                coordinates=Coordinates(latitude=row[3], longitude=row[4]),
+                zone=row[5],
             )
 
-            result.append(
-                {
-                    "id": stop.id,
-                    "name": stop.name,
-                    "longitude": stop.coordinates.longitude,
-                    "latitude": stop.coordinates.latitude,
-                    "zone": stop.zone,
-                }
-            )
+            result[stop.id] = {
+                "code": stop.code,
+                "name": stop.name,
+                "longitude": stop.coordinates.longitude,
+                "latitude": stop.coordinates.latitude,
+                "zone": stop.zone,
+                "lines": {},
+            }
 
-        return result
+        self.stops_cache = result
+
+    async def all_stops(
+        self, exclude: List[str] = None
+    ) -> Dict[str, Dict[str, Union[str, float, dict]]]:
+        """Return all the stops of the city.
+
+        Returns:
+            List of dictionaries with the stop ID, transport type, way,
+            name, coordinates and zone of each stop.
+        """
+        if self.stops_cache is None:
+            await self.initialize_stops_cache()
+
+        if exclude is not None:
+            return {
+                key: dict(
+                    filter(
+                        lambda key_value: key_value[0] not in exclude,
+                        value.items(),
+                    )
+                )
+                for key, value in self.stops_cache.items()
+            }
+        else:
+            return self.stops_cache
 
     async def stop_info(self, stop_id: str) -> Dict[str, Union[str, float]]:
         """Return the stop information.
@@ -97,38 +120,10 @@ class Service(BaseModel):
         Raises:
             ValueError: If the `stop_id` does not match any stop.
         """
-        table_stops: Table = Table("stops")
-        query: Query = (
-            Query.from_(table_stops)
-            .select(
-                table_stops.stop_code,
-                table_stops.stop_name,
-                table_stops.stop_lat,
-                table_stops.stop_lon,
-                table_stops.zone_id,
-            )
-            .where(table_stops.stop_code == stop_id)
-        )
-        query_result: List[tuple] = await self.sql_engine.execute_query(
-            str(query)
-        )
+        if self.stops_cache is None:
+            await self.initialize_stops_cache()
 
-        stop = Stop(
-            id=stop_id,
-            name=query_result[0][1],
-            coordinates=Coordinates(
-                latitude=query_result[0][2], longitude=query_result[0][3]
-            ),
-            zone=query_result[0][4],
-        )
-
-        return {
-            "id": stop.id,
-            "name": stop.name,
-            "longitude": stop.coordinates.longitude,
-            "latitude": stop.coordinates.latitude,
-            "zone": stop.zone,
-        }
+        return self.stops_cache[stop_id]
 
     async def stop_estimation(self, stop_id: str) -> List[Dict[str, dict]]:
         """Return ETA for the next vehicles to the stop.

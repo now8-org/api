@@ -124,7 +124,8 @@ class Stop:
     """Transportation stop.
 
     Attributes:
-        id: Stop identifier in the user format.
+        id: Stop identifier.
+        code: Stop identifier in the user format.
         transport_type: Transport type of the stop.
         way: Way of the stop.
         name: Name of the stop.
@@ -133,6 +134,7 @@ class Stop:
     """
 
     id: str
+    code: Optional[str] = None
     transport_type: Optional[TransportType] = None
     way: Optional[Way] = None
     name: Optional[str] = None
