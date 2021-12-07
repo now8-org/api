@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Union
 
 from now8_api.data.database import SqlEngine
 from now8_api.data.database.postgres import PostgresqlSqlEngine
-from now8_api.domain import Coordinates, Line, Stop, TransportType
+from now8_api.domain import Coordinates, Line, Stop, TransportType, Way
 from now8_api.service.city_data import CityData
 from now8_api.service.city_data.madrid import MadridCityData
 from pydantic import BaseModel
@@ -70,6 +70,7 @@ class Service(BaseModel):
                 table_routes.route_long_name,
                 table_routes.route_type,
                 table_routes.route_color,
+                table_route_stops.direction_id,
             )
             .distinct()
         )
@@ -111,6 +112,7 @@ class Service(BaseModel):
             line_name: str = row[8]
             line_type: int = row[9]
             line_color: str = row[10]
+            line_way: int = row[11]
 
             line: Line = Line(
                 id=line_id,
@@ -118,6 +120,7 @@ class Service(BaseModel):
                 transport_type=TransportType(line_type),
                 name=line_name,
                 color=Color(line_color),
+                way=Way(line_way),
             )
 
             result[stop.id]["lines"][line_id] = {  # type: ignore
@@ -125,6 +128,7 @@ class Service(BaseModel):
                 "code": line.code,
                 "transport_type": line.transport_type.value,
                 "color": line.color.as_hex(),
+                "way": line.way.value,
             }
 
         self.stops_cache = result

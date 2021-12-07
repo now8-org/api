@@ -62,6 +62,7 @@ class FakeSqlEngine(SqlEngine):
                     "route_long_name_1",
                     3,
                     "#00ff00",
+                    0,
                 ),
                 (
                     "1_42",
@@ -75,6 +76,7 @@ class FakeSqlEngine(SqlEngine):
                     "route_long_name_2",
                     3,
                     "#ff0000",
+                    1,
                 ),
             ]
         else:

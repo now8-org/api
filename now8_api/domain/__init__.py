@@ -25,7 +25,7 @@ class TransportType(int, Enum):
     MONORAIL = 12
 
 
-class Way(Enum):
+class Way(int, Enum):
     """Way (inbound or outbound)."""
 
     OUTBOUND = 0
