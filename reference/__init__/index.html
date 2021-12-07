@@ -5682,6 +5682,7 @@ name, coordinates and zone of each stop.</p></td>
             <span class="n">table_routes</span><span class="o">.</span><span class="n">route_long_name</span><span class="p">,</span>
             <span class="n">table_routes</span><span class="o">.</span><span class="n">route_type</span><span class="p">,</span>
             <span class="n">table_routes</span><span class="o">.</span><span class="n">route_color</span><span class="p">,</span>
+            <span class="n">table_route_stops</span><span class="o">.</span><span class="n">direction_id</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
     <span class="p">)</span>
@@ -5723,6 +5724,7 @@ name, coordinates and zone of each stop.</p></td>
         <span class="n">line_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
         <span class="n">line_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
         <span class="n">line_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+        <span class="n">line_way</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
 
         <span class="n">line</span><span class="p">:</span> <span class="n">Line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span>
             <span class="nb">id</span><span class="o">=</span><span class="n">line_id</span><span class="p">,</span>
@@ -5730,6 +5732,7 @@ name, coordinates and zone of each stop.</p></td>
             <span class="n">transport_type</span><span class="o">=</span><span class="n">TransportType</span><span class="p">(</span><span class="n">line_type</span><span class="p">),</span>
             <span class="n">name</span><span class="o">=</span><span class="n">line_name</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="n">Color</span><span class="p">(</span><span class="n">line_color</span><span class="p">),</span>
+            <span class="n">way</span><span class="o">=</span><span class="n">Way</span><span class="p">(</span><span class="n">line_way</span><span class="p">),</span>
         <span class="p">)</span>
 
         <span class="n">result</span><span class="p">[</span><span class="n">stop</span><span class="o">.</span><span class="n">id</span><span class="p">][</span><span class="s2">&quot;lines&quot;</span><span class="p">][</span><span class="n">line_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># type: ignore</span>
@@ -5737,6 +5740,7 @@ name, coordinates and zone of each stop.</p></td>
             <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">code</span><span class="p">,</span>
             <span class="s2">&quot;transport_type&quot;</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">transport_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
             <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">as_hex</span><span class="p">(),</span>
+            <span class="s2">&quot;way&quot;</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">way</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
         <span class="p">}</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">stops_cache</span> <span class="o">=</span> <span class="n">result</span>
