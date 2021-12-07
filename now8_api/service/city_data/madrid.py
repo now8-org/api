@@ -36,7 +36,7 @@ def _stop_id_user(stop_id_api: str, transport_type: TransportType) -> str:
             supported.
     """
     if transport_type not in TRANSPORT_TYPE_STOP_PREFIXES:
-        raise TransportTypeError(transport_type=transport_type.value)
+        raise TransportTypeError(transport_type=transport_type.name)
 
     return stop_id_api.removeprefix(
         TRANSPORT_TYPE_STOP_PREFIXES[transport_type]
@@ -58,7 +58,7 @@ def _stop_id_api(stop_id_user: str, transport_type: TransportType) -> str:
             supported.
     """
     if transport_type not in TRANSPORT_TYPE_STOP_PREFIXES:
-        raise TransportTypeError(transport_type=transport_type.value)
+        raise TransportTypeError(transport_type=transport_type.name)
 
     return TRANSPORT_TYPE_STOP_PREFIXES[transport_type] + stop_id_user
 
