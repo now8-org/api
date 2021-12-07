@@ -36,7 +36,7 @@ def _stop_id_user(stop_id_api: str, transport_type: TransportType) -> str:
             supported.
     """
     if transport_type not in TRANSPORT_TYPE_STOP_PREFIXES:
-        raise TransportTypeError(transport_type=transport_type.value)
+        raise TransportTypeError(transport_type=transport_type.name)
 
     return stop_id_api.removeprefix(
         TRANSPORT_TYPE_STOP_PREFIXES[transport_type]
@@ -58,7 +58,7 @@ def _stop_id_api(stop_id_user: str, transport_type: TransportType) -> str:
             supported.
     """
     if transport_type not in TRANSPORT_TYPE_STOP_PREFIXES:
-        raise TransportTypeError(transport_type=transport_type.value)
+        raise TransportTypeError(transport_type=transport_type.name)
 
     return TRANSPORT_TYPE_STOP_PREFIXES[transport_type] + stop_id_user
 
@@ -71,14 +71,11 @@ class MadridCityData(CityData):
         self,
         stop: Stop,
     ) -> List[VehicleEstimation]:
-        stop_id_api = _stop_id_api(
-            stop_id_user=stop.id, transport_type=TransportType.INTERCITY_BUS
-        )
         if stop.transport_type == TransportType.INTERCITY_BUS:
             response = await get_json(
                 f"https://www.crtm.es/"  # type: ignore
                 f"widgets/api/GetStopsTimes.php"
-                f"?codStop={stop_id_api}&"
+                f"?codStop={stop.id.removeprefix('par_')}&"
                 f"type=1&orderBy=2&stopTimesByIti=3"
             )
         else:

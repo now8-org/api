@@ -1,7 +1,7 @@
 from typing import Dict, List, Union
 
 from fastapi import APIRouter, HTTPException
-from now8_api.entrypoints.api.dependencies import StopId
+from now8_api.entrypoints.api.dependencies import Exclude, StopId
 from now8_api.service.service import Service
 
 router = APIRouter(
@@ -16,7 +16,9 @@ service: Service = Service()
     "",
     summary="Get all stops in the city.",
 )
-async def stop_api() -> List[Dict[str, Union[str, float]]]:
+async def stop_api(
+    exclude: List[str] = Exclude,
+) -> Dict[str, Dict[str, Union[str, float, dict]]]:
     """DO NOT CALL THIS ENDPOINT FROM THE SWAGGER UI.
 
     It will return a list with thousands of stop information dictionaries
@@ -24,7 +26,7 @@ async def stop_api() -> List[Dict[str, Union[str, float]]]:
     `/docs` in the path) with a web browser or cURL for example.
     """
 
-    result = await service.all_stops()
+    result = await service.all_stops(exclude=exclude)
 
     return result
 

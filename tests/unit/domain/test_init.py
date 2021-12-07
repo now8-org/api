@@ -3,14 +3,6 @@ from datetime import datetime
 from now8_api.domain import Estimation, Line, Vehicle
 
 
-class TestLine:
-    def test_line_default_name(self):
-        line_id = "test_line_id"
-        line = Line(id=line_id)
-
-        assert line.name == line_id
-
-
 class TestVehicle:
     def test_vehicle_default_name(self):
         vehicle_id = "test_vehicle_id"

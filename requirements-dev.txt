@@ -6,15 +6,19 @@
 #
 -e file:.
     # via -r requirements-dev.in
-aiohttp==3.7.4.post0
+aiohttp==3.8.1
     # via
     #   -c requirements.txt
     #   now8-api
+aiosignal==1.2.0
+    # via
+    #   -c requirements.txt
+    #   aiohttp
 asgiref==3.4.1
     # via
     #   -c requirements.txt
     #   uvicorn
-async-timeout==3.0.1
+async-timeout==4.0.1
     # via
     #   -c requirements.txt
     #   aiohttp
@@ -29,12 +33,11 @@ attrs==21.2.0
     #   pytest
 certifi==2021.5.30
     # via requests
-chardet==4.0.0
+charset-normalizer==2.0.9
     # via
     #   -c requirements.txt
     #   aiohttp
-charset-normalizer==2.0.6
-    # via requests
+    #   requests
 click==8.0.1
     # via
     #   -c docs/requirements.txt
@@ -45,6 +48,11 @@ fastapi==0.68.0
     # via
     #   -c requirements.txt
     #   now8-api
+frozenlist==1.2.0
+    # via
+    #   -c requirements.txt
+    #   aiohttp
+    #   aiosignal
 gunicorn==20.1.0
     # via
     #   -c requirements.txt
@@ -121,7 +129,7 @@ types-orjson==3.6.1
 typing-extensions==3.10.0.0
     # via
     #   -c requirements.txt
-    #   aiohttp
+    #   async-timeout
     #   pydantic
 typing-utils==0.1.0
     # via

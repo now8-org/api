@@ -12,7 +12,13 @@ class TestStop:
         response = self.client.get("/stop")
 
         assert response.status_code == 200
-        assert isinstance(response.json(), list)
+        assert isinstance(response.json(), dict)
+
+    def test_stop_exclude_effect(self):
+        response_original = self.client.get("/stop")
+        response_exclude = self.client.get("/stop?exclude=name&exclude=lines")
+
+        assert response_original.json() != response_exclude.json()
 
 
 class TestStopInfo:
@@ -21,7 +27,7 @@ class TestStopInfo:
         self.client = TestClient(api)
 
     def test_madrid_stop(self):
-        response = self.client.get("/stop/17491/info")
+        response = self.client.get("/stop/par_8_17491/info")
 
         assert response.status_code == 200
         assert isinstance(response.json(), dict)
@@ -33,7 +39,7 @@ class TestStopEstimation:
         self.client = TestClient(api)
 
     def test_madrid_estimation(self):
-        response = self.client.get("/stop/17491/estimation")
+        response = self.client.get("/stop/par_8_17491/estimation")
 
         assert response.status_code == 200
         assert isinstance(response.json(), list)

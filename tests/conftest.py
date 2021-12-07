@@ -50,8 +50,32 @@ class FakeSqlEngine(SqlEngine):
     async def execute_query(self, query: str, *_) -> List[tuple]:
         if query.startswith("SELECT"):
             return [
-                ("42", "Stop 42", 0.0, 0.0, "A"),
-                ("43", "Stop 43", 1.0, 1.0, "B"),
+                (
+                    "1_42",
+                    "42",
+                    "Stop 42",
+                    0.0,
+                    0.0,
+                    "A",
+                    "route_id_1",
+                    "route_short_name_1",
+                    "route_long_name_1",
+                    3,
+                    "#00ff00",
+                ),
+                (
+                    "1_42",
+                    "42",
+                    "Stop 42",
+                    0.0,
+                    0.0,
+                    "A",
+                    "route_id_2",
+                    "route_short_name_2",
+                    "route_long_name_2",
+                    3,
+                    "#ff0000",
+                ),
             ]
         else:
             raise NotImplementedError

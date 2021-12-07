@@ -5,18 +5,24 @@ from enum import Enum
 from typing import List, Optional
 
 from pydantic import Field, validator
+from pydantic.color import Color
 from pydantic.dataclasses import dataclass
 
 
-class TransportType(Enum):
+class TransportType(int, Enum):
     """Transport type (bus, metro, train, etc.)."""
 
-    BUS = "bus"
-    INTERCITY_BUS = "intercity_bus"
-    NIGHT_BUS = "Night_bus"
-    METRO = "METRO"
-    CITRY_TRAIN = "city_train"
-    TRAM = "TRAM"
+    TRAM = 0
+    METRO = 1
+    RAIL = 2
+    BUS = 3
+    FERRY = 4
+    CABLE_TRAM = 5
+    AERIAL_LIFT = 6
+    FUNICULAR = 6
+    INTERCITY_BUS = 8
+    TROLLEY_BUS = 11
+    MONORAIL = 12
 
 
 class Way(Enum):
@@ -31,22 +37,20 @@ class Line:
     """Transport line.
 
     Attributes:
-        id: Line identifier in the user format.
+        id: Line identifier.
+        code: Line identifier in the user format.
         transport_type: Transport type of the line.
         name: Line name.
+        way: Way (inbound or outbound).
+        color: Line color.
     """
 
     id: str
+    code: str = None
     transport_type: Optional[TransportType] = None
     name: Optional[str] = None
-
-    @validator("name", always=True)
-    @classmethod
-    def default_name(cls, value, values):
-        """Set the default value for the name if unspecified."""
-        if value is None:
-            value = values["id"]
-        return value
+    way: Way = None
+    color: Color = None
 
 
 @dataclass
@@ -124,7 +128,8 @@ class Stop:
     """Transportation stop.
 
     Attributes:
-        id: Stop identifier in the user format.
+        id: Stop identifier.
+        code: Stop identifier in the user format.
         transport_type: Transport type of the stop.
         way: Way of the stop.
         name: Name of the stop.
@@ -133,6 +138,7 @@ class Stop:
     """
 
     id: str
+    code: Optional[str] = None
     transport_type: Optional[TransportType] = None
     way: Optional[Way] = None
     name: Optional[str] = None

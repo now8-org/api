@@ -11,7 +11,7 @@ class TestCities:
     cities_transport_types: List[Tuple[CityData, Stop]] = [
         (
             MadridCityData(),
-            Stop(id="17491", transport_type=TransportType.INTERCITY_BUS),
+            Stop(id="par_8_17491", transport_type=TransportType.INTERCITY_BUS),
         )
     ]
 
