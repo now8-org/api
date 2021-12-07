@@ -46,6 +46,7 @@ class TestService:
                 "code",
                 "transport_type",
                 "color",
+                "way",
             ]
             for stop in result.values()
             for line in stop["lines"].values()
@@ -92,12 +93,14 @@ class TestService:
                     "color": "#0f0",
                     "name": "route_long_name_1",
                     "transport_type": 3,
+                    "way": 0,
                 },
                 "route_id_2": {
                     "code": "route_short_name_2",
                     "color": "#f00",
                     "name": "route_long_name_2",
                     "transport_type": 3,
+                    "way": 1,
                 },
             },
         }
