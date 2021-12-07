@@ -40,13 +40,15 @@ class TestService:
         result = await self.service.all_stops()
 
         assert all(
-            list(d["lines"].keys())
+            list(line.keys())
             == [
-                "line",
-                "transport_type",
                 "name",
+                "code",
+                "transport_type",
+                "color",
             ]
-            for d in result.values()
+            for stop in result.values()
+            for line in stop["lines"].values()
         )
 
     @pytest.mark.parametrize("exclude", stop_keys)
@@ -84,5 +86,18 @@ class TestService:
             "longitude": 0.0,
             "latitude": 0.0,
             "zone": "A",
-            "lines": {},
+            "lines": {
+                "route_id_1": {
+                    "code": "route_short_name_1",
+                    "color": "#0f0",
+                    "name": "route_long_name_1",
+                    "transport_type": 3,
+                },
+                "route_id_2": {
+                    "code": "route_short_name_2",
+                    "color": "#f00",
+                    "name": "route_long_name_2",
+                    "transport_type": 3,
+                },
+            },
         }
