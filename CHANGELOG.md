@@ -1,3 +1,9 @@
+## 4.1.0 (2021-12-07)
+
+### Feat
+
+- **service**: iclude line ways in stop info
+
 ## 4.0.0 (2021-12-07)
 
 ### Fix
