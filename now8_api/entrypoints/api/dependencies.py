@@ -1,7 +1,5 @@
 """Module to store the endpoint parameter dependencies."""
 
-from typing import List
-
 from fastapi import Path, Query
 
 CityName = Path(
@@ -11,23 +9,23 @@ CityName = Path(
 )
 
 StopId = Path(
-    "17491",
+    "par_8_17491",
     title="Stop code",
     examples={
-        "coordinates and lines": {
-            "summary": "Exclude coordinates and lines.",
-            "value": ["longitude", "latitude", "lines"],
+        "17491": {
+            "summary": "RONDA SUR-HOSPITAL DEL SURESTE (17491)",
+            "value": "par_8_17491",
         }
     },
 )
 
-Exclude: List[str] = Query(
-    [],
+Exclude = Query(
+    None,
     title="Stop attributes to exclude.",
     examples={
-        "17491": {
-            "summary": "RONDA SUR-HOSPITAL DEL SURESTE",
-            "value": "17491",
+        "coordinates and lines": {
+            "summary": "Exclude coordinates and lines.",
+            "value": ["longitude", "latitude", "lines"],
         }
     },
 )
