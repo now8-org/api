@@ -1,3 +1,14 @@
+## 4.0.0 (2021-12-07)
+
+### Fix
+
+- **madrid.py**: type error
+
+### Feat
+
+- add lines info to stop
+- stops as dictionary
+
 ## 3.2.0 (2021-11-07)
 
 ### Feat
