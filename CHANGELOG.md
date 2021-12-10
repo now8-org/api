@@ -1,3 +1,17 @@
+## 4.2.0 (2021-12-10)
+
+### Feat
+
+- **service**: get transport type from city API estimations
+
+### Fix
+
+- **domain**: fix transport type enum duplicated value
+
+### Perf
+
+- **entrypoints**: user orjson for faster serialization
+
 ## 4.1.0 (2021-12-07)
 
 ### Feat
