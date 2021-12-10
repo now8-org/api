@@ -73,6 +73,10 @@ multidict==5.1.0
     #   -c requirements.txt
     #   aiohttp
     #   yarl
+orjson==3.6.5
+    # via
+    #   -c requirements.txt
+    #   now8-api
 overrides==6.1.0
     # via
     #   -c requirements.txt

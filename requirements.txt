@@ -36,6 +36,8 @@ multidict==5.1.0
     # via
     #   aiohttp
     #   yarl
+orjson==3.6.5
+    # via now8-api (setup.py)
 overrides==6.1.0
     # via now8-api (setup.py)
 pydantic==1.8.2

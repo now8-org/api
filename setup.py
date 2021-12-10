@@ -17,6 +17,7 @@ setup(
         "asyncpg",
         "fastapi",
         "gunicorn",
+        "orjson",
         "overrides",
         "pydantic",
         "pypika",

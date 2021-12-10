@@ -3,6 +3,7 @@
 from os import environ
 
 from fastapi import FastAPI
+from fastapi.responses import ORJSONResponse
 from now8_api.entrypoints.api.scopes import stop
 
 DESCRIPTION = (
@@ -11,9 +12,11 @@ DESCRIPTION = (
 
 api = FastAPI(
     name="now8 API",
+    version="4.1.0",
     title="now8 API",
     description=DESCRIPTION,
     root_path=environ.get("ROOT_PATH", ""),
+    default_response_class=ORJSONResponse,
     responses={
         200: {
             "description": "Successful response.",
@@ -21,7 +24,6 @@ api = FastAPI(
         400: {"description": "Invalid value for parameter."},
         404: {"description": "No data available."},
     },
-    version="4.1.0",
 )
 
 api.include_router(stop.router)
