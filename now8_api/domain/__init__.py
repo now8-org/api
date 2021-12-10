@@ -21,6 +21,7 @@ class TransportType(int, Enum):
     AERIAL_LIFT = 6
     FUNICULAR = 7
     INTERCITY_BUS = 8
+    URBAN_BUS = 9
     TROLLEY_BUS = 11
     MONORAIL = 12
 

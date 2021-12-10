@@ -71,7 +71,10 @@ class MadridCityData(CityData):
         self,
         stop: Stop,
     ) -> List[VehicleEstimation]:
-        if stop.transport_type == TransportType.INTERCITY_BUS:
+        if stop.transport_type in [
+            TransportType.INTERCITY_BUS,
+            TransportType.URBAN_BUS,
+        ]:
             response = await get_json(
                 f"https://www.crtm.es/"  # type: ignore
                 f"widgets/api/GetStopsTimes.php"
@@ -86,7 +89,10 @@ class MadridCityData(CityData):
         for estimation in response["stopTimes"]["times"]["Time"]:
             line = Line(
                 id=estimation["line"]["shortDescription"],
-                transport_type=TransportType.INTERCITY_BUS,
+                code=estimation["line"]["shortDescription"],
+                transport_type=TransportType(
+                    int(estimation["line"]["codMode"])
+                ),
                 name=estimation["line"]["description"],
             )
             vehicle = Vehicle(line=line, id=estimation["codIssue"])
