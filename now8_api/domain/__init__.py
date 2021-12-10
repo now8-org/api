@@ -19,7 +19,7 @@ class TransportType(int, Enum):
     FERRY = 4
     CABLE_TRAM = 5
     AERIAL_LIFT = 6
-    FUNICULAR = 6
+    FUNICULAR = 7
     INTERCITY_BUS = 8
     TROLLEY_BUS = 11
     MONORAIL = 12
