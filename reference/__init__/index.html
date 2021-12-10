@@ -3487,6 +3487,8 @@ connection parameters.</p></td>
 
 
 
+
+
   </div>
 
     </div>
@@ -4922,7 +4924,10 @@ the stop transport type in this city.</p></td>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="n">Stop</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">VehicleEstimation</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="n">stop</span><span class="o">.</span><span class="n">transport_type</span> <span class="o">==</span> <span class="n">TransportType</span><span class="o">.</span><span class="n">INTERCITY_BUS</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">stop</span><span class="o">.</span><span class="n">transport_type</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">TransportType</span><span class="o">.</span><span class="n">INTERCITY_BUS</span><span class="p">,</span>
+        <span class="n">TransportType</span><span class="o">.</span><span class="n">URBAN_BUS</span><span class="p">,</span>
+    <span class="p">]:</span>
         <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_json</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;https://www.crtm.es/&quot;</span>  <span class="c1"># type: ignore</span>
             <span class="sa">f</span><span class="s2">&quot;widgets/api/GetStopsTimes.php&quot;</span>
@@ -4937,7 +4942,10 @@ the stop transport type in this city.</p></td>
     <span class="k">for</span> <span class="n">estimation</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;stopTimes&quot;</span><span class="p">][</span><span class="s2">&quot;times&quot;</span><span class="p">][</span><span class="s2">&quot;Time&quot;</span><span class="p">]:</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span>
             <span class="nb">id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;shortDescription&quot;</span><span class="p">],</span>
-            <span class="n">transport_type</span><span class="o">=</span><span class="n">TransportType</span><span class="o">.</span><span class="n">INTERCITY_BUS</span><span class="p">,</span>
+            <span class="n">code</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;shortDescription&quot;</span><span class="p">],</span>
+            <span class="n">transport_type</span><span class="o">=</span><span class="n">TransportType</span><span class="p">(</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;codMode&quot;</span><span class="p">])</span>
+            <span class="p">),</span>
             <span class="n">name</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">],</span>
         <span class="p">)</span>
         <span class="n">vehicle</span> <span class="o">=</span> <span class="n">Vehicle</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;codIssue&quot;</span><span class="p">])</span>
