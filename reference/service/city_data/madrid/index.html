@@ -979,22 +979,16 @@ the stop transport type in this city.</p></td>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="n">Stop</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">VehicleEstimation</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="n">stop</span><span class="o">.</span><span class="n">transport_type</span> <span class="ow">in</span> <span class="p">[</span>
-        <span class="n">TransportType</span><span class="o">.</span><span class="n">INTERCITY_BUS</span><span class="p">,</span>
-        <span class="n">TransportType</span><span class="o">.</span><span class="n">URBAN_BUS</span><span class="p">,</span>
-    <span class="p">]:</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_json</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;https://www.crtm.es/&quot;</span>  <span class="c1"># type: ignore</span>
-            <span class="sa">f</span><span class="s2">&quot;widgets/api/GetStopsTimes.php&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;?codStop=</span><span class="si">{</span><span class="n">stop</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s1">&#39;par_&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&amp;&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;type=1&amp;orderBy=2&amp;stopTimesByIti=3&quot;</span>
-        <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_json</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;https://www.crtm.es/&quot;</span>  <span class="c1"># type: ignore</span>
+        <span class="sa">f</span><span class="s2">&quot;widgets/api/GetStopsTimes.php&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;?codStop=</span><span class="si">{</span><span class="n">stop</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s1">&#39;par_&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&amp;&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;type=1&amp;orderBy=2&amp;stopTimesByIti=3&quot;</span>
+    <span class="p">)</span>
 
     <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">VehicleEstimation</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">for</span> <span class="n">estimation</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;stopTimes&quot;</span><span class="p">][</span><span class="s2">&quot;times&quot;</span><span class="p">][</span><span class="s2">&quot;Time&quot;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">estimation</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;stopTimes&quot;</span><span class="p">][</span><span class="s2">&quot;times&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="p">[]):</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span>
             <span class="nb">id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;shortDescription&quot;</span><span class="p">],</span>
             <span class="n">code</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;shortDescription&quot;</span><span class="p">],</span>
