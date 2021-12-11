@@ -1,3 +1,9 @@
+## 4.4.0 (2021-12-11)
+
+### Feat
+
+- **service**: include line code in estimations
+
 ## 4.3.2 (2021-12-11)
 
 ### Fix
