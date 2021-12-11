@@ -855,7 +855,7 @@
 <p>Run <code>pip install .</code>.</p>
 <h3 id="development">Development</h3>
 <p>To install also the development dependencies, run
-<code>pip install -r requirements-dev.txt</code></p>
+<code>make install</code></p>
 <h2 id="configuration">Configuration</h2>
 <p>Choose the city to serve for with the following environment variable:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CITY</span><span class="o">=</span>madrid
@@ -903,7 +903,7 @@ so that you can run the code and tests directly from the sources.</p>
 <code>$VIRTUAL_ENV/bin/postactivate</code> adding <code>export</code> before each one of them.</p>
 <h3 id="development_1">Development</h3>
 <p>For development, you can run the project with:</p>
-<div class="highlight"><pre><span></span><code>uvicorn now8_api.entrypoints.api.main:api --reload
+<div class="highlight"><pre><span></span><code>make run
 </code></pre></div>
 <p>You can then access the API at <a href="http://localhost:8000">http://localhost:8000</a> and the <a href="https://swagger.io/tools/swagger-ui/">Swagger UI</a> (interactive API documentation) at <a href="http://localhost:8000/docs">http://localhost:8000/docs</a>.</p>
 <h3 id="production">Production</h3>
@@ -940,7 +940,7 @@ in the same network (i.e., <code>now8</code>).</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-11-07T10:41:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-11-07</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-12-11T07:34:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-12-11</span>
       
     
   </small>
