@@ -56,8 +56,15 @@ pull:
 	git checkout main
 	git pull
 
+.PHONY: run
+run:
+	@echo "----------------------"
+	@echo "- Running API server -"
+	@echo "----------------------"
+	uvicorn now8_api.entrypoints.api.main:api --reload
+
 .PHONY: full
-full: install pull clean update lint test
+full: install pull clean update lint test run
 
 .PHONY: docs
 docs:

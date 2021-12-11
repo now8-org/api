@@ -7,7 +7,7 @@ Run `pip install .`.
 ### Development
 
 To install also the development dependencies, run
-`pip install -r requirements-dev.txt`
+`make install`
 
 ## Configuration
 
@@ -76,7 +76,7 @@ If you are using a Python virtual environment, you can add them to
 For development, you can run the project with:
 
 ```bash
-uvicorn now8_api.entrypoints.api.main:api --reload
+make run
 ```
 
 You can then access the API at <http://localhost:8000> and the [Swagger UI](https://swagger.io/tools/swagger-ui/) (interactive API documentation) at <http://localhost:8000/docs>.
