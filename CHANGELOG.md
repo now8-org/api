@@ -1,3 +1,9 @@
+## 4.3.2 (2021-12-11)
+
+### Fix
+
+- **madrid**: set correct line id on estimations
+
 ## 4.3.1 (2021-12-11)
 
 ### Fix
