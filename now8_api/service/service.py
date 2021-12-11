@@ -195,6 +195,7 @@ class Service(BaseModel):
                     "id": v_e.vehicle.id,
                     "line": {
                         "id": v_e.vehicle.line.id,
+                        "code": v_e.vehicle.line.code,
                         "transport_type": v_e.vehicle.line.transport_type.value,  # noqa: E501
                         "name": v_e.vehicle.line.name,
                     },
