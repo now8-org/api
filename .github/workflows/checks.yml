@@ -30,6 +30,8 @@ jobs:
         uses: pre-commit/action@v2.0.3
         with:
           extra_args: --all-files
+        env:
+          SKIP: no-commit-to-branch
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
