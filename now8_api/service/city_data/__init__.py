@@ -6,7 +6,24 @@ from typing import List, Tuple
 import aiohttp
 from now8_api.domain import Line, Stop, TransportType, VehicleEstimation
 from pydantic import BaseModel, HttpUrl, validate_arguments
-from tenacity import retry, stop_after_attempt
+from tenacity import (
+    retry,
+    retry_if_exception_type,
+    stop_after_attempt,
+    wait_exponential,
+)
+
+
+class UpstreamError(Exception):
+    """Custom exception for upstream API fauilures."""
+
+    def __init__(self, message):
+        """Initialization method.
+
+        Arguments:
+            message: Error message.
+        """
+        super().__init__(message)
 
 
 class CityData(BaseModel, ABC):
@@ -31,6 +48,7 @@ class CityData(BaseModel, ABC):
         Raises:
             NotImplementedError: If the method is not implemented for
                 the stop transport type in this city.
+            UpstreamError: If the upstream city API fails.
         """
 
     @abstractmethod
@@ -90,7 +108,11 @@ class CityData(BaseModel, ABC):
         """
 
 
-@retry(stop=stop_after_attempt(3))
+@retry(
+    retry=retry_if_exception_type(TimeoutError),
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=0.1),
+)
 @validate_arguments
 async def get_json(url: HttpUrl) -> dict:
     """Fetch the given URL and returns the result as a dictionary.

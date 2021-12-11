@@ -2,6 +2,7 @@ from typing import Dict, List, Union
 
 from fastapi import APIRouter, HTTPException
 from now8_api.entrypoints.api.dependencies import Exclude, StopId
+from now8_api.service.city_data import UpstreamError
 from now8_api.service.service import Service
 
 router = APIRouter(
@@ -60,6 +61,11 @@ async def stop_estimation_api(
     except NotImplementedError as error:
         raise HTTPException(
             404, "Can't get estimations for the given stop in the given city."
+        ) from error
+    except UpstreamError as error:
+        raise HTTPException(
+            503,
+            "Upstream city API failure. Check the stop id or try again later.",
         ) from error
 
     return result

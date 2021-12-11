@@ -11,7 +11,7 @@ from now8_api.domain import (
     VehicleEstimation,
 )
 from now8_api.service import TransportTypeError
-from now8_api.service.city_data import CityData, get_json
+from now8_api.service.city_data import CityData, UpstreamError, get_json
 from overrides import overrides
 
 CITY_NAME: str = "Madrid"
@@ -71,12 +71,18 @@ class MadridCityData(CityData):
         self,
         stop: Stop,
     ) -> List[VehicleEstimation]:
-        response = await get_json(
-            f"https://www.crtm.es/"  # type: ignore
-            f"widgets/api/GetStopsTimes.php"
-            f"?codStop={stop.id.removeprefix('par_')}&"
-            f"type=1&orderBy=2&stopTimesByIti=3"
-        )
+        try:
+            response = await get_json(
+                f"https://www.crtm.es/"  # type: ignore
+                f"widgets/api/GetStopsTimes.php"
+                f"?codStop="
+                f"{stop.id.removeprefix('par_').removeprefix('est_')}&"
+                f"type=1&orderBy=2&stopTimesByIti=3"
+            )
+        except Exception as error:
+            raise UpstreamError(
+                "Upstream error. Check the stop id or try later."
+            ) from error
 
         result: List[VehicleEstimation] = []
 
