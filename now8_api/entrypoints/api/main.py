@@ -12,7 +12,7 @@ DESCRIPTION = (
 
 api = FastAPI(
     name="now8 API",
-    version="4.3.0",
+    version="4.3.1",
     title="now8 API",
     description=DESCRIPTION,
     root_path=environ.get("ROOT_PATH", ""),

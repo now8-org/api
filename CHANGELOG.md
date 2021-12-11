@@ -1,3 +1,9 @@
+## 4.3.1 (2021-12-11)
+
+### Fix
+
+- **service**: handle upstream city api errors
+
 ## 4.3.0 (2021-12-11)
 
 ### Feat
