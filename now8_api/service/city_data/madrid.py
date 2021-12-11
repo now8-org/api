@@ -88,7 +88,7 @@ class MadridCityData(CityData):
 
         for estimation in response["stopTimes"]["times"].get("Time", []):
             line = Line(
-                id=estimation["line"]["shortDescription"],
+                id=estimation["line"]["codLine"],
                 code=estimation["line"]["shortDescription"],
                 transport_type=TransportType(
                     int(estimation["line"]["codMode"])
