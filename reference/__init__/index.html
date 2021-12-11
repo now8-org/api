@@ -836,6 +836,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#now8_api.service.city_data.UpstreamError" class="md-nav__link">
+    UpstreamError
+  </a>
+  
+    <nav class="md-nav" aria-label="UpstreamError">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#now8_api.service.city_data.UpstreamError.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#now8_api.service.city_data.get_json" class="md-nav__link">
     get_json()
   </a>
@@ -1806,6 +1826,26 @@
           <li class="md-nav__item">
   <a href="#now8_api.service.city_data.CityData.get_stops_line" class="md-nav__link">
     get_stops_line()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#now8_api.service.city_data.UpstreamError" class="md-nav__link">
+    UpstreamError
+  </a>
+  
+    <nav class="md-nav" aria-label="UpstreamError">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#now8_api.service.city_data.UpstreamError.__init__" class="md-nav__link">
+    __init__()
   </a>
   
 </li>
@@ -4403,6 +4443,10 @@ connection parameters.</p></td>
         <td><p>If the method is not implemented for
 the stop transport type in this city.</p></td>
       </tr>
+      <tr>
+        <td><code>UpstreamError</code></td>
+        <td><p>If the upstream city API fails.</p></td>
+      </tr>
   </tbody>
 </table>
         <details class="quote">
@@ -4423,6 +4467,7 @@ the stop transport type in this city.</p></td>
 <span class="sd">    Raises:</span>
 <span class="sd">        NotImplementedError: If the method is not implemented for</span>
 <span class="sd">            the stop transport type in this city.</span>
+<span class="sd">        UpstreamError: If the upstream city API fails.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
@@ -4728,6 +4773,97 @@ the line transport type in this city.</p></td>
 
 
 
+  <div class="doc doc-object doc-class">
+
+
+
+<h4 id="now8_api.service.city_data.UpstreamError" class="doc doc-heading">
+        <code>UpstreamError</code>
+
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Custom exception for upstream API fauilures.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h5 id="now8_api.service.city_data.UpstreamError.__init__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+</h5>
+
+    <div class="doc doc-contents ">
+
+      <p>Initialization method.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>message</code></td>
+        <td><code></code></td>
+        <td><p>Error message.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>now8_api/service/city_data/__init__.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initialization method.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        message: Error message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
 
   <div class="doc doc-object doc-function">
 
@@ -4765,7 +4901,11 @@ the line transport type in this city.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>now8_api/service/city_data/__init__.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="nd">@retry</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="n">stop_after_attempt</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+          <div class="highlight"><pre><span></span><code><span class="nd">@retry</span><span class="p">(</span>
+    <span class="n">retry</span><span class="o">=</span><span class="n">retry_if_exception_type</span><span class="p">(</span><span class="ne">TimeoutError</span><span class="p">),</span>
+    <span class="n">stop</span><span class="o">=</span><span class="n">stop_after_attempt</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">wait</span><span class="o">=</span><span class="n">wait_exponential</span><span class="p">(</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+<span class="p">)</span>
 <span class="nd">@validate_arguments</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get_json</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">HttpUrl</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Fetch the given URL and returns the result as a dictionary.</span>
@@ -4915,6 +5055,10 @@ the line transport type in this city.</p></td>
         <td><p>If the method is not implemented for
 the stop transport type in this city.</p></td>
       </tr>
+      <tr>
+        <td><code>UpstreamError</code></td>
+        <td><p>If the upstream city API fails.</p></td>
+      </tr>
   </tbody>
 </table>
         <details class="quote">
@@ -4924,12 +5068,18 @@ the stop transport type in this city.</p></td>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="n">Stop</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">VehicleEstimation</span><span class="p">]:</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_json</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;https://www.crtm.es/&quot;</span>  <span class="c1"># type: ignore</span>
-        <span class="sa">f</span><span class="s2">&quot;widgets/api/GetStopsTimes.php&quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;?codStop=</span><span class="si">{</span><span class="n">stop</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s1">&#39;par_&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&amp;&quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;type=1&amp;orderBy=2&amp;stopTimesByIti=3&quot;</span>
-    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_json</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;https://www.crtm.es/&quot;</span>  <span class="c1"># type: ignore</span>
+            <span class="sa">f</span><span class="s2">&quot;widgets/api/GetStopsTimes.php&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;?codStop=&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">stop</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s1">&#39;par_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s1">&#39;est_&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&amp;&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;type=1&amp;orderBy=2&amp;stopTimesByIti=3&quot;</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">UpstreamError</span><span class="p">(</span>
+            <span class="s2">&quot;Upstream error. Check the stop id or try later.&quot;</span>
+        <span class="p">)</span> <span class="kn">from</span> <span class="nn">error</span>
 
     <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">VehicleEstimation</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
