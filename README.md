@@ -7,16 +7,19 @@ estimations using Machine Learning.
 
 Run `pip install .`.
 
+## Development
+
+Run `make install` to install all development dependencies.
+
 ## Documentation
 
 You can access the online version at <https://now8-org.github.io/api/>.
 
-Alternatively, once installed, to render the documentation
-run (from the `docs/` directory):
+Alternatively, after `make install`, to render the documentation
+run:
 
 ```bash
-pip install -r requirements.txt
-mkdocs serve
+make docs
 ```
 
 You can now access the docs at <http://localhost:8000>.

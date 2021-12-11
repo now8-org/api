@@ -31,8 +31,12 @@ attrs==21.2.0
     #   -c requirements.txt
     #   aiohttp
     #   pytest
+backports.entry-points-selectable==1.1.1
+    # via virtualenv
 certifi==2021.5.30
     # via requests
+cfgv==3.3.1
+    # via pre-commit
 charset-normalizer==2.0.9
     # via
     #   -c requirements.txt
@@ -44,10 +48,14 @@ click==8.0.1
     #   -c requirements.txt
     #   pip-tools
     #   uvicorn
+distlib==0.3.4
+    # via virtualenv
 fastapi==0.68.0
     # via
     #   -c requirements.txt
     #   now8-api
+filelock==3.4.0
+    # via virtualenv
 frozenlist==1.2.0
     # via
     #   -c requirements.txt
@@ -61,6 +69,8 @@ h11==0.12.0
     # via
     #   -c requirements.txt
     #   uvicorn
+identify==2.4.0
+    # via pre-commit
 idna==3.2
     # via
     #   -c requirements.txt
@@ -73,6 +83,8 @@ multidict==5.1.0
     #   -c requirements.txt
     #   aiohttp
     #   yarl
+nodeenv==1.6.0
+    # via pre-commit
 orjson==3.6.5
     # via
     #   -c requirements.txt
@@ -89,8 +101,12 @@ pep517==0.12.0
     # via pip-tools
 pip-tools==6.4.0
     # via -r requirements-dev.in
+platformdirs==2.4.0
+    # via virtualenv
 pluggy==1.0.0
     # via pytest
+pre-commit==2.16.0
+    # via -r requirements-dev.in
 py==1.10.0
     # via pytest
 pydantic==1.8.2
@@ -112,8 +128,16 @@ pytest==6.2.5
     #   pytest-asyncio
 pytest-asyncio==0.15.1
     # via -r requirements-dev.in
+pyyaml==5.4.1
+    # via
+    #   -c docs/requirements.txt
+    #   pre-commit
 requests==2.26.0
     # via -r requirements-dev.in
+six==1.16.0
+    # via
+    #   -c docs/requirements.txt
+    #   virtualenv
 starlette==0.14.2
     # via
     #   -c requirements.txt
@@ -125,6 +149,7 @@ tenacity==8.0.1
 toml==0.10.2
     # via
     #   -r requirements-dev.in
+    #   pre-commit
     #   pytest
 tomli==1.2.2
     # via pep517
@@ -145,6 +170,8 @@ uvicorn==0.14.0
     # via
     #   -c requirements.txt
     #   now8-api
+virtualenv==20.10.0
+    # via pre-commit
 wheel==0.37.0
     # via pip-tools
 yarl==1.6.3

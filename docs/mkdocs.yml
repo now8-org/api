@@ -16,7 +16,7 @@ plugins:
           rendering:
             show_source: true
       watch:
-        - ../now8_api
+        - ./now8_api
   - git-revision-date-localized:
       type: timeago
 

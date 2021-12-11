@@ -4,6 +4,7 @@
 -e file:.
 
 pip-tools
+pre-commit
 pytest
 pytest-asyncio
 requests
