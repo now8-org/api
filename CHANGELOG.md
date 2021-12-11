@@ -1,3 +1,9 @@
+## 4.3.0 (2021-12-11)
+
+### Feat
+
+- **madrid**: support all transport types
+
 ## 4.2.0 (2021-12-10)
 
 ### Feat
