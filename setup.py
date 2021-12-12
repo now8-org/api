@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="now8_api",
-    version="4.4.0",
+    version="4.5.0",
     description="Estimated time of arrival for public transport vehicles.",
     author="m0wer",
     author_email="m0wer@autisitci.org",
