@@ -3,14 +3,14 @@ from typing import Dict, List, Union
 from fastapi import APIRouter, HTTPException
 from now8_api.entrypoints.api.dependencies import Exclude, StopId
 from now8_api.service.city_data import UpstreamError
-from now8_api.service.service import Service
+from now8_api.service.stop_service import StopService
 
 router = APIRouter(
     prefix="/stop",
     tags=["stop"],
 )
 
-service: Service = Service()
+stop_service: StopService = StopService()
 
 
 @router.get(
@@ -18,7 +18,7 @@ service: Service = Service()
     summary="Get all stops in the city.",
 )
 async def stop_api(
-    exclude: List[str] = Exclude,
+    keys_to_exclude: List[str] = Exclude,
 ) -> Dict[str, Dict[str, Union[str, float, dict]]]:
     """DO NOT CALL THIS ENDPOINT FROM THE SWAGGER UI.
 
@@ -27,7 +27,7 @@ async def stop_api(
     `/docs` in the path) with a web browser or cURL for example.
     """
 
-    result = await service.all_stops(exclude=exclude)
+    result = await stop_service.all_stops(keys_to_exclude=keys_to_exclude)
 
     return result
 
@@ -40,7 +40,7 @@ async def stop_info_api(
     stop_id: str = StopId,
 ) -> Dict[str, Union[str, float]]:
     try:
-        result = await service.stop_info(stop_id=stop_id)
+        result = await stop_service.stop_info(stop_id=stop_id)
     except NotImplementedError as error:
         raise HTTPException(
             404, "Can't get estimations for the given stop in the given city."
@@ -57,7 +57,7 @@ async def stop_estimation_api(
     stop_id: str = StopId,
 ) -> List[Dict[str, dict]]:
     try:
-        result = await service.stop_estimation(stop_id=stop_id)
+        result = await stop_service.stop_estimation(stop_id=stop_id)
     except NotImplementedError as error:
         raise HTTPException(
             404, "Can't get estimations for the given stop in the given city."

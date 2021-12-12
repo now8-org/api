@@ -4,7 +4,7 @@ from os import environ
 
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
-from now8_api.entrypoints.api.scopes import stop
+from now8_api.entrypoints.api.scopes import route, stop
 
 DESCRIPTION = (
     "Estimated time of arrival (and more) for public transport vehicles."
@@ -27,3 +27,4 @@ api = FastAPI(
 )
 
 api.include_router(stop.router)
+api.include_router(route.router)

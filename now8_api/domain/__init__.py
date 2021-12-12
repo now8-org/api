@@ -34,7 +34,7 @@ class Way(int, Enum):
 
 
 @dataclass
-class Line:
+class Route:
     """Transport line.
 
     Attributes:
@@ -65,7 +65,7 @@ class Vehicle:
     """
 
     id: str
-    line: Line
+    line: Route
     name: Optional[str] = None
 
     @validator("name", pre=True, always=True)

@@ -1,7 +1,7 @@
 from typing import List, Optional, Tuple
 
 from now8_api.data.database import SqlEngine
-from now8_api.domain import Line, Stop, TransportType, VehicleEstimation
+from now8_api.domain import Route, Stop, TransportType, VehicleEstimation
 from now8_api.service.city_data import CityData
 from overrides import overrides
 from pydantic.dataclasses import dataclass
@@ -25,7 +25,7 @@ class FakeCityData(CityData):
     @overrides
     async def get_stops_line(
         self,
-        line: Line,
+        line: Route,
     ) -> Tuple[List[Stop], List[Stop]]:
         return ([], [])
 
@@ -33,7 +33,7 @@ class FakeCityData(CityData):
     async def get_lines_stop(
         self,
         stop: Stop,
-    ) -> List[Line]:
+    ) -> List[Route]:
         return []
 
 
@@ -48,7 +48,17 @@ class FakeSqlEngine(SqlEngine):
 
     @overrides
     async def execute_query(self, query: str, *_) -> List[tuple]:
-        if query.startswith("SELECT"):
+        if (
+            query == "SELECT DISTINCT "
+            '"route_id","route_short_name","route_long_name",'
+            '"route_type","route_color" '
+            'FROM "routes"'
+        ):
+            return [
+                ("42", "r42", "ROUTE 42", 1, "#FF0000"),
+                ("42", "r42", "ROUTE 42", 1, "#FF0000"),
+            ]
+        elif query.startswith("SELECT"):
             return [
                 (
                     "1_42",

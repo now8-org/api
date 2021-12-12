@@ -10,7 +10,7 @@ CityName = Path(
 
 StopId = Path(
     "par_8_17491",
-    title="Stop code",
+    title="Stop ID",
     examples={
         "17491": {
             "summary": "RONDA SUR-HOSPITAL DEL SURESTE (17491)",
@@ -19,13 +19,24 @@ StopId = Path(
     },
 )
 
+RouteId = Path(
+    "633",
+    title="Route ID",
+    examples={
+        "633": {
+            "summary": "MADRID (Plaza de Castilla) - ALCOBENDAS (151)",
+            "value": "633",
+        }
+    },
+)
+
 Exclude = Query(
     None,
     title="Stop attributes to exclude.",
     examples={
-        "coordinates and lines": {
-            "summary": "Exclude coordinates and lines.",
-            "value": ["longitude", "latitude", "lines"],
+        "id and name": {
+            "summary": "Exclude name and id.",
+            "value": ["name", "id"],
         }
     },
 )

@@ -4,7 +4,7 @@ from typing import Dict, List, Tuple
 
 from now8_api.domain import (
     Estimation,
-    Line,
+    Route,
     Stop,
     TransportType,
     Vehicle,
@@ -87,7 +87,7 @@ class MadridCityData(CityData):
         result: List[VehicleEstimation] = []
 
         for estimation in response["stopTimes"]["times"].get("Time", []):
-            line = Line(
+            line = Route(
                 id=estimation["line"]["codLine"],
                 code=estimation["line"]["shortDescription"],
                 transport_type=TransportType(
@@ -116,7 +116,7 @@ class MadridCityData(CityData):
     @overrides
     async def get_stops_line(
         self,
-        line: Line,
+        line: Route,
     ) -> Tuple[List[Stop], List[Stop]]:
         raise NotImplementedError
 
@@ -124,5 +124,5 @@ class MadridCityData(CityData):
     async def get_lines_stop(
         self,
         stop: Stop,
-    ) -> List[Line]:
+    ) -> List[Route]:
         raise NotImplementedError

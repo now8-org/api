@@ -16,7 +16,9 @@ class TestStop:
 
     def test_stop_exclude_effect(self):
         response_original = self.client.get("/stop")
-        response_exclude = self.client.get("/stop?exclude=name&exclude=lines")
+        response_exclude = self.client.get(
+            "/stop?keys_to_exclude=name&keys_to_exclude=lines"
+        )
 
         assert response_original.json() != response_exclude.json()
 

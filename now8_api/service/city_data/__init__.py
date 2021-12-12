@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from typing import List, Tuple
 
 import aiohttp
-from now8_api.domain import Line, Stop, TransportType, VehicleEstimation
+from now8_api.domain import Route, Stop, TransportType, VehicleEstimation
 from pydantic import BaseModel, HttpUrl, validate_arguments
 from tenacity import (
     retry,
@@ -74,7 +74,7 @@ class CityData(BaseModel, ABC):
     @abstractmethod
     async def get_stops_line(
         self,
-        line: Line,
+        line: Route,
     ) -> Tuple[List[Stop], List[Stop]]:
         """Return all the stops of the selected line.
 
@@ -93,7 +93,7 @@ class CityData(BaseModel, ABC):
     async def get_lines_stop(
         self,
         stop: Stop,
-    ) -> List[Line]:
+    ) -> List[Route]:
         """Return all the lines that pass through the stop.
 
         Arguments:
