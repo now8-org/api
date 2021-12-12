@@ -1211,7 +1211,7 @@ the stop transport type in this city.</p></td>
   </thead>
   <tbody>
     <tr>
-      <td><code>List[now8_api.domain.Line]</code></td>
+      <td><code>List[now8_api.domain.Route]</code></td>
       <td><p>Lines that pass through the stop.</p></td>
     </tr>
   </tbody>
@@ -1238,7 +1238,7 @@ the stop transport type in this city.</p></td>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get_lines_stop</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="n">Stop</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Line</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Route</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Return all the lines that pass through the stop.</span>
 
 <span class="sd">    Arguments:</span>
@@ -1387,7 +1387,7 @@ the stop transport type in this city.</p></td>
   <tbody>
       <tr>
         <td><code>line</code></td>
-        <td><code>Line</code></td>
+        <td><code>Route</code></td>
         <td><p>Transport line to get the stops for.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -1429,7 +1429,7 @@ the line transport type in this city.</p></td>
           <div class="highlight"><pre><span></span><code><span class="nd">@abstractmethod</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get_stops_line</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">line</span><span class="p">:</span> <span class="n">Line</span><span class="p">,</span>
+    <span class="n">line</span><span class="p">:</span> <span class="n">Route</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Stop</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Stop</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Return all the stops of the selected line.</span>
 
@@ -1772,7 +1772,7 @@ the stop transport type in this city.</p></td>
     <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">VehicleEstimation</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">estimation</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;stopTimes&quot;</span><span class="p">][</span><span class="s2">&quot;times&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="p">[]):</span>
-        <span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">Route</span><span class="p">(</span>
             <span class="nb">id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;codLine&quot;</span><span class="p">],</span>
             <span class="n">code</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;shortDescription&quot;</span><span class="p">],</span>
             <span class="n">transport_type</span><span class="o">=</span><span class="n">TransportType</span><span class="p">(</span>
@@ -1844,7 +1844,7 @@ the stop transport type in this city.</p></td>
   </thead>
   <tbody>
     <tr>
-      <td><code>List[now8_api.domain.Line]</code></td>
+      <td><code>List[now8_api.domain.Route]</code></td>
       <td><p>Lines that pass through the stop.</p></td>
     </tr>
   </tbody>
@@ -1871,7 +1871,7 @@ the stop transport type in this city.</p></td>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get_lines_stop</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="n">Stop</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Line</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Route</span><span class="p">]:</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </code></pre></div>
         </details>
@@ -1996,7 +1996,7 @@ the stop transport type in this city.</p></td>
   <tbody>
       <tr>
         <td><code>line</code></td>
-        <td><code>Line</code></td>
+        <td><code>Route</code></td>
         <td><p>Transport line to get the stops for.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -2038,7 +2038,7 @@ the line transport type in this city.</p></td>
           <div class="highlight"><pre><span></span><code><span class="nd">@overrides</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get_stops_line</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">line</span><span class="p">:</span> <span class="n">Line</span><span class="p">,</span>
+    <span class="n">line</span><span class="p">:</span> <span class="n">Route</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Stop</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Stop</span><span class="p">]]:</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </code></pre></div>
