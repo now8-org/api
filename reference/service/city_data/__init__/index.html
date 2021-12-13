@@ -575,8 +575,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.CityData.get_lines_stop" class="md-nav__link">
-    get_lines_stop()
+  <a href="#now8_api.service.city_data.CityData.get_routes_stop" class="md-nav__link">
+    get_routes_stop()
   </a>
   
 </li>
@@ -589,8 +589,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.CityData.get_stops_line" class="md-nav__link">
-    get_stops_line()
+  <a href="#now8_api.service.city_data.CityData.get_stops_route" class="md-nav__link">
+    get_stops_route()
   </a>
   
 </li>
@@ -651,8 +651,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.madrid.MadridCityData.get_lines_stop" class="md-nav__link">
-    get_lines_stop()
+  <a href="#now8_api.service.city_data.madrid.MadridCityData.get_routes_stop" class="md-nav__link">
+    get_routes_stop()
   </a>
   
 </li>
@@ -665,8 +665,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.madrid.MadridCityData.get_stops_line" class="md-nav__link">
-    get_stops_line()
+  <a href="#now8_api.service.city_data.madrid.MadridCityData.get_stops_route" class="md-nav__link">
+    get_stops_route()
   </a>
   
 </li>
@@ -875,8 +875,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.CityData.get_lines_stop" class="md-nav__link">
-    get_lines_stop()
+  <a href="#now8_api.service.city_data.CityData.get_routes_stop" class="md-nav__link">
+    get_routes_stop()
   </a>
   
 </li>
@@ -889,8 +889,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.CityData.get_stops_line" class="md-nav__link">
-    get_stops_line()
+  <a href="#now8_api.service.city_data.CityData.get_stops_route" class="md-nav__link">
+    get_stops_route()
   </a>
   
 </li>
@@ -951,8 +951,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.madrid.MadridCityData.get_lines_stop" class="md-nav__link">
-    get_lines_stop()
+  <a href="#now8_api.service.city_data.madrid.MadridCityData.get_routes_stop" class="md-nav__link">
+    get_routes_stop()
   </a>
   
 </li>
@@ -965,8 +965,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.madrid.MadridCityData.get_stops_line" class="md-nav__link">
-    get_stops_line()
+  <a href="#now8_api.service.city_data.madrid.MadridCityData.get_stops_route" class="md-nav__link">
+    get_stops_route()
   </a>
   
 </li>
@@ -1169,8 +1169,8 @@ the stop transport type in this city.</p></td>
 
 
 
-<h3 id="now8_api.service.city_data.CityData.get_lines_stop" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_lines_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span></code>
+<h3 id="now8_api.service.city_data.CityData.get_routes_stop" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_routes_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-async"><code>async</code></small>
@@ -1180,7 +1180,7 @@ the stop transport type in this city.</p></td>
 
     <div class="doc doc-contents ">
 
-      <p>Return all the lines that pass through the stop.</p>
+      <p>Return all the routes that pass through the stop.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1196,7 +1196,7 @@ the stop transport type in this city.</p></td>
       <tr>
         <td><code>stop</code></td>
         <td><code>Stop</code></td>
-        <td><p>Transport stop to get the lines for.</p></td>
+        <td><p>Transport stop to get the routes for.</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
@@ -1212,7 +1212,7 @@ the stop transport type in this city.</p></td>
   <tbody>
     <tr>
       <td><code>List[now8_api.domain.Route]</code></td>
-      <td><p>Lines that pass through the stop.</p></td>
+      <td><p>Routes that pass through the stop.</p></td>
     </tr>
   </tbody>
 </table>
@@ -1235,17 +1235,17 @@ the stop transport type in this city.</p></td>
         <details class="quote">
           <summary>Source code in <code>now8_api/service/city_data/__init__.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="nd">@abstractmethod</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_lines_stop</span><span class="p">(</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_routes_stop</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="n">Stop</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Route</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Return all the lines that pass through the stop.</span>
+    <span class="sd">&quot;&quot;&quot;Return all the routes that pass through the stop.</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        stop: Transport stop to get the lines for.</span>
+<span class="sd">        stop: Transport stop to get the routes for.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Lines that pass through the stop.</span>
+<span class="sd">        Routes that pass through the stop.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        NotImplementedError: If the method is not implemented for</span>
@@ -1361,8 +1361,8 @@ the stop transport type in this city.</p></td>
 
 
 
-<h3 id="now8_api.service.city_data.CityData.get_stops_line" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_stops_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span></code>
+<h3 id="now8_api.service.city_data.CityData.get_stops_route" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_stops_route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">route</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-async"><code>async</code></small>
@@ -1372,7 +1372,7 @@ the stop transport type in this city.</p></td>
 
     <div class="doc doc-contents ">
 
-      <p>Return all the stops of the selected line.</p>
+      <p>Return all the stops of the selected route.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1386,9 +1386,9 @@ the stop transport type in this city.</p></td>
   </thead>
   <tbody>
       <tr>
-        <td><code>line</code></td>
+        <td><code>route</code></td>
         <td><code>Route</code></td>
-        <td><p>Transport line to get the stops for.</p></td>
+        <td><p>Transport route to get the stops for.</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
@@ -1404,7 +1404,7 @@ the stop transport type in this city.</p></td>
   <tbody>
     <tr>
       <td><code>Tuple[List[now8_api.domain.Stop], List[now8_api.domain.Stop]]</code></td>
-      <td><p>Stops of the selected line for both ways in order.</p></td>
+      <td><p>Stops of the selected route for both ways in order.</p></td>
     </tr>
   </tbody>
 </table>
@@ -1420,28 +1420,28 @@ the stop transport type in this city.</p></td>
       <tr>
         <td><code>NotImplementedError</code></td>
         <td><p>If the method is not implemented for
-the line transport type in this city.</p></td>
+the route transport type in this city.</p></td>
       </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>now8_api/service/city_data/__init__.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="nd">@abstractmethod</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_stops_line</span><span class="p">(</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_stops_route</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">line</span><span class="p">:</span> <span class="n">Route</span><span class="p">,</span>
+    <span class="n">route</span><span class="p">:</span> <span class="n">Route</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Stop</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Stop</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Return all the stops of the selected line.</span>
+    <span class="sd">&quot;&quot;&quot;Return all the stops of the selected route.</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        line: Transport line to get the stops for.</span>
+<span class="sd">        route: Transport route to get the stops for.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Stops of the selected line for both ways in order.</span>
+<span class="sd">        Stops of the selected route for both ways in order.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        NotImplementedError: If the method is not implemented for</span>
-<span class="sd">            the line transport type in this city.</span>
+<span class="sd">            the route transport type in this city.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div>
         </details>
@@ -1590,9 +1590,12 @@ the line transport type in this city.</p></td>
         <details class="quote">
           <summary>Source code in <code>now8_api/service/city_data/__init__.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="nd">@retry</span><span class="p">(</span>
-    <span class="n">retry</span><span class="o">=</span><span class="n">retry_if_exception_type</span><span class="p">(</span><span class="ne">TimeoutError</span><span class="p">),</span>
+    <span class="n">retry</span><span class="o">=</span><span class="p">(</span>
+        <span class="n">retry_if_exception_type</span><span class="p">(</span><span class="ne">TimeoutError</span><span class="p">)</span>
+        <span class="o">|</span> <span class="n">retry_if_exception_type</span><span class="p">(</span><span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientResponseError</span><span class="p">)</span>
+    <span class="p">),</span>
     <span class="n">stop</span><span class="o">=</span><span class="n">stop_after_attempt</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
-    <span class="n">wait</span><span class="o">=</span><span class="n">wait_exponential</span><span class="p">(</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">wait</span><span class="o">=</span><span class="n">wait_exponential</span><span class="p">(</span><span class="n">multiplier</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
 <span class="p">)</span>
 <span class="nd">@validate_arguments</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get_json</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">HttpUrl</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -1605,7 +1608,11 @@ the line transport type in this city.</p></td>
 <span class="sd">        List of dictionaries with the parsed answer.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">async</span> <span class="k">with</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">raise_for_status</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="k">as</span> <span class="n">resp</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">url</span><span class="p">,</span>
+            <span class="n">raise_for_status</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">resp</span><span class="p">:</span>
             <span class="k">return</span> <span class="k">await</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1772,15 +1779,13 @@ the stop transport type in this city.</p></td>
     <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">VehicleEstimation</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">estimation</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;stopTimes&quot;</span><span class="p">][</span><span class="s2">&quot;times&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="p">[]):</span>
-        <span class="n">line</span> <span class="o">=</span> <span class="n">Route</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;codLine&quot;</span><span class="p">],</span>
-            <span class="n">code</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;shortDescription&quot;</span><span class="p">],</span>
-            <span class="n">transport_type</span><span class="o">=</span><span class="n">TransportType</span><span class="p">(</span>
-                <span class="nb">int</span><span class="p">(</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;codMode&quot;</span><span class="p">])</span>
-            <span class="p">),</span>
-            <span class="n">name</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">],</span>
+        <span class="n">vehicle</span> <span class="o">=</span> <span class="n">Vehicle</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;codIssue&quot;</span><span class="p">],</span>
+            <span class="n">route_id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;codLine&quot;</span><span class="p">],</span>
+            <span class="n">route_way</span><span class="o">=</span><span class="n">Way</span><span class="p">(</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">vehicle</span> <span class="o">=</span> <span class="n">Vehicle</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;codIssue&quot;</span><span class="p">])</span>
         <span class="n">estimation</span> <span class="o">=</span> <span class="n">Estimation</span><span class="p">(</span>
             <span class="n">estimation</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">],</span>
             <span class="n">time</span><span class="o">=</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;stopTimes&quot;</span><span class="p">][</span><span class="s2">&quot;actualDate&quot;</span><span class="p">],</span>
@@ -1802,8 +1807,8 @@ the stop transport type in this city.</p></td>
 
 
 
-<h4 id="now8_api.service.city_data.madrid.MadridCityData.get_lines_stop" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_lines_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span></code>
+<h4 id="now8_api.service.city_data.madrid.MadridCityData.get_routes_stop" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_routes_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-async"><code>async</code></small>
@@ -1813,7 +1818,7 @@ the stop transport type in this city.</p></td>
 
     <div class="doc doc-contents ">
 
-      <p>Return all the lines that pass through the stop.</p>
+      <p>Return all the routes that pass through the stop.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1829,7 +1834,7 @@ the stop transport type in this city.</p></td>
       <tr>
         <td><code>stop</code></td>
         <td><code>Stop</code></td>
-        <td><p>Transport stop to get the lines for.</p></td>
+        <td><p>Transport stop to get the routes for.</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
@@ -1845,7 +1850,7 @@ the stop transport type in this city.</p></td>
   <tbody>
     <tr>
       <td><code>List[now8_api.domain.Route]</code></td>
-      <td><p>Lines that pass through the stop.</p></td>
+      <td><p>Routes that pass through the stop.</p></td>
     </tr>
   </tbody>
 </table>
@@ -1868,7 +1873,7 @@ the stop transport type in this city.</p></td>
         <details class="quote">
           <summary>Source code in <code>now8_api/service/city_data/madrid.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="nd">@overrides</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_lines_stop</span><span class="p">(</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_routes_stop</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">stop</span><span class="p">:</span> <span class="n">Stop</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Route</span><span class="p">]:</span>
@@ -1970,8 +1975,8 @@ the stop transport type in this city.</p></td>
 
 
 
-<h4 id="now8_api.service.city_data.madrid.MadridCityData.get_stops_line" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_stops_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span></code>
+<h4 id="now8_api.service.city_data.madrid.MadridCityData.get_stops_route" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_stops_route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">route</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-async"><code>async</code></small>
@@ -1981,7 +1986,7 @@ the stop transport type in this city.</p></td>
 
     <div class="doc doc-contents ">
 
-      <p>Return all the stops of the selected line.</p>
+      <p>Return all the stops of the selected route.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1995,9 +2000,9 @@ the stop transport type in this city.</p></td>
   </thead>
   <tbody>
       <tr>
-        <td><code>line</code></td>
+        <td><code>route</code></td>
         <td><code>Route</code></td>
-        <td><p>Transport line to get the stops for.</p></td>
+        <td><p>Transport route to get the stops for.</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
@@ -2013,7 +2018,7 @@ the stop transport type in this city.</p></td>
   <tbody>
     <tr>
       <td><code>Tuple[List[now8_api.domain.Stop], List[now8_api.domain.Stop]]</code></td>
-      <td><p>Stops of the selected line for both ways in order.</p></td>
+      <td><p>Stops of the selected route for both ways in order.</p></td>
     </tr>
   </tbody>
 </table>
@@ -2029,16 +2034,16 @@ the stop transport type in this city.</p></td>
       <tr>
         <td><code>NotImplementedError</code></td>
         <td><p>If the method is not implemented for
-the line transport type in this city.</p></td>
+the route transport type in this city.</p></td>
       </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>now8_api/service/city_data/madrid.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="nd">@overrides</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_stops_line</span><span class="p">(</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_stops_route</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">line</span><span class="p">:</span> <span class="n">Route</span><span class="p">,</span>
+    <span class="n">route</span><span class="p">:</span> <span class="n">Route</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Stop</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Stop</span><span class="p">]]:</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </code></pre></div>
