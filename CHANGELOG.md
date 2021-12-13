@@ -1,3 +1,24 @@
+## 5.0.0 (2021-12-13)
+
+### Feat
+
+- **entrypoints**: handle stop or route not found
+- **entrypoints**: add response models and cache to route endpoints
+- **entrypoints**: enable cache for stop endpoints
+- add response model for stop related endpoints
+
+### Fix
+
+- **entrypoints**: add request and response
+
+### Perf
+
+- **service**: retry get_json also on HTTP status
+
+### BREAKING CHANGE
+
+- Removed exclude parameter and changed response format.
+
 ## 4.5.0 (2021-12-12)
 
 ### Feat
