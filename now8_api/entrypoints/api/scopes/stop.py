@@ -7,7 +7,7 @@ from fastapi_cache.backends.inmemory import InMemoryBackend
 from fastapi_cache.decorator import cache
 from now8_api.entrypoints.api.dependencies import StopId
 from now8_api.service.city_data import UpstreamError
-from now8_api.service.stop_service import StopService
+from now8_api.service.stop_service import StopNotFoundError, StopService
 from pydantic import BaseModel, parse_obj_as
 from starlette.requests import Request
 from starlette.responses import Response
@@ -98,10 +98,8 @@ async def stop_info_api(
         result = StopInfo.parse_obj(
             await stop_service.stop_info(stop_id=stop_id)
         )
-    except NotImplementedError as error:
-        raise HTTPException(
-            404, "Can't get estimations for the given stop in the given city."
-        ) from error
+    except StopNotFoundError as error:
+        raise HTTPException(404, "Stop not found.") from error
 
     return result
 

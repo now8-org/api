@@ -1,14 +1,20 @@
 from typing import Any, Dict, List, Union
 
 from now8_api.domain import Coordinates, Stop, TransportType
-from now8_api.service.service import (
-    CITY,
-    CITY_DATA_DICT,
-    CityData,
-    Service,
-    exclude,
-)
+from now8_api.service.service import CITY, CITY_DATA_DICT, CityData, Service
 from pypika import Query, Table
+
+
+class StopNotFoundError(ValueError):
+    """Custom exception for stop not found."""
+
+    def __init__(self, stop_id: str) -> None:
+        """Initialize ValueError with custom message.
+
+        Arguments:
+            stop_id: Stop ID that was not found.
+        """
+        super().__init__(f'Stop "{stop_id}" not found.')
 
 
 class StopService(Service):
@@ -89,7 +95,7 @@ class StopService(Service):
         self.stops_cache = result
 
     async def all_stops(
-        self, keys_to_exclude: List[str] = None
+        self,
     ) -> Dict[str, Dict[str, Union[str, float, dict]]]:
         """Return all the stops of the city.
 
@@ -100,10 +106,7 @@ class StopService(Service):
         if self.stops_cache is None:
             await self.initialize_stops_cache()
 
-        return exclude(
-            dict_of_dicts=self.stops_cache,
-            keys_to_exclude=keys_to_exclude,
-        )
+        return self.stops_cache
 
     async def stop_info(
         self, stop_id: str
@@ -118,12 +121,15 @@ class StopService(Service):
                 coordinates and zone.
 
         Raises:
-            ValueError: If the `stop_id` does not match any stop.
+            StopNotFoundError: If the `stop_id` does not match any stop.
         """
         if self.stops_cache is None:
             await self.initialize_stops_cache()
 
-        return self.stops_cache[stop_id]
+        try:
+            return self.stops_cache[stop_id]
+        except KeyError as error:
+            raise StopNotFoundError(stop_id=stop_id) from error
 
     async def stop_estimation(self, stop_id: str) -> List[Dict[str, dict]]:
         """Return ETA for the next vehicles to the stop.

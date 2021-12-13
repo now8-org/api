@@ -3,9 +3,21 @@
 from typing import Any, Dict, List, Union
 
 from now8_api.domain import Route, TransportType
-from now8_api.service.service import Service, exclude
+from now8_api.service.service import Service
 from pydantic.color import Color
 from pypika import Query, Table
+
+
+class RouteNotFoundError(ValueError):
+    """Custom exception for route not found."""
+
+    def __init__(self, route_id: str) -> None:
+        """Initialize ValueError with custom message.
+
+        Arguments:
+            route_id: Route ID that was not found.
+        """
+        super().__init__(f'Route "{route_id}" not found.')
 
 
 class RouteService(Service):
@@ -57,7 +69,7 @@ class RouteService(Service):
         self.routes_cache = result
 
     async def all_routes(
-        self, keys_to_exclude: List[str] = None
+        self,
     ) -> Dict[str, Dict[str, Union[str, float, dict]]]:
         """Return all the routes of the city.
 
@@ -68,9 +80,7 @@ class RouteService(Service):
         if self.routes_cache is None:
             await self.initialize_routes_cache()
 
-        return exclude(
-            dict_of_dicts=self.routes_cache, keys_to_exclude=keys_to_exclude
-        )
+        return self.routes_cache
 
     async def route_info(self, route_id: str) -> Dict[str, Union[str, float]]:
         """Return the route information.
@@ -83,9 +93,12 @@ class RouteService(Service):
                 coordinates and zone.
 
         Raises:
-            ValueError: If the `route_id` does not match any route.
+            RouteNotFoundError: If the `route_id` does not match any route.
         """
         if self.routes_cache is None:
             await self.initialize_routes_cache()
 
-        return self.routes_cache[route_id]
+        try:
+            return self.routes_cache[route_id]
+        except KeyError as error:
+            raise RouteNotFoundError(route_id=route_id) from error

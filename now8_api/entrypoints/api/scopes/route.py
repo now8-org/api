@@ -5,7 +5,7 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
 from fastapi_cache.decorator import cache
 from now8_api.entrypoints.api.dependencies import RouteId
-from now8_api.service.route_service import RouteService
+from now8_api.service.route_service import RouteNotFoundError, RouteService
 from pydantic import BaseModel, parse_obj_as
 from starlette.requests import Request
 from starlette.responses import Response
@@ -72,9 +72,7 @@ async def route_info_api(
         result = RouteInfo.parse_obj(
             await service.route_info(route_id=route_id)
         )
-    except NotImplementedError as error:
-        raise HTTPException(
-            404, "Can't get estimations for the given route in the given city."
-        ) from error
+    except RouteNotFoundError as error:
+        raise HTTPException(404, "Route not found.") from error
 
     return result
