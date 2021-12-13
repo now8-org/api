@@ -1,24 +1,52 @@
-from typing import Dict, List, Union
+from typing import Dict, Optional
 
 from fastapi import APIRouter, HTTPException
-from now8_api.entrypoints.api.dependencies import Exclude, RouteId
-from now8_api.service.route_service import RouteService
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.inmemory import InMemoryBackend
+from fastapi_cache.decorator import cache
+from now8_api.entrypoints.api.dependencies import RouteId
+from now8_api.service.route_service import RouteNotFoundError, RouteService
+from pydantic import BaseModel, parse_obj_as
+from starlette.requests import Request
+from starlette.responses import Response
 
 router = APIRouter(
     prefix="/route",
     tags=["route"],
 )
 
+
+@router.on_event("startup")
+async def startup():
+    FastAPICache.init(InMemoryBackend())
+
+
+# MODELS
+
+
+class RouteInfo(BaseModel):
+    id: str
+    code: str
+    name: str
+    transport_type: int
+    color: Optional[str] = None
+
+
+RouteInfos = Dict[str, RouteInfo]
+
+# ROUTES
+
 service: RouteService = RouteService()
 
 
 @router.get(
-    "",
-    summary="Get all routes in the city.",
+    "", summary="Get all routes in the city.", response_model=RouteInfos
 )
+@cache(expire=7 * 24 * 60 * 60)  # 7 days
 async def route_api(
-    keys_to_exclude: List[str] = Exclude,
-) -> Dict[str, Dict[str, Union[str, float, dict]]]:
+    request: Request,
+    respone: Response,
+) -> RouteInfos:
     """DO NOT CALL THIS ENDPOINT FROM THE SWAGGER UI.
 
     It will return a list with thousands of route information dictionaries
@@ -26,7 +54,7 @@ async def route_api(
     `/docs` in the path) with a web browser or cURL for example.
     """
 
-    result = await service.all_routes(keys_to_exclude=keys_to_exclude)
+    result = parse_obj_as(RouteInfos, await service.all_routes())
 
     return result
 
@@ -34,15 +62,17 @@ async def route_api(
 @router.get(
     "/{route_id}/info",
     summary="Get route information.",
+    response_model=RouteInfo,
 )
+@cache(expire=7 * 24 * 60 * 60)  # 7 days
 async def route_info_api(
     route_id: str = RouteId,
-) -> Dict[str, Union[str, float]]:
+) -> RouteInfo:
     try:
-        result = await service.route_info(route_id=route_id)
-    except NotImplementedError as error:
-        raise HTTPException(
-            404, "Can't get estimations for the given route in the given city."
-        ) from error
+        result = RouteInfo.parse_obj(
+            await service.route_info(route_id=route_id)
+        )
+    except RouteNotFoundError as error:
+        raise HTTPException(404, "Route not found.") from error
 
     return result

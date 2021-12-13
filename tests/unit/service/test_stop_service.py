@@ -14,12 +14,13 @@ class TestStopService:
         )
 
     stop_keys: List[str] = [
+        "id",
         "code",
         "name",
         "longitude",
         "latitude",
         "zone",
-        "lines",
+        "route_ways",
     ]
 
     @pytest.mark.asyncio
@@ -29,27 +30,42 @@ class TestStopService:
         assert isinstance(result, dict)
         assert all(isinstance(item, dict) for item in result.values())
         assert all(
-            isinstance(value, (str, float, dict))
+            isinstance(value, (str, float, list))
             for d in result.values()
             for value in d.values()
         )
         assert all(list(d.keys()) == self.stop_keys for d in result.values())
 
     @pytest.mark.asyncio
-    async def test_all_stops_lines(self):
+    async def test_all_stops_routes(self):
         result = await self.stop_service.all_stops()
 
+        # must be dict
         assert all(
-            list(line.keys())
-            == [
-                "name",
-                "code",
-                "transport_type",
-                "color",
-                "way",
-            ]
+            isinstance(route_way, dict)
             for stop in result.values()
-            for line in stop["lines"].values()
+            for route_way in stop["route_ways"]
+        )
+        # the keys of the dict must be strings
+        assert all(
+            all(
+                isinstance(route_ways_key, str)
+                for route_ways_key in route_way.keys()
+            )
+            for stop in result.values()
+            for route_way in stop["route_ways"]
+        )
+        # the value of the id key must be str
+        assert all(
+            isinstance(route_way["id"], str)
+            for stop in result.values()
+            for route_way in stop["route_ways"]
+        )
+        # the value of the way key must be int
+        assert all(
+            isinstance(route_way["way"], int)
+            for stop in result.values()
+            for route_way in stop["route_ways"]
         )
 
     @pytest.mark.asyncio
@@ -59,28 +75,17 @@ class TestStopService:
         assert isinstance(result, dict)
         assert all(isinstance(key, str) for key in result.keys())
         assert all(
-            isinstance(value, (str, float, dict)) for value in result.values()
+            isinstance(value, (str, float, list)) for value in result.values()
         )
         assert result == {
+            "id": "1_42",
             "code": "42",
             "name": "Stop 42",
             "longitude": 0.0,
             "latitude": 0.0,
             "zone": "A",
-            "lines": {
-                "route_id_1": {
-                    "code": "route_short_name_1",
-                    "color": "#0f0",
-                    "name": "route_long_name_1",
-                    "transport_type": 3,
-                    "way": 0,
-                },
-                "route_id_2": {
-                    "code": "route_short_name_2",
-                    "color": "#f00",
-                    "name": "route_long_name_2",
-                    "transport_type": 3,
-                    "way": 1,
-                },
-            },
+            "route_ways": [
+                {"id": "route_id_1", "way": 0},
+                {"id": "route_id_2", "way": 1},
+            ],
         }

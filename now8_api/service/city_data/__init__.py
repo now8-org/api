@@ -72,35 +72,35 @@ class CityData(BaseModel, ABC):
         """
 
     @abstractmethod
-    async def get_stops_line(
+    async def get_stops_route(
         self,
-        line: Route,
+        route: Route,
     ) -> Tuple[List[Stop], List[Stop]]:
-        """Return all the stops of the selected line.
+        """Return all the stops of the selected route.
 
         Arguments:
-            line: Transport line to get the stops for.
+            route: Transport route to get the stops for.
 
         Returns:
-            Stops of the selected line for both ways in order.
+            Stops of the selected route for both ways in order.
 
         Raises:
             NotImplementedError: If the method is not implemented for
-                the line transport type in this city.
+                the route transport type in this city.
         """
 
     @abstractmethod
-    async def get_lines_stop(
+    async def get_routes_stop(
         self,
         stop: Stop,
     ) -> List[Route]:
-        """Return all the lines that pass through the stop.
+        """Return all the routes that pass through the stop.
 
         Arguments:
-            stop: Transport stop to get the lines for.
+            stop: Transport stop to get the routes for.
 
         Returns:
-            Lines that pass through the stop.
+            Routes that pass through the stop.
 
         Raises:
             NotImplementedError: If the method is not implemented for
@@ -109,9 +109,12 @@ class CityData(BaseModel, ABC):
 
 
 @retry(
-    retry=retry_if_exception_type(TimeoutError),
+    retry=(
+        retry_if_exception_type(TimeoutError)
+        | retry_if_exception_type(aiohttp.ClientResponseError)
+    ),
     stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=0.1),
+    wait=wait_exponential(multiplier=0.5),
 )
 @validate_arguments
 async def get_json(url: HttpUrl) -> dict:
@@ -124,5 +127,9 @@ async def get_json(url: HttpUrl) -> dict:
         List of dictionaries with the parsed answer.
     """
     async with aiohttp.ClientSession() as session:
-        async with session.get(url, raise_for_status=True, timeout=10) as resp:
+        async with session.get(
+            url,
+            raise_for_status=True,
+            timeout=10,
+        ) as resp:
             return await resp.json(content_type=None)

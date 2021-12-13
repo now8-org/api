@@ -23,14 +23,14 @@ class FakeCityData(CityData):
         return []
 
     @overrides
-    async def get_stops_line(
+    async def get_stops_route(
         self,
-        line: Route,
+        route: Route,
     ) -> Tuple[List[Stop], List[Stop]]:
         return ([], [])
 
     @overrides
-    async def get_lines_stop(
+    async def get_routes_stop(
         self,
         stop: Stop,
     ) -> List[Route]:
@@ -68,10 +68,6 @@ class FakeSqlEngine(SqlEngine):
                     0.0,
                     "A",
                     "route_id_1",
-                    "route_short_name_1",
-                    "route_long_name_1",
-                    3,
-                    "#00ff00",
                     0,
                 ),
                 (
@@ -82,10 +78,6 @@ class FakeSqlEngine(SqlEngine):
                     0.0,
                     "A",
                     "route_id_2",
-                    "route_short_name_2",
-                    "route_long_name_2",
-                    3,
-                    "#ff0000",
                     1,
                 ),
             ]

@@ -9,6 +9,7 @@ from now8_api.domain import (
     TransportType,
     Vehicle,
     VehicleEstimation,
+    Way,
 )
 from now8_api.service import TransportTypeError
 from now8_api.service.city_data import CityData, UpstreamError, get_json
@@ -87,15 +88,13 @@ class MadridCityData(CityData):
         result: List[VehicleEstimation] = []
 
         for estimation in response["stopTimes"]["times"].get("Time", []):
-            line = Route(
-                id=estimation["line"]["codLine"],
-                code=estimation["line"]["shortDescription"],
-                transport_type=TransportType(
-                    int(estimation["line"]["codMode"])
-                ),
-                name=estimation["line"]["description"],
+            vehicle = Vehicle(
+                id=estimation["codIssue"],
+                route_id=estimation["line"]["codLine"],
+                route_way=Way(estimation["direction"])
+                if estimation["direction"] in [0, 1]
+                else None,
             )
-            vehicle = Vehicle(line=line, id=estimation["codIssue"])
             estimation = Estimation(
                 estimation=estimation["time"],
                 time=response["stopTimes"]["actualDate"],
@@ -114,14 +113,14 @@ class MadridCityData(CityData):
         raise NotImplementedError
 
     @overrides
-    async def get_stops_line(
+    async def get_stops_route(
         self,
-        line: Route,
+        route: Route,
     ) -> Tuple[List[Stop], List[Stop]]:
         raise NotImplementedError
 
     @overrides
-    async def get_lines_stop(
+    async def get_routes_stop(
         self,
         stop: Stop,
     ) -> List[Route]:
