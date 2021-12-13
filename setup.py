@@ -16,6 +16,7 @@ setup(
         "aiohttp",
         "asyncpg",
         "fastapi",
+        "fastapi-cache2",
         "gunicorn",
         "orjson",
         "overrides",

@@ -2,15 +2,26 @@ import datetime
 from typing import Dict, List, Optional
 
 from fastapi import APIRouter, HTTPException
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.inmemory import InMemoryBackend
+from fastapi_cache.decorator import cache
 from now8_api.entrypoints.api.dependencies import StopId
 from now8_api.service.city_data import UpstreamError
 from now8_api.service.stop_service import StopService
 from pydantic import BaseModel, parse_obj_as
+from starlette.requests import Request
+from starlette.responses import Response
 
 router = APIRouter(
     prefix="/stop",
     tags=["stop"],
 )
+
+
+@router.on_event("startup")
+async def startup():
+    FastAPICache.init(InMemoryBackend())
+
 
 # MODELS
 
@@ -57,7 +68,8 @@ stop_service: StopService = StopService()
 
 
 @router.get("", summary="Get all stops in the city.", response_model=StopInfos)
-async def stop_api() -> StopInfos:
+@cache(expire=7 * 24 * 60 * 60)  # 7 days
+async def stop_api(request: Request, response: Response) -> StopInfos:
     """DO NOT CALL THIS ENDPOINT FROM THE SWAGGER UI.
 
     It will return a list with thousands of stop information dictionaries
@@ -76,6 +88,7 @@ async def stop_api() -> StopInfos:
 @router.get(
     "/{stop_id}/info", summary="Get stop information.", response_model=StopInfo
 )
+@cache(expire=7 * 24 * 60 * 60)  # 7 days
 async def stop_info_api(
     stop_id: str = StopId,
 ) -> StopInfo:
@@ -96,6 +109,7 @@ async def stop_info_api(
     summary="ETA for the next vehicles to the stop.",
     response_model=StopEstimations,
 )
+@cache(expire=30)  # 30 seconds
 async def stop_estimation_api(
     stop_id: str = StopId,
 ) -> StopEstimations:

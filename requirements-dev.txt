@@ -53,6 +53,11 @@ distlib==0.3.4
 fastapi==0.68.0
     # via
     #   -c requirements.txt
+    #   fastapi-cache2
+    #   now8-api
+fastapi-cache2==0.1.8
+    # via
+    #   -c requirements.txt
     #   now8-api
 filelock==3.4.0
     # via virtualenv
@@ -97,6 +102,10 @@ packaging==21.0
     # via
     #   -c docs/requirements.txt
     #   pytest
+pendulum==2.1.2
+    # via
+    #   -c requirements.txt
+    #   fastapi-cache2
 pep517==0.12.0
     # via pip-tools
 pip-tools==6.4.0
@@ -128,6 +137,15 @@ pytest==6.2.5
     #   pytest-asyncio
 pytest-asyncio==0.15.1
     # via -r requirements-dev.in
+python-dateutil==2.8.2
+    # via
+    #   -c docs/requirements.txt
+    #   -c requirements.txt
+    #   pendulum
+pytzdata==2020.1
+    # via
+    #   -c requirements.txt
+    #   pendulum
 pyyaml==5.4.1
     # via
     #   -c docs/requirements.txt
@@ -137,6 +155,8 @@ requests==2.26.0
 six==1.16.0
     # via
     #   -c docs/requirements.txt
+    #   -c requirements.txt
+    #   python-dateutil
     #   virtualenv
 starlette==0.14.2
     # via
@@ -169,6 +189,7 @@ urllib3==1.26.6
 uvicorn==0.14.0
     # via
     #   -c requirements.txt
+    #   fastapi-cache2
     #   now8-api
 virtualenv==20.10.0
     # via pre-commit
