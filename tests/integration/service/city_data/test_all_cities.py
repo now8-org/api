@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
 import pytest
-from now8_api.domain import Stop, TransportType, VehicleEstimation
+from now8_api.domain import Stop, VehicleEstimation
 from now8_api.service.city_data import CityData
 from now8_api.service.city_data.madrid import MadridCityData
 
@@ -11,8 +11,16 @@ class TestCities:
     cities_transport_types: List[Tuple[CityData, Stop]] = [
         (
             MadridCityData(),
-            Stop(id="par_8_17491", transport_type=TransportType.INTERCITY_BUS),
-        )
+            Stop(id="par_8_17491"),
+        ),
+        (
+            MadridCityData(),
+            Stop(id="par_6_4285"),
+        ),
+        (
+            MadridCityData(),
+            Stop(id="par_5_11"),
+        ),
     ]
 
     @pytest.mark.slow
