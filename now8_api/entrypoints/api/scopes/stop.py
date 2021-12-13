@@ -90,6 +90,8 @@ async def stop_api(request: Request, response: Response) -> StopInfos:
 )
 @cache(expire=7 * 24 * 60 * 60)  # 7 days
 async def stop_info_api(
+    request: Request,
+    response: Response,
     stop_id: str = StopId,
 ) -> StopInfo:
     try:
@@ -111,6 +113,8 @@ async def stop_info_api(
 )
 @cache(expire=30)  # 30 seconds
 async def stop_estimation_api(
+    request: Request,
+    response: Response,
     stop_id: str = StopId,
 ) -> StopEstimations:
     try:
