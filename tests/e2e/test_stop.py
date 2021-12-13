@@ -14,14 +14,6 @@ class TestStop:
         assert response.status_code == 200
         assert isinstance(response.json(), dict)
 
-    def test_stop_exclude_effect(self):
-        response_original = self.client.get("/stop")
-        response_exclude = self.client.get(
-            "/stop?keys_to_exclude=name&keys_to_exclude=lines"
-        )
-
-        assert response_original.json() != response_exclude.json()
-
 
 class TestStopInfo:
     @pytest.fixture(autouse=True)

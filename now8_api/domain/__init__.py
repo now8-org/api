@@ -4,7 +4,7 @@ from datetime import datetime
 from enum import Enum
 from typing import List, Optional
 
-from pydantic import Field, validator
+from pydantic import Field
 from pydantic.color import Color
 from pydantic.dataclasses import dataclass
 
@@ -35,22 +35,20 @@ class Way(int, Enum):
 
 @dataclass
 class Route:
-    """Transport line.
+    """Transport route.
 
     Attributes:
-        id: Line identifier.
-        code: Line identifier in the user format.
-        transport_type: Transport type of the line.
-        name: Line name.
-        way: Way (inbound or outbound).
-        color: Line color.
+        id: Route identifier.
+        code: Route identifier in the user format.
+        transport_type: Transport type of the route.
+        name: Route name.
+        color: Route color.
     """
 
     id: str
     code: str = None
     transport_type: Optional[TransportType] = None
     name: Optional[str] = None
-    way: Way = None
     color: Color = None
 
 
@@ -60,21 +58,14 @@ class Vehicle:
 
     Attributes:
         id: Vehicle identifier.
-        line: Line to which the vehicle belongs to.
+        route_id: Route to which the vehicle belongs to.
         name: Vehicle name.
     """
 
     id: str
-    line: Route
+    route_id: str
+    route_way: Optional[Way] = None
     name: Optional[str] = None
-
-    @validator("name", pre=True, always=True)
-    @classmethod
-    def default_name(cls, value, values):
-        """Set the default value for the name if unspecified."""
-        if value is None:
-            value = values["id"]
-        return value
 
 
 @dataclass
@@ -86,16 +77,8 @@ class Estimation:
         time: Time when the estimation was made.
     """
 
+    time: datetime
     estimation: datetime
-    time: Optional[datetime] = None
-
-    @validator("time")
-    @classmethod
-    def set_time(cls, value):
-        """Set time to current time if not specified."""
-        if value is None:
-            value = datetime.now()
-        return value
 
 
 @dataclass
@@ -131,18 +114,16 @@ class Stop:
     Attributes:
         id: Stop identifier.
         code: Stop identifier in the user format.
-        transport_type: Transport type of the stop.
-        way: Way of the stop.
         name: Name of the stop.
+        transport_type: Transport type of the stop.
         coordinates: Coordinates where the stop is located at.
         zone: Zone where the stop is located at.
     """
 
     id: str
     code: Optional[str] = None
-    transport_type: Optional[TransportType] = None
-    way: Optional[Way] = None
     name: Optional[str] = None
+    transport_type: Optional[TransportType] = None
     coordinates: Optional[Coordinates] = None
     zone: Optional[str] = None
 

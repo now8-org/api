@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Union
 
-from now8_api.domain import Coordinates, Route, Stop, TransportType, Way
+from now8_api.domain import Coordinates, Stop, TransportType
 from now8_api.service.service import (
     CITY,
     CITY_DATA_DICT,
@@ -8,7 +8,6 @@ from now8_api.service.service import (
     Service,
     exclude,
 )
-from pydantic.color import Color
 from pypika import Query, Table
 
 
@@ -42,10 +41,6 @@ class StopService(Service):
                 table_stops.stop_lon,
                 table_stops.zone_id,
                 table_routes.route_id,
-                table_routes.route_short_name,
-                table_routes.route_long_name,
-                table_routes.route_type,
-                table_routes.route_color,
                 table_route_stops.direction_id,
             )
             .distinct()
@@ -54,7 +49,7 @@ class StopService(Service):
             str(query)
         )
 
-        result: Dict[str, Dict[str, Union[str, float, dict]]] = {}
+        result: Dict[str, Dict[str, Any]] = {}
         for row in query_result:
             stop_id: str = row[0]
             stop_code: str = row[1]
@@ -75,37 +70,21 @@ class StopService(Service):
                 )
 
                 result[stop.id] = {
+                    "id": stop.id,
                     "code": stop.code,
                     "name": stop.name,
                     "longitude": stop.coordinates.longitude,
                     "latitude": stop.coordinates.latitude,
                     "zone": stop.zone,
-                    "lines": {},
+                    "route_ways": [],
                 }
 
-            line_id: str = row[6]
-            line_code: str = row[7]
-            line_name: str = row[8]
-            line_type: int = row[9]
-            line_color: str = row[10]
-            line_way: int = row[11]
+            route_id: str = row[6]
+            route_way: int = row[7]
 
-            line: Route = Route(
-                id=line_id,
-                code=line_code,
-                transport_type=TransportType(line_type),
-                name=line_name,
-                color=Color(line_color),
-                way=Way(line_way),
+            result[stop.id]["route_ways"].append(
+                {"id": route_id, "way": route_way}
             )
-
-            result[stop.id]["lines"][line_id] = {  # type: ignore
-                "name": line.name,
-                "code": line.code,
-                "transport_type": line.transport_type.value,
-                "color": line.color.as_hex(),
-                "way": line.way.value,
-            }
 
         self.stops_cache = result
 
@@ -122,10 +101,13 @@ class StopService(Service):
             await self.initialize_stops_cache()
 
         return exclude(
-            dict_of_dicts=self.stops_cache, keys_to_exclude=keys_to_exclude
+            dict_of_dicts=self.stops_cache,
+            keys_to_exclude=keys_to_exclude,
         )
 
-    async def stop_info(self, stop_id: str) -> Dict[str, Union[str, float]]:
+    async def stop_info(
+        self, stop_id: str
+    ) -> Dict[str, Union[str, float, list]]:
         """Return the stop information.
 
         Arguments:
@@ -160,13 +142,12 @@ class StopService(Service):
             {
                 "vehicle": {
                     "id": v_e.vehicle.id,
-                    "line": {
-                        "id": v_e.vehicle.line.id,
-                        "code": v_e.vehicle.line.code,
-                        "transport_type": v_e.vehicle.line.transport_type.value,  # noqa: E501
-                        "name": v_e.vehicle.line.name,
+                    "route_way": {
+                        "id": v_e.vehicle.route_id,
+                        "way": v_e.vehicle.route_way.value
+                        if v_e.vehicle.route_way is not None
+                        else None,
                     },
-                    "name": v_e.vehicle.name,
                 },
                 "estimation": {
                     "estimation": v_e.estimation.estimation,
