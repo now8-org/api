@@ -109,9 +109,12 @@ class CityData(BaseModel, ABC):
 
 
 @retry(
-    retry=retry_if_exception_type(TimeoutError),
+    retry=(
+        retry_if_exception_type(TimeoutError)
+        | retry_if_exception_type(aiohttp.ClientResponseError)
+    ),
     stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=0.1),
+    wait=wait_exponential(multiplier=0.5),
 )
 @validate_arguments
 async def get_json(url: HttpUrl) -> dict:
@@ -124,5 +127,9 @@ async def get_json(url: HttpUrl) -> dict:
         List of dictionaries with the parsed answer.
     """
     async with aiohttp.ClientSession() as session:
-        async with session.get(url, raise_for_status=True, timeout=10) as resp:
+        async with session.get(
+            url,
+            raise_for_status=True,
+            timeout=10,
+        ) as resp:
             return await resp.json(content_type=None)
