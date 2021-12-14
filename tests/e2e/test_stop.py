@@ -44,15 +44,20 @@ class TestStopInfo:
 
         assert response.status_code == 200
         assert isinstance(response.json(), dict)
-        assert response.json() == {
-            "code": "17491",
-            "id": "par_8_17491",
-            "latitude": pytest.approx(40.295986176),
-            "longitude": pytest.approx(-3.457196951),
-            "name": "RONDA SUR-HOSPITAL DEL SURESTE",
-            "route_ways": [{"id": "278", "way": 1}],
-            "zone": "B3",
-        }
+        assert response.json()["code"] == "17491"
+        assert response.json()["id"] == "par_8_17491"
+        assert response.json()["latitude"] == pytest.approx(40.295986176)
+        assert response.json()["longitude"] == pytest.approx(-3.457196951)
+        assert response.json()["name"] == "RONDA SUR-HOSPITAL DEL SURESTE"
+        assert all(
+            (
+                isinstance(route_way, dict)
+                and isinstance(route_way["id"], str)
+                and isinstance(route_way["way"], int)
+            )
+            for route_way in response.json()["route_ways"]
+        )
+        assert response.json()["zone"] == "B3"
 
 
 class TestStopEstimation:
