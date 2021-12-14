@@ -15,25 +15,27 @@ class TestStop:
 
         assert response.status_code == 200
         assert isinstance(response.json(), dict)
-        assert response.json()["par_8_99987"] == {
-            "code": "99987",
-            "id": "par_8_99987",
-            "latitude": pytest.approx(40.242103577),
-            "longitude": pytest.approx(-4.190074921),
-            "name": "MÉNTRIDA-ESTACIÓN DE SERVICIO",
-            "route_ways": [
-                {"id": "358", "way": 0},
-                {"id": "235", "way": 0},
-                {"id": "141", "way": 1},
-                {"id": "252", "way": 0},
-                {"id": "137", "way": 0},
-                {"id": "527", "way": 1},
-                {"id": "136", "way": 1},
-                {"id": "107", "way": 0},
-                {"id": "250", "way": 0},
-            ],
-            "zone": "E1",
-        }
+        assert response.json()["par_8_99987"]["code"] == "99987"
+        assert response.json()["par_8_99987"]["id"] == "par_8_99987"
+        assert response.json()["par_8_99987"]["latitude"] == pytest.approx(
+            40.242103577
+        )
+        assert response.json()["par_8_99987"]["longitude"] == pytest.approx(
+            -4.190074921
+        )
+        assert (
+            response.json()["par_8_99987"]["name"]
+            == "MÉNTRIDA-ESTACIÓN DE SERVICIO"
+        )
+        assert all(
+            (
+                isinstance(route_way, dict)
+                and isinstance(route_way["id"], str)
+                and isinstance(route_way["way"], int)
+            )
+            for route_way in response.json()["par_8_99987"]["route_ways"]
+        )
+        assert response.json()["par_8_99987"]["zone"] == "E1"
 
 
 class TestStopInfo:

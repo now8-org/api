@@ -30,5 +30,4 @@ class TestCities:
         result = await city_data.get_estimations(stop)
 
         assert isinstance(result, list)
-        assert len(result) > 0
         assert all(isinstance(item, VehicleEstimation) for item in result)
