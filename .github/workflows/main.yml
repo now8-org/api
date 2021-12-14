@@ -60,6 +60,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           changelog_increment_filename: body.md
           branch: main
+          extra_requirements: typing-extensions
 
       - name: Create GitHub release
         if: github.ref == 'refs/heads/main'
