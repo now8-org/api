@@ -16,10 +16,10 @@ class TestRoute:
         assert response.status_code == 200
         assert isinstance(response.json(), dict)
         assert response.json()["999"] == {
-            "code": "6",
+            "code": "5",
             "color": "E60003",
             "id": "999",
-            "name": "UNIVERSIDAD REY JUAN CARLOS-URB. P.GUADARRAMA",
+            "name": "S. S. DE LOS REYES-ALCOBENDAS-SOTO MORALEJA",
             "transport_type": 3,
         }
 
@@ -31,9 +31,9 @@ class TestRouteInfo:
         assert response.status_code == 200
         assert isinstance(response.json(), dict)
         assert response.json() == {
-            "code": "151",
-            "color": "8EBF42",
+            "code": "ML2",
+            "color": "A60084",
             "id": "633",
-            "name": "MADRID (Plaza de Castilla) - ALCOBENDAS",
-            "transport_type": 3,
+            "name": "Colonia Jardín - Estación de Aravaca",
+            "transport_type": 0,
         }

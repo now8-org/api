@@ -2,8 +2,11 @@ import datetime
 from typing import Dict, List, Optional
 
 from fastapi import APIRouter, HTTPException
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import ORJSONResponse
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
+from fastapi_cache.coder import PickleCoder
 from fastapi_cache.decorator import cache
 from now8_api.entrypoints.api.dependencies import StopId
 from now8_api.service.city_data import UpstreamError
@@ -68,8 +71,8 @@ stop_service: StopService = StopService()
 
 
 @router.get("", summary="Get all stops in the city.", response_model=StopInfos)
-@cache(expire=7 * 24 * 60 * 60)  # 7 days
-async def stop_api(request: Request, response: Response) -> StopInfos:
+@cache(expire=7 * 24 * 60 * 60, coder=PickleCoder)  # 7 days
+async def stop_api(request: Request, response: Response):
     """DO NOT CALL THIS ENDPOINT FROM THE SWAGGER UI.
 
     It will return a list with thousands of stop information dictionaries
@@ -77,23 +80,20 @@ async def stop_api(request: Request, response: Response) -> StopInfos:
     `/docs` in the path) with a web browser or cURL for example.
     """
 
-    result = parse_obj_as(
-        StopInfos,
-        await stop_service.all_stops(),
-    )
+    result = parse_obj_as(StopInfos, await stop_service.all_stops())
 
-    return result
+    return ORJSONResponse(content=jsonable_encoder(result))
 
 
 @router.get(
     "/{stop_id}/info", summary="Get stop information.", response_model=StopInfo
 )
-@cache(expire=7 * 24 * 60 * 60)  # 7 days
+@cache(expire=7 * 24 * 60 * 60, coder=PickleCoder)  # 7 days
 async def stop_info_api(
     request: Request,
     response: Response,
     stop_id: str = StopId,
-) -> StopInfo:
+):
     try:
         result = StopInfo.parse_obj(
             await stop_service.stop_info(stop_id=stop_id)
@@ -101,7 +101,7 @@ async def stop_info_api(
     except StopNotFoundError as error:
         raise HTTPException(404, "Stop not found.") from error
 
-    return result
+    return ORJSONResponse(content=jsonable_encoder(result))
 
 
 @router.get(
@@ -109,12 +109,12 @@ async def stop_info_api(
     summary="ETA for the next vehicles to the stop.",
     response_model=StopEstimations,
 )
-@cache(expire=30)  # 30 seconds
+@cache(expire=30, coder=PickleCoder)  # 30 seconds
 async def stop_estimation_api(
     request: Request,
     response: Response,
     stop_id: str = StopId,
-) -> StopEstimations:
+):
     try:
         result = parse_obj_as(
             StopEstimations,
@@ -130,4 +130,4 @@ async def stop_estimation_api(
             "Upstream city API failure. Check the stop id or try again later.",
         ) from error
 
-    return result
+    return ORJSONResponse(content=jsonable_encoder(result))
