@@ -18,10 +18,20 @@ class TestStop:
         assert response.json()["par_8_99987"] == {
             "code": "99987",
             "id": "par_8_99987",
-            "latitude": 40.242103577,
-            "longitude": -4.190074921,
+            "latitude": pytest.approx(40.242103577),
+            "longitude": pytest.approx(-4.190074921),
             "name": "MÉNTRIDA-ESTACIÓN DE SERVICIO",
-            "route_ways": [{"id": "358", "way": 0}, {"id": "767", "way": 0}],
+            "route_ways": [
+                {"id": "358", "way": 0},
+                {"id": "235", "way": 0},
+                {"id": "141", "way": 1},
+                {"id": "252", "way": 0},
+                {"id": "137", "way": 0},
+                {"id": "527", "way": 1},
+                {"id": "136", "way": 1},
+                {"id": "107", "way": 0},
+                {"id": "250", "way": 0},
+            ],
             "zone": "E1",
         }
 
@@ -35,19 +45,10 @@ class TestStopInfo:
         assert response.json() == {
             "code": "17491",
             "id": "par_8_17491",
-            "latitude": 40.296051025,
-            "longitude": -3.457335711,
+            "latitude": pytest.approx(40.295986176),
+            "longitude": pytest.approx(-3.457196951),
             "name": "RONDA SUR-HOSPITAL DEL SURESTE",
-            "route_ways": [
-                {"id": "269", "way": 0},
-                {"id": "279", "way": 1},
-                {"id": "280", "way": 1},
-                {"id": "281", "way": 1},
-                {"id": "678", "way": 0},
-                {"id": "688", "way": 1},
-                {"id": "689", "way": 1},
-                {"id": "690", "way": 1},
-            ],
+            "route_ways": [{"id": "278", "way": 1}],
             "zone": "B3",
         }
 
