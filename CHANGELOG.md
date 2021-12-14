@@ -1,3 +1,10 @@
+## 5.0.1 (2021-12-14)
+
+### Perf
+
+- **entrypoints**: dont validate cache
+- **entrypoints**: dont validate cache
+
 ## 5.0.0 (2021-12-13)
 
 ### Feat
