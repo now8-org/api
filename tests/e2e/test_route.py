@@ -15,25 +15,25 @@ class TestRoute:
 
         assert response.status_code == 200
         assert isinstance(response.json(), dict)
-        assert response.json()["999"] == {
-            "code": "5",
-            "color": "E60003",
-            "id": "999",
-            "name": "S. S. DE LOS REYES-ALCOBENDAS-SOTO MORALEJA",
+        assert response.json()["8__483___"] == {
+            "id": "8__483___",
+            "code": "483",
+            "name": "MADRID (Aluche)-LEGANÉS (Vereda de los Estudiantes)",
             "transport_type": 3,
+            "color": "8EBF42",
         }
 
 
 class TestRouteInfo:
     def test_madrid_route(self, client):
-        response = client.get("/route/633/info")
+        response = client.get("/route/10__ML2___/info")
 
         assert response.status_code == 200
         assert isinstance(response.json(), dict)
         assert response.json() == {
+            "id": "10__ML2___",
             "code": "ML2",
-            "color": "A60084",
-            "id": "633",
             "name": "Colonia Jardín - Estación de Aravaca",
             "transport_type": 0,
+            "color": "A60084",
         }
