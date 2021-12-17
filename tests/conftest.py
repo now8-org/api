@@ -58,6 +58,18 @@ class FakeSqlEngine(SqlEngine):
                 ("42", "r42", "ROUTE 42", 1, "#FF0000"),
                 ("42", "r42", "ROUTE 42", 1, "#FF0000"),
             ]
+        elif (
+            query == "SELECT DISTINCT "
+            '"route_id","route_short_name","route_long_name",'
+            '"route_type","route_color" '
+            'FROM "routes" '
+            "WHERE \"route_id\"='42'"
+        ):
+            return [
+                ("42", "r42", "ROUTE 42", 1, "#FF0000"),
+                ("42", "r42", "ROUTE 42", 1, "#FF0000"),
+            ]
+
         elif query.startswith("SELECT"):
             return [
                 (
