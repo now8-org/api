@@ -26,10 +26,16 @@ class StopService(Service):
     """
 
     city_data: CityData = CITY_DATA_DICT[CITY]
-    stops_cache: Dict[str, Dict[str, Any]] = None
 
-    async def initialize_stops_cache(self) -> None:
-        """Initialize `stops_cache` if undefined."""
+    async def all_stops(
+        self,
+    ) -> Dict[str, Dict[str, Union[str, float, dict]]]:
+        """Return all the stops of the city.
+
+        Returns:
+            List of dictionaries with the stop ID, transport type, way,
+            name, coordinates and zone of each stop.
+        """
         table_routes: Table = Table("routes")
         table_route_stops: Table = Table("route_stops")
         table_stops: Table = Table("stops")
@@ -92,21 +98,7 @@ class StopService(Service):
                 {"id": route_id, "way": route_way}
             )
 
-        self.stops_cache = result
-
-    async def all_stops(
-        self,
-    ) -> Dict[str, Dict[str, Union[str, float, dict]]]:
-        """Return all the stops of the city.
-
-        Returns:
-            List of dictionaries with the stop ID, transport type, way,
-            name, coordinates and zone of each stop.
-        """
-        if self.stops_cache is None:
-            await self.initialize_stops_cache()
-
-        return self.stops_cache
+        return result
 
     async def stop_info(
         self, stop_id: str
@@ -123,13 +115,70 @@ class StopService(Service):
         Raises:
             StopNotFoundError: If the `stop_id` does not match any stop.
         """
-        if self.stops_cache is None:
-            await self.initialize_stops_cache()
+        table_routes: Table = Table("routes")
+        table_route_stops: Table = Table("route_stops")
+        table_stops: Table = Table("stops")
+        query: Query = (
+            Query.from_(table_routes)
+            .join(table_route_stops)
+            .on(table_routes.route_id == table_route_stops.route_id)
+            .join(table_stops)
+            .on(table_route_stops.stop_id == table_stops.stop_id)
+            .select(
+                table_stops.stop_id,
+                table_stops.stop_code,
+                table_stops.stop_name,
+                table_stops.stop_lat,
+                table_stops.stop_lon,
+                table_stops.zone_id,
+                table_routes.route_id,
+                table_route_stops.direction_id,
+            )
+            .where(table_stops.stop_id == stop_id)
+            .distinct()
+        )
+        query_result: List[tuple] = await self.sql_engine.execute_query(
+            str(query)
+        )
 
-        try:
-            return self.stops_cache[stop_id]
-        except KeyError as error:
-            raise StopNotFoundError(stop_id=stop_id) from error
+        if len(query_result) < 1:
+            raise StopNotFoundError(stop_id=stop_id)
+
+        result: Dict[str, Any] = {}
+        for row in query_result:
+            stop_code: str = row[1]
+            stop_name: str = row[2]
+            stop_lat: float = row[3]
+            stop_lon: float = row[4]
+            stop_zone: str = row[5]
+
+            if result == {}:
+                stop = Stop(
+                    id=stop_id,
+                    code=stop_code,
+                    name=stop_name,
+                    coordinates=Coordinates(
+                        latitude=stop_lat, longitude=stop_lon
+                    ),
+                    zone=stop_zone,
+                )
+
+                result = {
+                    "id": stop.id,
+                    "code": stop.code,
+                    "name": stop.name,
+                    "longitude": stop.coordinates.longitude,
+                    "latitude": stop.coordinates.latitude,
+                    "zone": stop.zone,
+                    "route_ways": [],
+                }
+
+            route_id: str = row[6]
+            route_way: int = row[7]
+
+            result["route_ways"].append({"id": route_id, "way": route_way})
+
+        return result
 
     async def stop_estimation(self, stop_id: str) -> List[Dict[str, dict]]:
         """Return ETA for the next vehicles to the stop.

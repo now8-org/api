@@ -70,7 +70,63 @@ class FakeSqlEngine(SqlEngine):
                 ("42", "r42", "ROUTE 42", 1, "#FF0000"),
             ]
 
-        elif query.startswith("SELECT"):
+        elif (
+            query == "SELECT DISTINCT "
+            '"stops"."stop_id","stops"."stop_code",'
+            '"stops"."stop_name","stops"."stop_lat",'
+            '"stops"."stop_lon","stops"."zone_id",'
+            '"routes"."route_id","route_stops"."direction_id" '
+            'FROM "routes" '
+            'JOIN "route_stops" ON '
+            '"routes"."route_id"="route_stops"."route_id" '
+            'JOIN "stops" ON '
+            '"route_stops"."stop_id"="stops"."stop_id"'
+        ):
+            return [
+                (
+                    "1_42",
+                    "42",
+                    "Stop 42",
+                    0.0,
+                    0.0,
+                    "A",
+                    "route_id_1",
+                    0,
+                ),
+                (
+                    "1_42",
+                    "42",
+                    "Stop 42",
+                    0.0,
+                    0.0,
+                    "A",
+                    "route_id_2",
+                    1,
+                ),
+                (
+                    "1_43",
+                    "43",
+                    "Stop 43",
+                    0.0,
+                    0.0,
+                    "B",
+                    "route_id_2",
+                    1,
+                ),
+            ]
+        elif (
+            query == "SELECT DISTINCT "
+            '"stops"."stop_id","stops"."stop_code",'
+            '"stops"."stop_name","stops"."stop_lat",'
+            '"stops"."stop_lon","stops"."zone_id",'
+            '"routes"."route_id","route_stops"."direction_id" '
+            'FROM "routes" '
+            'JOIN "route_stops" ON '
+            '"routes"."route_id"="route_stops"."route_id" '
+            'JOIN "stops" ON '
+            '"route_stops"."stop_id"="stops"."stop_id" '
+            'WHERE "stops"."stop_id"=\'1_42\''
+        ):
             return [
                 (
                     "1_42",

@@ -35,6 +35,10 @@ class TestStop:
             )
             for route_way in response.json()["par_8_99987"]["route_ways"]
         )
+        assert {"id": "8__541___", "way": 0} in response.json()["par_8_99987"][
+            "route_ways"
+        ]
+
         assert response.json()["par_8_99987"]["zone"] == "E1"
 
 
@@ -57,6 +61,7 @@ class TestStopInfo:
             )
             for route_way in response.json()["route_ways"]
         )
+        assert {"id": "8__330___", "way": 0} in response.json()["route_ways"]
         assert response.json()["zone"] == "B3"
 
 
