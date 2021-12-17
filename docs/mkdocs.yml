@@ -7,6 +7,9 @@ repo_url: http://github.com/now8-org/now8-api/
 plugins:
   - search
   - autolinks
+  - gen-files:
+      scripts:
+        - docs/generate_reference.py
   - mkdocstrings:
       default_handler: python
       handlers:
@@ -19,6 +22,7 @@ plugins:
         - ./now8_api
   - git-revision-date-localized:
       type: timeago
+      fallback_to_build_date: true
 
 theme:
   name: material
