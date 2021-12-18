@@ -31,3 +31,11 @@ class TestCities:
 
         assert isinstance(result, list)
         assert all(isinstance(item, VehicleEstimation) for item in result)
+        assert all(
+            vehicle_estimation.vehicle.id != ""
+            for vehicle_estimation in result
+        )
+        assert all(
+            vehicle_estimation.vehicle.name != ""
+            for vehicle_estimation in result
+        )

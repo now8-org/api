@@ -62,8 +62,8 @@ class Vehicle:
         name: Vehicle name.
     """
 
-    id: str
     route_id: str
+    id: Optional[str] = None
     route_way: Optional[Way] = None
     name: Optional[str] = None
 

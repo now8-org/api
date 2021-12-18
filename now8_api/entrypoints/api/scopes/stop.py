@@ -48,8 +48,8 @@ StopInfos = Dict[str, StopInfo]
 
 
 class Vehicle(BaseModel):
-    id: str
-    route_way: RouteWay = None
+    id: Optional[str] = None
+    route_way: Optional[RouteWay] = None
     name: Optional[str] = None
 
 
