@@ -840,20 +840,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.madrid._stop_id_api" class="md-nav__link">
-    _stop_id_api()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.madrid._stop_id_user" class="md-nav__link">
-    _stop_id_user()
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1047,20 +1033,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.madrid._stop_id_api" class="md-nav__link">
-    _stop_id_api()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#now8_api.service.city_data.madrid._stop_id_user" class="md-nav__link">
-    _stop_id_user()
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1086,7 +1058,6 @@
 
 
   <div class="doc doc-children">
-
 
 
 
@@ -1224,7 +1195,9 @@ the stop transport type in this city.</p></td>
 
     <span class="k">for</span> <span class="n">estimation</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;stopTimes&quot;</span><span class="p">][</span><span class="s2">&quot;times&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="p">[]):</span>
         <span class="n">vehicle</span> <span class="o">=</span> <span class="n">Vehicle</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;codIssue&quot;</span><span class="p">],</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;codIssue&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;codIssue&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">route_id</span><span class="o">=</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">][</span><span class="s2">&quot;codLine&quot;</span><span class="p">],</span>
             <span class="n">route_way</span><span class="o">=</span><span class="n">Way</span><span class="p">(</span><span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">estimation</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
@@ -1509,210 +1482,6 @@ the route transport type in this city.</p></td>
 
 
 
-  <div class="doc doc-object doc-function">
-
-
-
-<h2 id="now8_api.service.city_data.madrid._stop_id_api" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">_stop_id_api</span><span class="p">(</span><span class="n">stop_id_user</span><span class="p">,</span> <span class="n">transport_type</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-private"><code>private</code></small>
-  </span>
-
-</h2>
-
-    <div class="doc doc-contents ">
-
-      <p>Return the Stop ID in the API format.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>stop_id_user</code></td>
-        <td><code>str</code></td>
-        <td><p>Stop ID in the user format.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>transport_type</code></td>
-        <td><code>TransportType</code></td>
-        <td><p>Stop transport type.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Stop ID in the API format.</p></td>
-    </tr>
-  </tbody>
-</table>
-<p><strong>Exceptions:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>TransportTypeError</code></td>
-        <td><p>If the transport type is not
-supported.</p></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>now8_api/service/city_data/madrid.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_stop_id_api</span><span class="p">(</span><span class="n">stop_id_user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">transport_type</span><span class="p">:</span> <span class="n">TransportType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return the Stop ID in the API format.</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">        stop_id_user: Stop ID in the user format.</span>
-<span class="sd">        transport_type: Stop transport type.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Stop ID in the API format.</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        TransportTypeError: If the transport type is not</span>
-<span class="sd">            supported.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">transport_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TRANSPORT_TYPE_STOP_PREFIXES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">TransportTypeError</span><span class="p">(</span><span class="n">transport_type</span><span class="o">=</span><span class="n">transport_type</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">TRANSPORT_TYPE_STOP_PREFIXES</span><span class="p">[</span><span class="n">transport_type</span><span class="p">]</span> <span class="o">+</span> <span class="n">stop_id_user</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h2 id="now8_api.service.city_data.madrid._stop_id_user" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">_stop_id_user</span><span class="p">(</span><span class="n">stop_id_api</span><span class="p">,</span> <span class="n">transport_type</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-private"><code>private</code></small>
-  </span>
-
-</h2>
-
-    <div class="doc doc-contents ">
-
-      <p>Return the Stop ID in the user format.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>stop_id_api</code></td>
-        <td><code>str</code></td>
-        <td><p>Stop ID in the city API format.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>transport_type</code></td>
-        <td><code>TransportType</code></td>
-        <td><p>Stop transport type.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Stop ID in the user format.</p></td>
-    </tr>
-  </tbody>
-</table>
-<p><strong>Exceptions:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>TransportTypeError</code></td>
-        <td><p>If the transport type is not
-supported.</p></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>now8_api/service/city_data/madrid.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_stop_id_user</span><span class="p">(</span><span class="n">stop_id_api</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">transport_type</span><span class="p">:</span> <span class="n">TransportType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return the Stop ID in the user format.</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">        stop_id_api: Stop ID in the city API format.</span>
-<span class="sd">        transport_type: Stop transport type.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Stop ID in the user format.</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        TransportTypeError: If the transport type is not</span>
-<span class="sd">            supported.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">transport_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TRANSPORT_TYPE_STOP_PREFIXES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">TransportTypeError</span><span class="p">(</span><span class="n">transport_type</span><span class="o">=</span><span class="n">transport_type</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">stop_id_api</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span>
-        <span class="n">TRANSPORT_TYPE_STOP_PREFIXES</span><span class="p">[</span><span class="n">transport_type</span><span class="p">]</span>
-    <span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
 
 
 
@@ -1729,7 +1498,7 @@ supported.</p></td>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-12-17T12:38:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-12-17</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-12-18T08:46:08+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-12-18</span>
       
     
   </small>
