@@ -12,21 +12,38 @@ StopId = Path(
     "par_8_17491",
     title="Stop ID",
     examples={
-        "17491": {
+        "par_8_17491": {
             "summary": "RONDA SUR-HOSPITAL DEL SURESTE (17491)",
             "value": "par_8_17491",
-        }
+        },
+        "par_5_11": {
+            "summary": "ATOCHA (Cercanías)",
+            "value": "par_5_11",
+        },
+        "par_6_4285": {
+            "summary": "Paraninfo-Telecomunicaciones (4285)",
+            "value": "par_6_4285",
+        },
     },
 )
 
 RouteId = Path(
-    "633",
+    "8__633___",
     title="Route ID",
     examples={
-        "633": {
-            "summary": "MADRID (Plaza de Castilla) - ALCOBENDAS (151)",
-            "value": "633",
-        }
+        "8__633___": {
+            "summary": "MAJADAHONDA (Hospital)-TORRELODONES (Colonia)"
+            "-GALAPAGAR-COLMENAREJO (633)",
+            "value": "8__633___",
+        },
+        "6_N_20___": {
+            "summary": "CIBELES-PITIS (N20)",
+            "value": "6_N_20___",
+        },
+        "5__C1___": {
+            "summary": "P.Pío-Atocha-Recoletos-Chamartín-Aeropuerto T4 (C1)",
+            "value": "5__C1___",
+        },
     },
 )
 
