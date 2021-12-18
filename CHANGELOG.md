@@ -1,3 +1,17 @@
+## 5.2.0 (2021-12-18)
+
+### Fix
+
+- allow null vehicle id and/or name
+
+### Feat
+
+- **entrypoints**: add new stop and route examples
+
+### Refactor
+
+- **service**: remove unused functions
+
 ## 5.1.0 (2021-12-17)
 
 ### Feat
