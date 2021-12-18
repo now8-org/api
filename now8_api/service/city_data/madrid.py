@@ -42,7 +42,9 @@ class MadridCityData(CityData):
 
         for estimation in response["stopTimes"]["times"].get("Time", []):
             vehicle = Vehicle(
-                id=estimation["codIssue"],
+                id=estimation["codIssue"]
+                if estimation["codIssue"] != ""
+                else None,
                 route_id=estimation["line"]["codLine"],
                 route_way=Way(estimation["direction"])
                 if estimation["direction"] in [0, 1]
