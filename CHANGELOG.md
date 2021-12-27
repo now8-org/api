@@ -1,3 +1,9 @@
+## 5.3.0 (2021-12-27)
+
+### Feat
+
+- **entrypoints**: api vehicle route_way required
+
 ## 5.2.0 (2021-12-18)
 
 ### Fix
