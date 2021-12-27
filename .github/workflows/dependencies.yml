@@ -9,7 +9,8 @@ jobs:
   main:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      fail-fast: true
+    environment: test
     services:
       postgres:
         image: postgres:alpine
