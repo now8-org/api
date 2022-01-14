@@ -1,8 +1,9 @@
 from typing import Any, Dict, List, Union
 
+from pypika import Query, Table
+
 from now8_api.domain import Coordinates, Stop, TransportType
 from now8_api.service.service import CITY, CITY_DATA_DICT, CityData, Service
-from pypika import Query, Table
 
 
 class StopNotFoundError(ValueError):
@@ -17,12 +18,33 @@ class StopNotFoundError(ValueError):
         super().__init__(f'Stop "{stop_id}" not found.')
 
 
+_table_routes: Table = Table("routes")
+_table_route_stops: Table = Table("route_stops")
+_table_stops: Table = Table("stops")
+_all_stops_query: Query = (
+    Query.from_(_table_routes)
+    .join(_table_route_stops)
+    .on(_table_routes.route_id == _table_route_stops.route_id)
+    .join(_table_stops)
+    .on(_table_route_stops.stop_id == _table_stops.stop_id)
+    .select(
+        _table_stops.stop_id,
+        _table_stops.stop_code,
+        _table_stops.stop_name,
+        _table_stops.stop_lat,
+        _table_stops.stop_lon,
+        _table_stops.zone_id,
+        _table_routes.route_id,
+        _table_route_stops.direction_id,
+    )
+)
+
+
 class StopService(Service):
     """Service base class.
 
     Attributes:
         city_data: CityData instance for the city.
-        stops_cache: Object to store the stops info.
     """
 
     city_data: CityData = CITY_DATA_DICT[CITY]
@@ -36,29 +58,8 @@ class StopService(Service):
             List of dictionaries with the stop ID, transport type, way,
             name, coordinates and zone of each stop.
         """
-        table_routes: Table = Table("routes")
-        table_route_stops: Table = Table("route_stops")
-        table_stops: Table = Table("stops")
-        query: Query = (
-            Query.from_(table_routes)
-            .join(table_route_stops)
-            .on(table_routes.route_id == table_route_stops.route_id)
-            .join(table_stops)
-            .on(table_route_stops.stop_id == table_stops.stop_id)
-            .select(
-                table_stops.stop_id,
-                table_stops.stop_code,
-                table_stops.stop_name,
-                table_stops.stop_lat,
-                table_stops.stop_lon,
-                table_stops.zone_id,
-                table_routes.route_id,
-                table_route_stops.direction_id,
-            )
-            .distinct()
-        )
         query_result: List[tuple] = await self.sql_engine.execute_query(
-            str(query)
+            str(_all_stops_query)
         )
 
         result: Dict[str, Dict[str, Any]] = {}
@@ -94,7 +95,7 @@ class StopService(Service):
             route_id: str = row[6]
             route_way: int = row[7]
 
-            result[stop.id]["route_ways"].append(
+            result[stop_id]["route_ways"].append(
                 {"id": route_id, "way": route_way}
             )
 
@@ -115,30 +116,8 @@ class StopService(Service):
         Raises:
             StopNotFoundError: If the `stop_id` does not match any stop.
         """
-        table_routes: Table = Table("routes")
-        table_route_stops: Table = Table("route_stops")
-        table_stops: Table = Table("stops")
-        query: Query = (
-            Query.from_(table_routes)
-            .join(table_route_stops)
-            .on(table_routes.route_id == table_route_stops.route_id)
-            .join(table_stops)
-            .on(table_route_stops.stop_id == table_stops.stop_id)
-            .select(
-                table_stops.stop_id,
-                table_stops.stop_code,
-                table_stops.stop_name,
-                table_stops.stop_lat,
-                table_stops.stop_lon,
-                table_stops.zone_id,
-                table_routes.route_id,
-                table_route_stops.direction_id,
-            )
-            .where(table_stops.stop_id == stop_id)
-            .distinct()
-        )
         query_result: List[tuple] = await self.sql_engine.execute_query(
-            str(query)
+            str(_all_stops_query.where(_table_stops.stop_id == stop_id))
         )
 
         if len(query_result) < 1:

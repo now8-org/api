@@ -1,5 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
+
 from now8_api.entrypoints.api.main import api
 
 
