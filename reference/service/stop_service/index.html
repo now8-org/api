@@ -1088,6 +1088,10 @@
 
 
 
+
+
+
+
   <div class="doc doc-object doc-class">
 
 
@@ -1212,11 +1216,6 @@
         <td><code>CityData</code></td>
         <td><p>CityData instance for the city.</p></td>
       </tr>
-      <tr>
-        <td><code>stops_cache</code></td>
-        <td><code></code></td>
-        <td><p>Object to store the stops info.</p></td>
-      </tr>
   </tbody>
 </table>
 
@@ -1280,29 +1279,8 @@ name, coordinates and zone of each stop.</p></td>
 <span class="sd">        List of dictionaries with the stop ID, transport type, way,</span>
 <span class="sd">        name, coordinates and zone of each stop.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">table_routes</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;routes&quot;</span><span class="p">)</span>
-    <span class="n">table_route_stops</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;route_stops&quot;</span><span class="p">)</span>
-    <span class="n">table_stops</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;stops&quot;</span><span class="p">)</span>
-    <span class="n">query</span><span class="p">:</span> <span class="n">Query</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">Query</span><span class="o">.</span><span class="n">from_</span><span class="p">(</span><span class="n">table_routes</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">table_route_stops</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">table_routes</span><span class="o">.</span><span class="n">route_id</span> <span class="o">==</span> <span class="n">table_route_stops</span><span class="o">.</span><span class="n">route_id</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">table_stops</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">table_route_stops</span><span class="o">.</span><span class="n">stop_id</span> <span class="o">==</span> <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_id</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">select</span><span class="p">(</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_id</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_code</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_name</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_lat</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_lon</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">zone_id</span><span class="p">,</span>
-            <span class="n">table_routes</span><span class="o">.</span><span class="n">route_id</span><span class="p">,</span>
-            <span class="n">table_route_stops</span><span class="o">.</span><span class="n">direction_id</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
-    <span class="p">)</span>
     <span class="n">query_result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span>
-        <span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">_all_stops_query</span><span class="p">)</span>
     <span class="p">)</span>
 
     <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1338,7 +1316,7 @@ name, coordinates and zone of each stop.</p></td>
         <span class="n">route_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
         <span class="n">route_way</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
 
-        <span class="n">result</span><span class="p">[</span><span class="n">stop</span><span class="o">.</span><span class="n">id</span><span class="p">][</span><span class="s2">&quot;route_ways&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">stop_id</span><span class="p">][</span><span class="s2">&quot;route_ways&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">route_id</span><span class="p">,</span> <span class="s2">&quot;way&quot;</span><span class="p">:</span> <span class="n">route_way</span><span class="p">}</span>
         <span class="p">)</span>
 
@@ -1529,30 +1507,8 @@ name, coordinates and zone of each stop.</p></td>
 <span class="sd">    Raises:</span>
 <span class="sd">        StopNotFoundError: If the `stop_id` does not match any stop.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">table_routes</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;routes&quot;</span><span class="p">)</span>
-    <span class="n">table_route_stops</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;route_stops&quot;</span><span class="p">)</span>
-    <span class="n">table_stops</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;stops&quot;</span><span class="p">)</span>
-    <span class="n">query</span><span class="p">:</span> <span class="n">Query</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">Query</span><span class="o">.</span><span class="n">from_</span><span class="p">(</span><span class="n">table_routes</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">table_route_stops</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">table_routes</span><span class="o">.</span><span class="n">route_id</span> <span class="o">==</span> <span class="n">table_route_stops</span><span class="o">.</span><span class="n">route_id</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">table_stops</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">table_route_stops</span><span class="o">.</span><span class="n">stop_id</span> <span class="o">==</span> <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_id</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">select</span><span class="p">(</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_id</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_code</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_name</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_lat</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">stop_lon</span><span class="p">,</span>
-            <span class="n">table_stops</span><span class="o">.</span><span class="n">zone_id</span><span class="p">,</span>
-            <span class="n">table_routes</span><span class="o">.</span><span class="n">route_id</span><span class="p">,</span>
-            <span class="n">table_route_stops</span><span class="o">.</span><span class="n">direction_id</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">table_stops</span><span class="o">.</span><span class="n">stop_id</span> <span class="o">==</span> <span class="n">stop_id</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
-    <span class="p">)</span>
     <span class="n">query_result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_engine</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span>
-        <span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">_all_stops_query</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">_table_stops</span><span class="o">.</span><span class="n">stop_id</span> <span class="o">==</span> <span class="n">stop_id</span><span class="p">))</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">query_result</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -1628,7 +1584,7 @@ name, coordinates and zone of each stop.</p></td>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2021-12-27T09:57:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2021-12-27</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-01-14T12:02:17+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-01-14</span>
       
     
   </small>
