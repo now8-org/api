@@ -1,10 +1,11 @@
 from typing import List, Optional, Tuple
 
+from overrides import overrides
+from pydantic.dataclasses import dataclass
+
 from now8_api.data.database import SqlEngine
 from now8_api.domain import Route, Stop, TransportType, VehicleEstimation
 from now8_api.service.city_data import CityData
-from overrides import overrides
-from pydantic.dataclasses import dataclass
 
 
 class FakeCityData(CityData):
@@ -71,7 +72,7 @@ class FakeSqlEngine(SqlEngine):
             ]
 
         elif (
-            query == "SELECT DISTINCT "
+            query == "SELECT "
             '"stops"."stop_id","stops"."stop_code",'
             '"stops"."stop_name","stops"."stop_lat",'
             '"stops"."stop_lon","stops"."zone_id",'
@@ -115,7 +116,7 @@ class FakeSqlEngine(SqlEngine):
                 ),
             ]
         elif (
-            query == "SELECT DISTINCT "
+            query == "SELECT "
             '"stops"."stop_id","stops"."stop_code",'
             '"stops"."stop_name","stops"."stop_lat",'
             '"stops"."stop_lon","stops"."zone_id",'

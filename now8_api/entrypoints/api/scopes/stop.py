@@ -8,12 +8,13 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
 from fastapi_cache.coder import PickleCoder
 from fastapi_cache.decorator import cache
-from now8_api.entrypoints.api.dependencies import StopId
-from now8_api.service.city_data import UpstreamError
-from now8_api.service.stop_service import StopNotFoundError, StopService
 from pydantic import BaseModel, parse_obj_as
 from starlette.requests import Request
 from starlette.responses import Response
+
+from now8_api.entrypoints.api.dependencies import StopId
+from now8_api.service.city_data import UpstreamError
+from now8_api.service.stop_service import StopNotFoundError, StopService
 
 router = APIRouter(
     prefix="/stop",
