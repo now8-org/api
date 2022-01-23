@@ -1,3 +1,10 @@
+## 5.3.1 (2022-01-14)
+
+### Fix
+
+- **service**: fix route_ways generation in all_stops
+- **service**: fix route_ways generation in all_stops
+
 ## 5.3.0 (2021-12-27)
 
 ### Feat
