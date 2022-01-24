@@ -7,7 +7,9 @@
 babel==2.9.1
     # via mkdocs-git-revision-date-localized-plugin
 click==8.0.1
-    # via mkdocs
+    # via
+    #   -c docs/../requirements.txt
+    #   mkdocs
 ghp-import==2.0.1
     # via mkdocs
 gitdb==4.0.7
@@ -69,7 +71,9 @@ pymdown-extensions==8.2
 pyparsing==2.4.7
     # via packaging
 python-dateutil==2.8.2
-    # via ghp-import
+    # via
+    #   -c docs/../requirements.txt
+    #   ghp-import
 pytkdocs==0.11.1
     # via mkdocstrings
 pytz==2021.1
@@ -81,7 +85,9 @@ pyyaml==5.4.1
 pyyaml-env-tag==0.1
     # via mkdocs
 six==1.16.0
-    # via python-dateutil
+    # via
+    #   -c docs/../requirements.txt
+    #   python-dateutil
 smmap==4.0.0
     # via gitdb
 watchdog==2.1.3
