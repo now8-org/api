@@ -1,3 +1,9 @@
+## 5.4.0 (2022-07-17)
+
+### Feat
+
+- add destination stop in estimations
+
 ## 5.3.1 (2022-01-14)
 
 ### Fix
