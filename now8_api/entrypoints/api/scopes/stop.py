@@ -39,9 +39,9 @@ class StopInfo(BaseModel):
     id: str
     code: str
     name: str
-    longitude: float
-    latitude: float
-    route_ways: List[RouteWay]
+    longitude: Optional[float]
+    latitude: Optional[float]
+    route_ways: Optional[List[RouteWay]]
     zone: Optional[str] = None
 
 
@@ -52,6 +52,7 @@ class Vehicle(BaseModel):
     route_way: RouteWay
     id: Optional[str] = None
     name: Optional[str] = None
+    destination_stop: Optional[StopInfo]
 
 
 class Estimation(BaseModel):
