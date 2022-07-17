@@ -18,9 +18,9 @@ update:
 	python -m piptools sync requirements.txt requirements-dev.txt docs/requirements.txt
 
 	pip install --upgrade pip
-	pip-compile
-	pip-compile requirements-dev.in
-	pip-compile docs/requirements.in
+	pip-compile --upgrade
+	pip-compile --upgrade requirements-dev.in
+	pip-compile --upgrade docs/requirements.in
 
 	python -m piptools sync requirements.txt requirements-dev.txt docs/requirements.txt
 
