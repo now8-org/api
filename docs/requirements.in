@@ -6,3 +6,4 @@ mkdocs-gen-files
 mkdocs-git-revision-date-localized-plugin
 mkdocs-material
 mkdocstrings
+mkdocstrings-python-legacy
