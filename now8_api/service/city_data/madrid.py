@@ -1,6 +1,9 @@
 """Module to store the city data of Madrid."""
 
+from json.decoder import JSONDecodeError
 from typing import List, Tuple
+
+from overrides import overrides
 
 from now8_api.domain import (
     Estimation,
@@ -12,7 +15,6 @@ from now8_api.domain import (
     Way,
 )
 from now8_api.service.city_data import CityData, UpstreamError, get_json
-from overrides import overrides
 
 CITY_NAME: str = "Madrid"
 
@@ -33,25 +35,36 @@ class MadridCityData(CityData):
                 f"{stop.id.removeprefix('par_').removeprefix('est_')}&"
                 f"type=1&orderBy=2&stopTimesByIti=3"
             )
-        except Exception as error:
+        except JSONDecodeError as error:
             raise UpstreamError(
                 "Upstream error. Check the stop id or try later."
             ) from error
 
         result: List[VehicleEstimation] = []
 
-        for estimation in response["stopTimes"]["times"].get("Time", []):
+        _estimations = response["stopTimes"]["times"].get("Time", [])
+        estimations: List[dict] = (
+            _estimations if isinstance(_estimations, list) else [_estimations]
+        )
+
+        for e in estimations:
             vehicle = Vehicle(
-                id=estimation["codIssue"]
-                if estimation["codIssue"] != ""
+                id=e["codIssue"] if e["codIssue"] != "" else None,
+                route_id=e["line"]["codLine"],
+                route_way=Way(e["direction"])
+                if e["direction"] in [0, 1]
                 else None,
-                route_id=estimation["line"]["codLine"],
-                route_way=Way(estimation["direction"])
-                if estimation["direction"] in [0, 1]
+                destination_stop=Stop(
+                    id=e["destinationStop"]["codStop"],
+                    code=e["destinationStop"]["shortCodStop"],
+                    name=e["destinationStop"]["name"],
+                )
+                if "codStop" in e["destinationStop"]
+                and e["destinationStop"]["codStop"]
                 else None,
             )
             estimation = Estimation(
-                estimation=estimation["time"],
+                estimation=e["time"],
                 time=response["stopTimes"]["actualDate"],
             )
             result.append(

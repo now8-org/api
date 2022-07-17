@@ -182,6 +182,11 @@ class StopService(Service):
                         if v_e.vehicle.route_way is not None
                         else None,
                     },
+                    "destination_stop": {
+                        "id": v_e.vehicle.destination_stop.id,
+                        "code": v_e.vehicle.destination_stop.code,
+                        "name": v_e.vehicle.destination_stop.name,
+                    },
                 },
                 "estimation": {
                     "estimation": v_e.estimation.estimation,

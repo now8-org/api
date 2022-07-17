@@ -53,48 +53,6 @@ class Route:
 
 
 @dataclass
-class Vehicle:
-    """Transport vehicle.
-
-    Attributes:
-        id: Vehicle identifier.
-        route_id: Route to which the vehicle belongs to.
-        name: Vehicle name.
-    """
-
-    route_id: str
-    id: Optional[str] = None
-    route_way: Optional[Way] = None
-    name: Optional[str] = None
-
-
-@dataclass
-class Estimation:
-    """Estimation class.
-
-    Attributes:
-        estimation: Estimated time of arrival.
-        time: Time when the estimation was made.
-    """
-
-    time: datetime
-    estimation: datetime
-
-
-@dataclass
-class VehicleEstimation:
-    """Vehicle estimated time of arrival.
-
-    Attributes:
-        vehicle: Vehicle for which the estimation is for.
-        estimation: Estimated time of arrival.
-    """
-
-    vehicle: Vehicle
-    estimation: Estimation
-
-
-@dataclass
 class Coordinates:
     """Coordinates (in degrees).
 
@@ -126,6 +84,49 @@ class Stop:
     transport_type: Optional[TransportType] = None
     coordinates: Optional[Coordinates] = None
     zone: Optional[str] = None
+
+
+@dataclass
+class Vehicle:
+    """Transport vehicle.
+
+    Attributes:
+        id: Vehicle identifier.
+        route_id: Route to which the vehicle belongs to.
+        name: Vehicle name.
+    """
+
+    route_id: str
+    id: Optional[str] = None
+    route_way: Optional[Way] = None
+    name: Optional[str] = None
+    destination_stop: Optional[Stop] = None
+
+
+@dataclass
+class Estimation:
+    """Estimation class.
+
+    Attributes:
+        estimation: Estimated time of arrival.
+        time: Time when the estimation was made.
+    """
+
+    time: datetime
+    estimation: datetime
+
+
+@dataclass
+class VehicleEstimation:
+    """Vehicle estimated time of arrival.
+
+    Attributes:
+        vehicle: Vehicle for which the estimation is for.
+        estimation: Estimated time of arrival.
+    """
+
+    vehicle: Vehicle
+    estimation: Estimation
 
 
 @dataclass

@@ -16,9 +16,9 @@ StopId = Path(
             "summary": "RONDA SUR-HOSPITAL DEL SURESTE (17491)",
             "value": "par_8_17491",
         },
-        "par_5_11": {
-            "summary": "ATOCHA (Cercanías)",
-            "value": "par_5_11",
+        "par_5_10": {
+            "summary": "ASAMBLEA DE MADRID-ENTREVÍAS (Cercanías)",
+            "value": "par_5_10",
         },
         "par_6_4285": {
             "summary": "Paraninfo-Telecomunicaciones (4285)",

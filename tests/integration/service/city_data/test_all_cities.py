@@ -1,6 +1,7 @@
 from typing import List, Tuple
 
 import pytest
+
 from now8_api.domain import Stop, VehicleEstimation
 from now8_api.service.city_data import CityData
 from now8_api.service.city_data.madrid import MadridCityData
@@ -19,7 +20,7 @@ class TestCities:
         ),
         (
             MadridCityData(),
-            Stop(id="par_5_11"),
+            Stop(id="par_5_10"),
         ),
     ]
 
