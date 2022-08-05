@@ -55,6 +55,8 @@ jobs:
       # Create release if in main branch
       - name: commitizen
         if: github.ref == 'refs/heads/main'
+        id: commitizen
+        continue-on-error: true
         uses: commitizen-tools/commitizen-action@0.10.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -63,7 +65,7 @@ jobs:
           extra_requirements: typing-extensions
 
       - name: Create GitHub release
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && steps.commitizen.outcome == 'success'
         uses: softprops/action-gh-release@v1
         with:
           body_path: body.md
